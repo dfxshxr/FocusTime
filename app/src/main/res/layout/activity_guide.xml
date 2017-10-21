@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_height="55dp">
+
+        <TextView
+            android:id="@+id/advanced_lock"
+            android:layout_width="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/advanced_lock"
+            android:textColor="#2c2c2c"
+            android:textSize="14sp"
+            android:layout_height="55dp" />
+
+
+        <CheckBox
+            android:id="@+id/advanced_lock_switch_compat"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:button="@drawable/bg_checkbox_lock"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="#DEDEDE"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_height="55dp">
+
+        <TextView
+            android:id="@+id/lock_install"
+            android:layout_width="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/lock_install"
+            android:textColor="#2c2c2c"
+            android:textSize="14sp"
+            android:layout_height="55dp" />
+
+
+        <CheckBox
+            android:id="@+id/lock_install_switch_compat"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:button="@drawable/bg_checkbox_lock"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="#DEDEDE"/>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_height="55dp">
+
+        <TextView
+            android:id="@+id/lock_auto_screen"
+            android:layout_width="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/lock_auto_screen"
+            android:textColor="#2c2c2c"
+            android:textSize="14sp"
+            android:layout_height="55dp" />
+
+
+        <CheckBox
+            android:id="@+id/lock_auto_screen_switch_compat"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:button="@drawable/bg_checkbox_lock"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="#DEDEDE"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/hide_icon"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="@string/hide_icon"
+        android:textColor="#2c2c2c"
+        android:textSize="14sp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#DEDEDE"/>
+
+    <TextView
+        android:id="@+id/setting_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:drawableRight="@drawable/arrow_more"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="@string/setting_password"
+        android:textColor="#2c2c2c"
+        android:textSize="14sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#DEDEDE"/>
+
+    <TextView
+        android:id="@+id/auto_start"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:drawableRight="@drawable/arrow_more"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="@string/auto_start"
+        android:textColor="#2c2c2c"
+        android:textSize="14sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#DEDEDE"/>
+
+    <TextView
+        android:id="@+id/background_run"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:drawableRight="@drawable/arrow_more"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="@string/background_run"
+        android:textColor="#2c2c2c"
+        android:textSize="14sp"/>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#DEDEDE"/>
+
+    <TextView
+        android:id="@+id/no_clear"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:drawableRight="@drawable/arrow_more"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="@string/no_clear"
+        android:textColor="#2c2c2c"
+        android:textSize="14sp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#DEDEDE"/>
+
+
+    <TextView
+        android:id="@+id/device_admin"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:drawableRight="@drawable/arrow_more"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="@string/device_admin"
+        android:textColor="#2c2c2c"
+        android:textSize="14sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/line_color"/>
+
+    </LinearLayout>
+</ScrollView>

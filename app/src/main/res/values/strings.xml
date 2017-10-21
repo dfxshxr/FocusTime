@@ -1,0 +1,49 @@
+<resources>
+    <string name="app_name">专注时间</string>
+
+    <string name="dialog_tip">你的系统大于等于5.0，我们需要获取 “查看应用使用情况” 权限</string>
+
+    <string name="accessibility_description">开启系统服务可以减少系统电量消耗</string>
+    <string name="device_admin_description">注册成为设备管理器可以防止恶意卸载</string>
+
+    <string name="title_activity_login">是否继续学习</string>
+    <string name="title_change_password">设置密码</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">用户名</string>
+    <string name="prompt_password">密码</string>
+    <string name="prompt_password2">确认密码</string>
+    <string name="action_sign_in">小玩一下</string>
+    <string name="action_sign_in_short">登录</string>
+    <string name="error_invalid_email">用户名无效</string>
+    <string name="error_invalid_password">密码长度过短</string>
+    <string name="error_not_matching_password">两次输入的密码不一致</string>
+    <string name="error_incorrect_password">密码错误</string>
+    <string name="error_field_required">请填写这个字段</string>
+
+    <string name="advanced_lock">高级锁定引擎</string>
+    <string name="lock_install">锁定安装卸载、修改权限界面</string>
+    <string name="lock_auto_screen">关闭屏幕后自动锁定</string>
+    <string name="hide_icon">隐藏桌面图标</string>
+    <string name="setting_password">设置密码</string>
+    <string name="auto_start">设置开机自动启动</string>
+    <string name="background_run">加入锁屏清理白名单</string>
+    <string name="no_clear">加入一键清理白名单</string>
+    <string name="device_admin">注册成为设备管理器</string>
+    <string name="setting">设置</string>
+    <string name="lock_status">开启专注时间</string>
+    <string name="lock_start">开始学习</string>
+    <string name="lock_stop">学习结束</string>
+    <string name="lock_start_cycle_model">专心学习中</string>
+    <string name="lock_start_advanced_model">专心学习中</string>
+    <string name="cycle_model">轮询模式</string>
+    <string name="advanced_model">辅助功能模式</string>
+    <string name="remove_device_admin_success">已移除设备管理器</string>
+    <string name="not_found_setting_screen">未找到设置界面，请到手机管家中设置</string>
+    <string name="setting_auto_start">请将「专注时间」设置为自动启动</string>
+    <string name="setting_no_clear">请将「专注时间」设置为不清理</string>
+    <string name="not_found_setting_screen_2">未找到设置界面，请手动设置</string>
+    <string name="add_white_list_tip1">单击系统菜单键弹出最近运行的任务页面，长按/上滑/下滑本应用，点击加锁按钮。需要解除锁定时，你需要回到这个页面，然后在最近运行的任务中对本应用解除锁定。同时如果您的手机中有手机管家，您需要将本应用加入内存清理白名单当中。</string>
+    <string name="add_white_list_tip2">在弹出的最近运行任务页面中，长按/上滑/下滑本应用，点击加锁按钮。需要解除锁定时，你需要回到这个页面，然后在最近运行的任务中对本应用解除锁定。同时如果您的手机中有手机管家，您需要将本应用加入内存清理白名单当中。</string>
+    <string name="add_white_list_toast_tip1">单击系统菜单键，（长按/上滑/下滑本应用）点击加锁按钮</string>
+    <string name="add_white_list_toast_tip2">（长按/上滑/下滑应用图标）点击加锁按钮</string>
+</resources>

@@ -1,0 +1,98 @@
+apply plugin: 'com.android.application'
+def gitVersionCode() {
+    def cmd = 'git rev-list HEAD --first-parent --count'
+    cmd.execute().text.trim().toInteger()
+}
+
+def gitBranchName() {
+    def cmd = 'git rev-parse --abbrev-ref HEAD'
+    return cmd.execute().text.trim()
+}
+
+def gitVersionTag() {
+    def cmd = 'git describe --tags'
+    def version = cmd.execute().text.trim()
+    def pattern = "-(\\d+)-g"
+    def matcher = version =~ pattern
+    if (matcher) {
+        version = version.substring(0, matcher.start())
+    } else {
+        //version = version + ".0"
+    }
+
+    return version
+}
+
+def gitVersionTagDebug() {
+    def cmd = 'git describe --tags'
+    return cmd.execute().text.trim()
+}
+def releaseTime() {
+    return new Date().format("yyMMdd", TimeZone.getTimeZone("Asia/Shanghai"))
+}
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.1"
+    defaultConfig {
+        applicationId "com.xidian.qualitytime"
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode gitVersionCode()
+        versionName gitVersionTag()
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+
+        debug {
+            // 显示Log
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            //applicationIdSuffix ".debug"//包名加上debug
+            versionNameSuffix "-debug-v${gitVersionCode()}"
+            minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
+        }
+
+        release {
+            // 不显示Log
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            zipAlignEnabled true //Zipalign优化
+            shrinkResources false //移除无用的resource文件
+            minifyEnabled false //混淆
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                File outputDirectory = new File(outputFile.parent);
+                def fileName
+                if (variant.buildType.name == "release") {
+                    fileName = "FocusTime_v${gitVersionTag()}_${gitVersionCode()}_${releaseTime()}.apk"
+                } else {
+                    fileName = "FocusTime_${gitBranchName()}_v${gitVersionTagDebug()}_${gitVersionCode()}_${releaseTime()}_debug.apk"
+                }
+                output.outputFile = new File(outputDirectory, fileName)
+            }
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:26.+'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:design:26.+'
+    compile 'org.litepal.android:core:1.5.0'
+    compile 'com.apkfuns.logutils:library:1.5.1.1'
+    testCompile 'junit:junit:4.12'
+
+    compile('cn.qqtheme.framework:WheelPicker:1.5.5') {
+        exclude group: 'com.android.support'
+    }
+}
