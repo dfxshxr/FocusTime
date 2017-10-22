@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 def gitVersionCode() {
-    def cmd = 'git rev-list HEAD --first-parent --count'
+    def cmd = 'git rev-list HEAD --count'
     cmd.execute().text.trim().toInteger()
 }
 
@@ -15,13 +15,14 @@ def gitVersionTag() {
     def pattern = "-(\\d+)-g"
     def matcher = version =~ pattern
     if (matcher) {
-        version = version.substring(0, matcher.start())
+        version = version.substring(0, matcher.start()) + "." + matcher[0][1]
     } else {
-        //version = version + ".0"
+        version = version + ".0"
     }
 
     return version
 }
+
 
 def gitVersionTagDebug() {
     def cmd = 'git describe --tags'
@@ -47,8 +48,8 @@ android {
         debug {
             // 显示Log
             buildConfigField "boolean", "LOG_DEBUG", "true"
-            //applicationIdSuffix ".debug"//包名加上debug
-            versionNameSuffix "-debug-v${gitVersionCode()}"
+            applicationIdSuffix ".debug"//包名加上debug
+            versionNameSuffix "-${gitBranchName()}-debug"
             minifyEnabled false
             zipAlignEnabled false
             shrinkResources false
@@ -72,7 +73,7 @@ android {
                 if (variant.buildType.name == "release") {
                     fileName = "FocusTime_v${gitVersionTag()}_${gitVersionCode()}_${releaseTime()}.apk"
                 } else {
-                    fileName = "FocusTime_${gitBranchName()}_v${gitVersionTagDebug()}_${gitVersionCode()}_${releaseTime()}_debug.apk"
+                    fileName = "FocusTime_${gitBranchName()}_v${gitVersionTag()}_${gitVersionCode()}_${releaseTime()}_debug.apk"
                 }
                 output.outputFile = new File(outputDirectory, fileName)
             }

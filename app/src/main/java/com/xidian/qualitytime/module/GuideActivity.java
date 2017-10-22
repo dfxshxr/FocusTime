@@ -22,7 +22,7 @@ import com.xidian.qualitytime.utils.ToastUtil;
 public class GuideActivity extends BaseActivity implements View.OnClickListener{
 
 
-    private TextView mBtnAutoStart,mBtnBackgroundRun,mBtnDeviceAdmin,mBtnNoClear,mBtnChangePassword,mBtnHideIcon;
+    private TextView mBtnAutoStart,mBtnBackgroundRun,mBtnDeviceAdmin,mBtnNoClear,mBtnHideIcon;
 
 
     private CheckBox mAdvancedLockSwitch,mLockInstallSwitch,mLockAutoScreenSwitch;
@@ -45,7 +45,6 @@ public class GuideActivity extends BaseActivity implements View.OnClickListener{
         mBtnBackgroundRun = (TextView) findViewById(R.id.background_run);
         mBtnDeviceAdmin = (TextView) findViewById(R.id.device_admin);
         mBtnNoClear = (TextView) findViewById(R.id.no_clear);
-        mBtnChangePassword = (TextView) findViewById(R.id.setting_pwd);
     }
 
     @Override
@@ -69,7 +68,6 @@ public class GuideActivity extends BaseActivity implements View.OnClickListener{
         mBtnBackgroundRun.setOnClickListener(this);
         mBtnDeviceAdmin.setOnClickListener(this);
         mBtnNoClear.setOnClickListener(this);
-        mBtnChangePassword.setOnClickListener(this);
         mAdvancedLockSwitch.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -132,10 +130,6 @@ public class GuideActivity extends BaseActivity implements View.OnClickListener{
                     addWhiteListIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
                 }
                 startActivity(addWhiteListIntent);
-                break;
-            case R.id.setting_pwd:
-                Intent changePasswordIntent = new Intent(this,ChangePasswordActivity.class);
-                startActivity(changePasswordIntent);
                 break;
             case R.id.hide_icon:
                 PackageManager packageManager = getPackageManager();

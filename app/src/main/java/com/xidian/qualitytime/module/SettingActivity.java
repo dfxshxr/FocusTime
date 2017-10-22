@@ -1,9 +1,12 @@
 package com.xidian.qualitytime.module;
 
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.apkfuns.logutils.LogUtils;
 import com.xidian.qualitytime.R;
@@ -20,6 +23,9 @@ import static com.xidian.qualitytime.utils.ToastUtil.showToast;
 
 public class SettingActivity extends BaseActivity {
 
+    Button mStudyButton;
+    Button mplayButton;
+    TextView mVersionTextView;
     @Override
     public int getLayoutId() {
         return R.layout.activity_setting;
@@ -27,24 +33,26 @@ public class SettingActivity extends BaseActivity {
 
     @Override
     protected void initViews(Bundle savedInstanceState) {
-        Button mStudyButton = (Button) findViewById(R.id.study);
+        mStudyButton = (Button) findViewById(R.id.study);
         mStudyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onStudyTimePicker(view);
             }
         });
-        Button mplayButton = (Button) findViewById(R.id.play);
+        mplayButton = (Button) findViewById(R.id.play);
         mplayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onPlayTimePicker(view);
             }
         });
+        mVersionTextView=(TextView) findViewById(R.id.version);
     }
 
     @Override
     protected void initData() {
+        mVersionTextView.setText("版本号："+getVersionName()+"("+getVersionCode()+")");
     }
 
 
@@ -111,5 +119,45 @@ public class SettingActivity extends BaseActivity {
             }
         });
         picker.show();
+    }
+
+    /**
+     * 获取版本名称
+     * @return
+     */
+    private String getVersionName(){
+
+        //得到包管理器
+        PackageManager packageManager = getPackageManager();
+        try {
+            /**
+             *  @param flags Additional option flags.有这个解释就用0
+             *  得到包信息
+             */
+            PackageInfo packageInfo = packageManager.getPackageInfo(getPackageName(), 0);
+            int versionCode = packageInfo.versionCode;//获得版本号
+            String versionName = packageInfo.versionName;//获得版本名称
+            return versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            //没有找到包名的时候会走此异常
+            e.printStackTrace();
+        }
+        return "";
+    }
+    /**
+     * 获取版本号
+     * @return
+     */
+    private int getVersionCode(){
+        PackageManager packageManager = getPackageManager();
+        try {
+            PackageInfo packageInfo = packageManager.getPackageInfo(getPackageName(), 0);//获取包信息
+            int versionCode = packageInfo.versionCode;//获得版本号
+            return versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return -1;
     }
 }
