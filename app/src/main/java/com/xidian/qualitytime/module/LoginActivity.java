@@ -81,12 +81,12 @@ public class LoginActivity extends BaseActivity{
 
         Long remainPlaytime=SpUtil.getInstance().getLong(AppConstants.LOCK_PLAY_REMAIN_MILLISENCONS,1000*60*10);
         if(remainPlaytime>=1000*30){
-            SpUtil.getInstance().putLong(AppConstants.LOCK_PLAY_START_MILLISENCONS,System.currentTimeMillis());
-            SpUtil.getInstance().putBoolean(AppConstants.RUN_LOCK_STATE,false);
             if (actionFrom.equals(AppConstants.LOCK_FROM_LOCK_MAIN_ACITVITY)) {
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 finish();
             } else {
+                SpUtil.getInstance().putLong(AppConstants.LOCK_PLAY_START_MILLISENCONS,System.currentTimeMillis());
+                SpUtil.getInstance().putBoolean(AppConstants.RUN_LOCK_STATE,false);
                 SpUtil.getInstance().putString(AppConstants.LOCK_LAST_LOAD_PKG_NAME, pkgName);//记录解锁包名
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 if (imm != null) {
