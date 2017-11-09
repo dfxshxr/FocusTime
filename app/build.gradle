@@ -65,7 +65,6 @@ android {
         }
     }
 
-
     android.applicationVariants.all { variant ->
         variant.outputs.all {
             if (variant.buildType.name == "release") {
