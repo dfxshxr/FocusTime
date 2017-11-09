@@ -16,8 +16,8 @@
 
 
     <list>
-        <mapping class="com.xidian.qualitytime.bean.App" />
-        <mapping class="com.xidian.qualitytime.bean.RecommendApp" />
+        <mapping class="com.xidian.focustime.bean.App" />
+        <mapping class="com.xidian.focustime.bean.RecommendApp" />
     </list>
 
     <!--
