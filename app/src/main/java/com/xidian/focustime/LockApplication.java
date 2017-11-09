@@ -1,5 +1,6 @@
 package com.xidian.focustime;
 
+import com.umeng.analytics.MobclickAgent;
 import com.xidian.focustime.base.AppConstants;
 import com.xidian.focustime.base.BaseActivity;
 import com.xidian.focustime.module.LoginActivity;
@@ -27,7 +28,7 @@ public class LockApplication extends LitePalApplication {
         application = this;
         SpUtil.getInstance().init(application);
         activityList = new ArrayList<>();
-
+        MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType. E_UM_NORMAL);
         SpUtil.getInstance().putBoolean(AppConstants.RUN_LOCK_STATE,true);
     }
 

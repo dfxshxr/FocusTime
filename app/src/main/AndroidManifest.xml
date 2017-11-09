@@ -11,10 +11,11 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
-    <!-- To auto-complete the email text field in the login form with the user's emails -->
-    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
-    <uses-permission android:name="android.permission.READ_PROFILE"/>
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <!-- 友盟统计 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
     <application
         android:name=".LockApplication"
@@ -71,9 +72,6 @@
             android:label="@string/title_activity_login"
             android:launchMode="singleTask"
             android:noHistory="true"/>
-        <activity
-            android:name=".module.ChangePasswordActivity"
-            android:label="@string/title_change_password"/>
 
         <service
             android:name=".service.AdvancedLockService"
@@ -106,6 +104,9 @@
         <activity android:name=".module.SettingActivity"
                   android:label="设置">
         </activity>
+        <!--友盟统计-->
+        <meta-data android:value="5a0417a8a40fa369e30000d0" android:name="UMENG_APPKEY"/>
+        <meta-data android:value="Main Channel" android:name="UMENG_CHANNEL"/>
     </application>
 
 </manifest>

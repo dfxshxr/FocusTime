@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
 import com.xidian.focustime.LockApplication;
 import com.xidian.focustime.R;
 
@@ -60,5 +61,17 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public final void clear() {
         super.finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }
