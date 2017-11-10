@@ -17,7 +17,7 @@ import android.text.TextUtils;
 import com.xidian.focustime.LockApplication;
 import com.xidian.focustime.base.AppConstants;
 import com.xidian.focustime.base.BaseActivity;
-import com.xidian.focustime.module.LoginActivity;
+import com.xidian.focustime.module.LockActivity;
 import com.xidian.focustime.module.ResultActivity;
 
 import java.util.ArrayList;
@@ -204,8 +204,8 @@ public class LockUtil {
     /**
      * 白名单
      */
-    public static boolean inWhiteList(String packageName) { //packageName.equals("com.android.settings")||
-        return packageName.equals(AppConstants.APP_PACKAGE_NAME);
+    public static boolean inWhiteList(String packageName) {
+        return packageName.equals(AppConstants.APP_PACKAGE_NAME+".debug")||packageName.equals(AppConstants.APP_PACKAGE_NAME);
     }
     /**
     黑名单
@@ -238,7 +238,7 @@ public class LockUtil {
      */
     public static void gotoUnlock(Context context, String packageName) {
         LockApplication.getInstance().clearAllActivity();
-        Intent intent = new Intent(context, LoginActivity.class);
+        Intent intent = new Intent(context, LockActivity.class);
 
         intent.putExtra(AppConstants.LOCK_PACKAGE_NAME, packageName);
         intent.putExtra(AppConstants.LOCK_FROM, AppConstants.LOCK_FROM_FINISH);

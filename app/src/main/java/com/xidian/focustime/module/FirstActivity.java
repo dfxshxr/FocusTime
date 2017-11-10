@@ -41,13 +41,13 @@ public class FirstActivity extends BaseActivity {
 
     private void gotoSplashActivity() {
 
-        Intent loginIntent = new Intent(this, SplashActivity.class);
+        Intent intent = new Intent(this, SplashActivity.class);
 
-        loginIntent.putExtra(AppConstants.LOCK_PACKAGE_NAME, AppConstants.APP_PACKAGE_NAME);
-        loginIntent.putExtra(AppConstants.LOCK_FROM, AppConstants.LOCK_FROM_LOCK_MAIN_ACITVITY);
-        loginIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(AppConstants.LOCK_PACKAGE_NAME, AppConstants.APP_PACKAGE_NAME);
+        intent.putExtra(AppConstants.LOCK_FROM, AppConstants.LOCK_FROM_LOCK_MAIN_ACITVITY);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-        startActivity(loginIntent);
+        startActivity(intent);
 
         finish();
     }

@@ -19,10 +19,10 @@ import com.xidian.focustime.utils.SpUtil;
 import com.xidian.focustime.utils.ToastUtil;
 
 
-public class GuideActivity extends BaseActivity implements View.OnClickListener{
+public class AdvancedSettingActivity extends BaseActivity implements View.OnClickListener{
 
 
-    private TextView mBtnAutoStart,mBtnBackgroundRun,mBtnDeviceAdmin,mBtnNoClear,mBtnHideIcon;
+    private TextView mBtnAutoStart,mBtnBackgroundRun,mBtnDeviceAdmin,mBtnNoClear,mBtnHideIcon,mBtnAppManage;
 
 
     private CheckBox mAdvancedLockSwitch,mLockInstallSwitch,mLockAutoScreenSwitch;
@@ -30,7 +30,7 @@ public class GuideActivity extends BaseActivity implements View.OnClickListener{
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_guide;
+        return R.layout.activity_advanced_setting;
     }
 
     @Override
@@ -40,6 +40,7 @@ public class GuideActivity extends BaseActivity implements View.OnClickListener{
         mLockInstallSwitch = (CheckBox) findViewById(R.id.lock_install_switch_compat);
         mLockAutoScreenSwitch = (CheckBox) findViewById(R.id.lock_auto_screen_switch_compat);
 
+        mBtnAppManage = (TextView) findViewById(R.id.app_manage);
         mBtnHideIcon = (TextView) findViewById(R.id.hide_icon);
         mBtnAutoStart = (TextView) findViewById(R.id.auto_start);
         mBtnBackgroundRun = (TextView) findViewById(R.id.background_run);
@@ -68,15 +69,16 @@ public class GuideActivity extends BaseActivity implements View.OnClickListener{
         mBtnBackgroundRun.setOnClickListener(this);
         mBtnDeviceAdmin.setOnClickListener(this);
         mBtnNoClear.setOnClickListener(this);
+        mBtnAppManage.setOnClickListener(this);
         mAdvancedLockSwitch.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v){
             boolean checked = ((CheckBox) v).isChecked();
                 if (checked) {
-                    ToastUtil.showToast("请开启「应用监管系统」服务");
+                    ToastUtil.showToast("请开启「专注时间」服务");
                 } else {
-                    ToastUtil.showToast("请关闭「应用监管系统」服务");
+                    ToastUtil.showToast("请关闭「专注时间」服务");
                 }
                 Intent intent=new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
                 startActivity(intent);
@@ -100,7 +102,6 @@ public class GuideActivity extends BaseActivity implements View.OnClickListener{
                 SpUtil.getInstance().putBoolean(AppConstants.LOCK_AUTO_SCREEN,checked);
             }
         });
-
         PackageManager packageManager = getPackageManager();
         ComponentName componentName = new ComponentName(this, FirstActivity.class);
         int res = packageManager.getComponentEnabledSetting(componentName);
@@ -131,6 +132,11 @@ public class GuideActivity extends BaseActivity implements View.OnClickListener{
                 }
                 startActivity(addWhiteListIntent);
                 break;
+
+            case R.id.app_manage:
+                Intent intent = new Intent(this, AppManageActivity.class);
+                startActivity(intent);
+                break;
             case R.id.hide_icon:
                 PackageManager packageManager = getPackageManager();
                 ComponentName componentName = new ComponentName(this, FirstActivity.class);
@@ -150,6 +156,7 @@ public class GuideActivity extends BaseActivity implements View.OnClickListener{
                     ToastUtil.showToast("已显示桌面图标");
                 }
                 break;
+            default:
         }
 
     }

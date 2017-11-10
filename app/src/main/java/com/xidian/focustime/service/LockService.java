@@ -132,21 +132,11 @@ public class LockService extends IntentService {
 
             Long currentTime =System.currentTimeMillis();
             Long startTime = SpUtil.getInstance().getLong(AppConstants.LOCK_START_MILLISENCONS,0);
-            Long continueTime =SpUtil.getInstance().getLong(AppConstants.LOCK_CONTINUE_MILLISENCONS,1000*60*60*2);
+            Long continueTime =SpUtil.getInstance().getLong(AppConstants.LOCK_SETTING_MILLISENCONS,1000*60*60*2);
 
             Long startPlayTime=SpUtil.getInstance().getLong(AppConstants.LOCK_PLAY_START_MILLISENCONS,0);
             Long remainPlaytime=SpUtil.getInstance().getLong(AppConstants.LOCK_PLAY_REMAIN_MILLISENCONS,1000*60*10);
-            //任务结束返回结果页面
-            if(lockState &&(currentTime-startTime>continueTime)){//||remainPlaytime<1000*60*2
-                SpUtil.getInstance().putBoolean(AppConstants.LOCK_STATE,false);
-                lockState =false;
-                NotifyUtil.stopServiceNotify(this);
-                if(currentTime-startTime>continueTime){
-                    LockUtil.gotoResult(LockApplication.getContext(),true);//任务成功
-                }else{
-                    LockUtil.gotoResult(LockApplication.getContext(),false);//任务失败
-                }
-            }
+
             runLockState=SpUtil.getInstance().getBoolean(AppConstants.RUN_LOCK_STATE,true);
             try {
                 //判断包名打开解锁页面
@@ -162,14 +152,18 @@ public class LockService extends IntentService {
                             SpUtil.getInstance().putBoolean(AppConstants.RUN_LOCK_STATE,true);
                             runLockState=true;
                             LockApplication.getInstance().clearAllActivity();
-                            SpUtil.getInstance().putLong(AppConstants.LOCK_PLAY_REMAIN_MILLISENCONS,remainPlaytime/2);
+
+                            if(currentTime-startPlayTime>1000*60*2)
+                            {
+                                SpUtil.getInstance().putLong(AppConstants.LOCK_PLAY_REMAIN_MILLISENCONS,1000*60*4);
+                            }
                         }
                         NotifyUtil.updateNotify("专心学习中","学习时间还有"+(continueTime-currentTime+startTime)/1000+"秒");
                     }else {
                         if(!runLockState){
                             NotifyUtil.updateNotify("愉快玩耍中","可玩时间还有"+(remainPlaytime-currentTime+startPlayTime)/1000+"秒");
                         }else {
-                            NotifyUtil.updateNotify("专心学习中","学习时间还有"+(continueTime-currentTime+startTime)/1000+"秒");
+                               NotifyUtil.updateNotify("专心学习中","学习时间还有"+(continueTime-currentTime+startTime)/1000+"秒");
                         }
                     }
 

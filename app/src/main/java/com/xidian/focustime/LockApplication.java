@@ -3,7 +3,7 @@ package com.xidian.focustime;
 import com.umeng.analytics.MobclickAgent;
 import com.xidian.focustime.base.AppConstants;
 import com.xidian.focustime.base.BaseActivity;
-import com.xidian.focustime.module.LoginActivity;
+import com.xidian.focustime.module.LockActivity;
 import com.xidian.focustime.utils.SpUtil;
 
 import org.litepal.LitePalApplication;
@@ -59,7 +59,7 @@ public class LockApplication extends LitePalApplication {
 
     private boolean clearAllWhiteList(BaseActivity activity) {
 
-        return activity instanceof LoginActivity;
+        return activity instanceof LockActivity;
     }
 
 }

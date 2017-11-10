@@ -68,8 +68,8 @@ public class SettingActivity extends BaseActivity {
         picker.setCycleDisable(false);
         picker.setRangeStart(0, 1);//00:00
         picker.setRangeEnd(23, 59);//23:59
-        int currentHour =(int)SpUtil.getInstance().getLong(AppConstants.LOCK_CONTINUE_MILLISENCONS,1000*60*10)/(1000*60*60);
-        int currentMinute = (int)SpUtil.getInstance().getLong(AppConstants.LOCK_CONTINUE_MILLISENCONS,1000*60*10)/(1000*60);
+        int currentHour =(int)SpUtil.getInstance().getLong(AppConstants.LOCK_SETTING_MILLISENCONS,1000*60*10)/(1000*60*60);
+        int currentMinute = (int)SpUtil.getInstance().getLong(AppConstants.LOCK_SETTING_MILLISENCONS,1000*60*10)/(1000*60);
         picker.setSelectedItem(currentHour, currentMinute);
         picker.setTopLineVisible(false);
         picker.setOnTimePickListener(new TimePicker.OnTimePickListener() {
@@ -81,7 +81,7 @@ public class SettingActivity extends BaseActivity {
                 if(continueTime<remainPlaytime){
                     SpUtil.getInstance().putLong(AppConstants.LOCK_PLAY_SETTING_MILLISENCONS,continueTime);
                 }
-                SpUtil.getInstance().putLong(AppConstants.LOCK_CONTINUE_MILLISENCONS,continueTime);
+                SpUtil.getInstance().putLong(AppConstants.LOCK_SETTING_MILLISENCONS,continueTime);
             }
         });
         picker.show();
@@ -93,7 +93,7 @@ public class SettingActivity extends BaseActivity {
         picker.setCycleDisable(false);
         picker.setRangeStart(0, 1);//00:00
 
-        Long continueTime =SpUtil.getInstance().getLong(AppConstants.LOCK_CONTINUE_MILLISENCONS,1000*60*60*2);
+        Long continueTime =SpUtil.getInstance().getLong(AppConstants.LOCK_SETTING_MILLISENCONS,1000*60*60*2);
         Long remainPlaytime=SpUtil.getInstance().getLong(AppConstants.LOCK_PLAY_SETTING_MILLISENCONS,1000*60*10);
 
         if(continueTime<remainPlaytime){

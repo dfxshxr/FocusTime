@@ -44,7 +44,9 @@ public class ServiceReceiver extends BroadcastReceiver {
                 //锁屏的时候进行加锁
                 if (isLockOffScreen) {
                     Long remainPlaytime=SpUtil.getInstance().getLong(AppConstants.LOCK_PLAY_REMAIN_MILLISENCONS,1000*60*10);
-                    SpUtil.getInstance().putLong(AppConstants.LOCK_PLAY_REMAIN_MILLISENCONS,remainPlaytime/2);
+                    if(remainPlaytime<1000*60*4){
+                        SpUtil.getInstance().putLong(AppConstants.LOCK_PLAY_REMAIN_MILLISENCONS,1000*60*4);
+                    }
                     SpUtil.getInstance().putBoolean(AppConstants.RUN_LOCK_STATE,true);
                 }
                 break;
@@ -52,7 +54,7 @@ public class ServiceReceiver extends BroadcastReceiver {
                 if (isLockOffScreen) {
                     NotifyUtil.updateNotify("专心学习中","专心学习中");
                     if(LockUtil.getLauncherTopApp(context,activityManager).equals(AppConstants.APP_PACKAGE_NAME)&&
-                            !LockUtil.getLauncherTopActivity(context,activityManager).equals(AppConstants.APP_PACKAGE_NAME+".module.LoginActivity"))
+                            !LockUtil.getLauncherTopActivity(context,activityManager).equals(AppConstants.APP_PACKAGE_NAME+".module.LockActivity"))
                     {
                         LockApplication.getInstance().clearAllActivity();
                         intent=new Intent(context, SplashActivity.class);
@@ -61,6 +63,7 @@ public class ServiceReceiver extends BroadcastReceiver {
                     }
                 }
                 break;
+            default:
         }
     }
 }

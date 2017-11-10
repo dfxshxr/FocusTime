@@ -26,8 +26,8 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        if(SpUtil.getInstance().getLong(AppConstants.LOCK_CONTINUE_MILLISENCONS,0)==0){
-            SpUtil.getInstance().putLong(AppConstants.LOCK_CONTINUE_MILLISENCONS,1000*60*60*2);
+        if(SpUtil.getInstance().getLong(AppConstants.LOCK_SETTING_MILLISENCONS,0)==0){
+            SpUtil.getInstance().putLong(AppConstants.LOCK_SETTING_MILLISENCONS,1000*60*60*2);
         }
         if(SpUtil.getInstance().getLong(AppConstants.LOCK_PLAY_SETTING_MILLISENCONS,0)==0){
             SpUtil.getInstance().putLong(AppConstants.LOCK_PLAY_SETTING_MILLISENCONS,1000*60*10);
@@ -43,14 +43,8 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     protected void initAction() {
-
-        if (SpUtil.getInstance().getBoolean(AppConstants.LOCK_STATE,false)) {
             LogUtils.i("启动跳转");
-             gotoLockMainActivity();
-        }else{
-            gotoMainActivity();
-        }
-
+            gotoLockMainActivity();
     }
 
     @Override
@@ -62,13 +56,13 @@ public class SplashActivity extends BaseActivity {
 
     private void gotoLockMainActivity() {
 
-        Intent loginIntent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this, LockActivity.class);
 
-        loginIntent.putExtra(AppConstants.LOCK_PACKAGE_NAME, AppConstants.APP_PACKAGE_NAME);
-        loginIntent.putExtra(AppConstants.LOCK_FROM, AppConstants.LOCK_FROM_LOCK_MAIN_ACITVITY);
-        loginIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(AppConstants.LOCK_PACKAGE_NAME, AppConstants.APP_PACKAGE_NAME);
+        intent.putExtra(AppConstants.LOCK_FROM, AppConstants.LOCK_FROM_LOCK_MAIN_ACITVITY);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-        startActivity(loginIntent);
+        startActivity(intent);
 
         finish();
     }
@@ -76,11 +70,12 @@ public class SplashActivity extends BaseActivity {
 
     private void gotoMainActivity() {
 
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, AppManageActivity.class);
 
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         startActivity(intent);
         finish();
     }
+
 }

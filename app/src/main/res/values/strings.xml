@@ -6,7 +6,7 @@
     <string name="accessibility_description">开启系统服务可以减少系统电量消耗</string>
     <string name="device_admin_description">注册成为设备管理器可以防止恶意卸载</string>
 
-    <string name="title_activity_login">是否继续学习</string>
+    <string name="title_activity_lock">专注时间</string>
     <string name="title_change_password">设置密码</string>
     <!-- Strings related to login -->
     <string name="prompt_email">用户名</string>

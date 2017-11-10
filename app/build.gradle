@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+
 def gitVersionCode() {
     def cmd = 'git rev-list HEAD --count'
     cmd.execute().text.trim().toInteger()
@@ -28,6 +29,7 @@ def gitVersionTagDebug() {
     def cmd = 'git describe --tags'
     return cmd.execute().text.trim()
 }
+
 def releaseTime() {
     return new Date().format("yyMMdd", TimeZone.getTimeZone("Asia/Shanghai"))
 }

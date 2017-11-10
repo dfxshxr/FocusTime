@@ -13,7 +13,7 @@
 
     <!-- 友盟统计 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
@@ -38,9 +38,9 @@
             android:name=".module.SplashActivity"
             android:excludeFromRecents="true">
         </activity>
-        <activity android:name=".module.MainActivity"/>
+        <activity android:name=".module.AppManageActivity"/>
         <activity
-            android:name=".module.GuideActivity"
+            android:name=".module.AdvancedSettingActivity"
             android:label="设置"/>
         <activity
             android:name=".module.AddWhiteListActivity"
@@ -67,9 +67,9 @@
         </receiver>
 
         <activity
-            android:name=".module.LoginActivity"
+            android:name=".module.LockActivity"
             android:excludeFromRecents="true"
-            android:label="@string/title_activity_login"
+            android:label="@string/title_activity_lock"
             android:launchMode="singleTask"
             android:noHistory="true"/>
 
@@ -101,12 +101,18 @@
 
         <activity android:name=".module.ResultActivity">
         </activity>
-        <activity android:name=".module.SettingActivity"
-                  android:label="设置">
+        <activity
+            android:name=".module.SettingActivity"
+            android:label="设置">
         </activity>
-        <!--友盟统计-->
-        <meta-data android:value="5a0417a8a40fa369e30000d0" android:name="UMENG_APPKEY"/>
-        <meta-data android:value="Main Channel" android:name="UMENG_CHANNEL"/>
+        <!-- 友盟统计 -->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5a0417a8a40fa369e30000d0"/>
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="Main Channel"/>
+
     </application>
 
 </manifest>

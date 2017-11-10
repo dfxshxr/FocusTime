@@ -32,7 +32,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_gravity="center_vertical"
-            android:button="@drawable/bg_checkbox_lock"/>
+            android:button="@drawable/bg_checkbox_lock"
+            android:clickable="false"/>
 
         <View
             android:layout_width="match_parent"
@@ -54,7 +55,8 @@
             android:text="@string/lock_install"
             android:textColor="#2c2c2c"
             android:textSize="14sp"
-            android:layout_height="55dp" />
+            android:layout_height="55dp"
+            android:clickable="false"/>
 
 
         <CheckBox
@@ -106,6 +108,23 @@
             android:background="#DEDEDE"/>
     </RelativeLayout>
 
+        <TextView
+            android:id="@+id/app_manage"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="应用管理"
+            android:textColor="#2c2c2c"
+            android:textSize="14sp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="#DEDEDE"/>
+
     <TextView
         android:id="@+id/hide_icon"
         android:layout_width="match_parent"
@@ -122,18 +141,6 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:background="#DEDEDE"/>
-
-    <TextView
-        android:id="@+id/setting_pwd"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:drawableRight="@drawable/arrow_more"
-        android:gravity="center_vertical"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:text="@string/setting_password"
-        android:textColor="#2c2c2c"
-        android:textSize="14sp"/>
 
     <View
         android:layout_width="match_parent"
