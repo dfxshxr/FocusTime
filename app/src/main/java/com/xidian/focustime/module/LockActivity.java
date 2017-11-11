@@ -14,7 +14,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.Chronometer;
 
-import com.apkfuns.logutils.LogUtils;
 import com.xidian.focustime.LockApplication;
 import com.xidian.focustime.R;
 import com.xidian.focustime.base.AppConstants;
@@ -163,7 +162,10 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
         SpUtil.getInstance().putBoolean(AppConstants.RUN_LOCK_STATE, true);
         SpUtil.getInstance().putBoolean(AppConstants.LOCK_STATE, true);
         SpUtil.getInstance().putBoolean(AppConstants.FIRST_PLAY_CYCLE,true);
-        SpUtil.getInstance().putInt(AppConstants.STUDY_CYCLE,1);
+        SpUtil.getInstance().putInt(AppConstants.TOMATO_STUDY_CYCLE,1);
+        SpUtil.getInstance().putLong(AppConstants.TOMATO_BREAK_TIME,1000*60*5);
+        SpUtil.getInstance().putBoolean(AppConstants.TOMATO_LEARNING_BREAK_TIME_STATE,false);
+
         //时钟显示计数
         long lastSuccess = SpUtil.getInstance().getLong(AppConstants.LOCK_START_MILLISENCONS);
         long elapsedRealtimeOffset = System.currentTimeMillis() - SystemClock.elapsedRealtime();

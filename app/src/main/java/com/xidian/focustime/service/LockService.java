@@ -49,6 +49,7 @@ public class LockService extends IntentService {
     public boolean threadIsTerminate = false; //是否开启循环
 
     public static final String UNLOCK_ACTION = "UNLOCK_ACTION";
+    public static final String TOMATO_CYCLE_ACTION = "TOMATO_CYCLE_ACTION";
 
     private boolean lockState;
     private boolean runLockState;
@@ -76,9 +77,11 @@ public class LockService extends IntentService {
         //注册广播
         mServiceReceiver = new ServiceReceiver();
         IntentFilter filter = new IntentFilter();
-        filter.addAction(Intent.ACTION_SCREEN_ON);
-        filter.addAction(Intent.ACTION_SCREEN_OFF);
+        filter.addAction(Intent.ACTION_SCREEN_ON);//开屏
+        filter.addAction(Intent.ACTION_SCREEN_OFF);//关屏
+        filter.addAction(Intent.ACTION_USER_PRESENT);//解锁
         filter.addAction(UNLOCK_ACTION);
+        filter.addAction(TOMATO_CYCLE_ACTION);
         registerReceiver(mServiceReceiver, filter);
 
 
@@ -139,6 +142,17 @@ public class LockService extends IntentService {
 
             runLockState=SpUtil.getInstance().getBoolean(AppConstants.RUN_LOCK_STATE,true);
             try {
+
+                //番茄学习法
+                int tomatoCycle=SpUtil.getInstance().getInt(AppConstants.TOMATO_STUDY_CYCLE,1);
+                if (lockState && currentTime-startTime >tomatoCycle*1000*10)//1000*60*25
+                {
+                    LogUtils.i("唤醒屏幕"+(currentTime-startTime)/1000);
+                    Intent tomatoIntent =new Intent(TOMATO_CYCLE_ACTION);
+                    sendBroadcast(tomatoIntent);
+                    SpUtil.getInstance().putInt(AppConstants.TOMATO_STUDY_CYCLE,tomatoCycle+1);
+                }
+
                 //判断包名打开解锁页面
                 if (lockState && !LockUtil.inWhiteList(packageName) && !TextUtils.isEmpty(packageName)) {
 

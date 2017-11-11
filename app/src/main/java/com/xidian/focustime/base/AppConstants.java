@@ -46,7 +46,15 @@ public class AppConstants {
     /**
      * 学习周期轮数 （int）初始化时设为1
      */
-    public static final String STUDY_CYCLE = "study_cycle";
+    public static final String TOMATO_STUDY_CYCLE = "tomato_study_cycle";
+    /**
+     * 番茄学习法的休息时间（毫秒） 设为1000*60*5
+     */
+    public static final String TOMATO_BREAK_TIME = "tomato_break_time";
+    /**
+     * 番茄学习法的状态 如果是以番茄模式进入的休息则为true
+     */
+    public static final String TOMATO_LEARNING_BREAK_TIME_STATE = "tomato_learning_break_time_state";
 
     public interface NOTIFICATION_ID {
         public static int SERVICE = 101;
