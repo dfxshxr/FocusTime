@@ -45,14 +45,13 @@ public class ServiceReceiver extends BroadcastReceiver {
         switch (action) {
             case TOMATO_CYCLE_ACTION:
 
-
-//                KeyguardManager km = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
-//                LogUtils.i("收到唤醒广播"+km.inKeyguardRestrictedInputMode());
-//                if (km.inKeyguardRestrictedInputMode()) {
-                    /*Intent alarmIntent = new Intent(LockApplication.getContext(), TomatoWakeUpActivity.class);
+                KeyguardManager km = (KeyguardManager)LockApplication.getContext().getSystemService(Context.KEYGUARD_SERVICE);
+                LogUtils.i("收到唤醒广播"+km.inKeyguardRestrictedInputMode());
+                if (km.inKeyguardRestrictedInputMode()) {
+                    Intent alarmIntent = new Intent(LockApplication.getContext(), TomatoWakeUpActivity.class);
                     alarmIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(alarmIntent);*/
-//                }
+                    context.startActivity(alarmIntent);
+                }
                 break;
             case Intent.ACTION_SCREEN_OFF: //屏幕关闭的广播
                 SpUtil.getInstance().putLong(AppConstants.LOCK_CURR_MILLISENCONS, System.currentTimeMillis()); //记录屏幕关闭时间
@@ -62,6 +61,7 @@ public class ServiceReceiver extends BroadcastReceiver {
                     if(remainPlaytime<1000*60*4){
                         SpUtil.getInstance().putLong(AppConstants.LOCK_PLAY_REMAIN_MILLISENCONS,1000*60*4);
                     }
+                    SpUtil.getInstance().putBoolean(AppConstants.TOMATO_LEARNING_BREAK_TIME_STATE, false);
                     SpUtil.getInstance().putBoolean(AppConstants.RUN_LOCK_STATE,true);
                 }
                 break;

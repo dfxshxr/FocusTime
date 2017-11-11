@@ -221,6 +221,7 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
 
         SpUtil.getInstance().putLong(AppConstants.LOCK_PLAY_REMAIN_MILLISENCONS,remainPlaytime);
         SpUtil.getInstance().putLong(AppConstants.LOCK_PLAY_START_MILLISENCONS,System.currentTimeMillis());
+        SpUtil.getInstance().putBoolean(AppConstants.TOMATO_LEARNING_BREAK_TIME_STATE, false);
         SpUtil.getInstance().putBoolean(AppConstants.RUN_LOCK_STATE,false);
 
         //记录解锁包名

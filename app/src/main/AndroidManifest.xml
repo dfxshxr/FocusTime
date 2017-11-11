@@ -116,11 +116,10 @@
             android:value="Main Channel"/>
 
         <activity android:name=".module.TomatoWakeUpActivity"
-                  android:launchMode="singleInstance"
                   android:excludeFromRecents="true"
+                  android:launchMode="singleInstance"
                   android:taskAffinity=""
-                  android:theme="@android:style/Theme.Wallpaper.NoTitleBar">
-        </activity>
+                  android:theme="@android:style/Theme.Wallpaper.NoTitleBar" />
     </application>
 
 </manifest>
