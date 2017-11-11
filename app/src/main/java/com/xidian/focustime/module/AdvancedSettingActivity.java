@@ -74,7 +74,8 @@ public class AdvancedSettingActivity extends BaseActivity implements View.OnClic
 
             @Override
             public void onClick(View v){
-            boolean checked = ((CheckBox) v).isChecked();
+                ToastUtil.showToast("该选项暂不可用");
+           /* boolean checked = ((CheckBox) v).isChecked();
                 if (checked) {
                     ToastUtil.showToast("请开启「专注时间」服务");
                 } else {
@@ -82,7 +83,7 @@ public class AdvancedSettingActivity extends BaseActivity implements View.OnClic
                 }
                 Intent intent=new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
                 startActivity(intent);
-                SpUtil.getInstance().putBoolean(AppConstants.ADVANCED_LOCK_STATE,checked);
+                SpUtil.getInstance().putBoolean(AppConstants.ADVANCED_LOCK_STATE,checked);*/
 
             }
         });

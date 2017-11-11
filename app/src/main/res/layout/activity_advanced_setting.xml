@@ -32,8 +32,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_gravity="center_vertical"
-            android:button="@drawable/bg_checkbox_lock"
-            android:clickable="false"/>
+            android:button="@drawable/bg_checkbox_lock"/>
 
         <View
             android:layout_width="match_parent"
@@ -55,8 +54,7 @@
             android:text="@string/lock_install"
             android:textColor="#2c2c2c"
             android:textSize="14sp"
-            android:layout_height="55dp"
-            android:clickable="false"/>
+            android:layout_height="55dp"/>
 
 
         <CheckBox

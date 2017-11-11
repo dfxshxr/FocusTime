@@ -39,6 +39,15 @@ public class AppConstants {
     public static final String LOCK_PLAY_SETTING_MILLISENCONS = "lock_play_setting_milliseconds"; //记录还能玩的时间设定值（毫秒）
     public static final String LOCK_PLAY_REMAIN_MILLISENCONS = "lock_play_remain_milliseconds"; //记录还能玩的时间（毫秒）
 
+    /**
+     * 一次亮屏内是否是第一次玩 （boolen） 初始化时设为true
+     */
+    public static final String FIRST_PLAY_CYCLE = "first_play_cycle";
+    /**
+     * 学习周期轮数 （int）初始化时设为1
+     */
+    public static final String STUDY_CYCLE = "study_cycle";
+
     public interface NOTIFICATION_ID {
         public static int SERVICE = 101;
         public static int FOREGROUND_SERVICE = 101;

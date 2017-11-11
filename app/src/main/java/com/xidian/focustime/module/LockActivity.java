@@ -157,13 +157,14 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
      * 启动后台监测正在运行的程序服务
      */
     public void startLockService() {
+        //初始化变量
         SpUtil.getInstance().putLong(AppConstants.LOCK_START_MILLISENCONS, System.currentTimeMillis());
-        LogUtils.i("System.currentTimeMillis()"+System.currentTimeMillis());
         SpUtil.getInstance().putLong(AppConstants.LOCK_PLAY_REMAIN_MILLISENCONS,SpUtil.getInstance().getLong(AppConstants.LOCK_PLAY_SETTING_MILLISENCONS,1000*60*10));
         SpUtil.getInstance().putBoolean(AppConstants.RUN_LOCK_STATE, true);
         SpUtil.getInstance().putBoolean(AppConstants.LOCK_STATE, true);
-        LogUtils.i("SystemClock.elapsedRealtime()"+SystemClock.elapsedRealtime());
-
+        SpUtil.getInstance().putBoolean(AppConstants.FIRST_PLAY_CYCLE,true);
+        SpUtil.getInstance().putInt(AppConstants.STUDY_CYCLE,1);
+        //时钟显示计数
         long lastSuccess = SpUtil.getInstance().getLong(AppConstants.LOCK_START_MILLISENCONS);
         long elapsedRealtimeOffset = System.currentTimeMillis() - SystemClock.elapsedRealtime();
         chronometer.setBase(lastSuccess - elapsedRealtimeOffset);
@@ -175,11 +176,12 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
     }
 
     /**
-     * 启动后台监测正在运行的程序服务
+     * 结束后台监测正在运行的程序服务
      */
     public void cancleLockService() {
-        Intent stopIntent = new Intent(LockApplication.getContext(), LockService.class);
-        stopService(stopIntent);
+        //伪结束 后台服务不停止
+        //Intent stopIntent = new Intent(LockApplication.getContext(), LockService.class);
+        //stopService(stopIntent);
         SpUtil.getInstance().putBoolean(AppConstants.LOCK_STATE, false);
         NotifyUtil.stopServiceNotify(LockApplication.getContext());
 
@@ -192,12 +194,33 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
      */
     private void allowPlay() {
 
-        Long remainPlaytime=SpUtil.getInstance().getLong(AppConstants.LOCK_PLAY_REMAIN_MILLISENCONS,1000*60*10)/2;
-        SpUtil.getInstance().putLong(AppConstants.LOCK_PLAY_REMAIN_MILLISENCONS,remainPlaytime);
+        Long remainPlaytime=SpUtil.getInstance().getLong(AppConstants.LOCK_PLAY_REMAIN_MILLISENCONS,1000*60*10);
 
-        ToastUtil.showToast("本次最多可玩"+ DataUtil.timeParse(remainPlaytime));
+        Long currentTime =System.currentTimeMillis();
+        Long startTime = SpUtil.getInstance().getLong(AppConstants.LOCK_START_MILLISENCONS,0);
+        Long settingTime =SpUtil.getInstance().getLong(AppConstants.LOCK_SETTING_MILLISENCONS,1000*60*60*2);
+        Long thisTime =currentTime-startTime;
+
+        if(thisTime>settingTime){
+            //这里逻辑存在漏洞 如果一直没有亮屏操作 还有初始化结果未知 似乎初始化为true可以
+            if(SpUtil.getInstance().getBoolean(AppConstants.FIRST_PLAY_CYCLE, true) )
+            {
+                ToastUtil.showToast("已达到规定学习时长，本次最多可玩"+ DataUtil.timeParse(remainPlaytime));
+                SpUtil.getInstance().putBoolean(AppConstants.FIRST_PLAY_CYCLE, false);
+            }else {
+                remainPlaytime=remainPlaytime/2;
+                ToastUtil.showToast("本次最多可玩"+ DataUtil.timeParse(remainPlaytime));
+            }
+
+        }else{
+            remainPlaytime=remainPlaytime/2;
+            ToastUtil.showToast("未达到规定学习时长，本次最多可玩"+ DataUtil.timeParse(remainPlaytime));
+        }
+
+        SpUtil.getInstance().putLong(AppConstants.LOCK_PLAY_REMAIN_MILLISENCONS,remainPlaytime);
         SpUtil.getInstance().putLong(AppConstants.LOCK_PLAY_START_MILLISENCONS,System.currentTimeMillis());
         SpUtil.getInstance().putBoolean(AppConstants.RUN_LOCK_STATE,false);
+
         //记录解锁包名
         SpUtil.getInstance().putString(AppConstants.LOCK_LAST_LOAD_PKG_NAME, pkgName);
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
