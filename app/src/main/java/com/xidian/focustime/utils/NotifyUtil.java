@@ -7,12 +7,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 
 import com.xidian.focustime.LockApplication;
 import com.xidian.focustime.R;
 import com.xidian.focustime.base.AppConstants;
 import com.xidian.focustime.module.SplashActivity;
+import com.xidian.focustime.module.TomatoWakeUpActivity;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 
@@ -83,4 +85,31 @@ public class NotifyUtil {
                 notification);
     }
 
+    public static void tomatoNotify(Context context) {
+        Intent intent=new Intent(context, TomatoWakeUpActivity.class);
+        PendingIntent pi= PendingIntent.getActivity(context,0,intent,0);
+        Bitmap icon = BitmapFactory.decodeResource(context.getResources(),
+                R.mipmap.ic_launcher);
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context);
+        mBuilder.setSmallIcon(R.mipmap.ic_launcher)
+                .setContentText( "是否需要休息一下" )
+                // 点击消失
+                .setAutoCancel( true )
+                .setLargeIcon( Bitmap.createScaledBitmap(icon, 128, 128, false) )
+                .setTicker("您已完成一个番茄时间周期")
+                .setContentIntent(pi)
+                // 通知首次出现在通知栏，带上升动画效果的
+                .setWhen( System.currentTimeMillis() )
+                .setDefaults(Notification.DEFAULT_SOUND
+                        | Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS);
+        //在5.0版本之后，可以支持在锁屏界面显示notification
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            mBuilder.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
+        }
+
+        Notification notification  = mBuilder.build();
+        NotificationManager manager=(NotificationManager)context.getSystemService(NOTIFICATION_SERVICE);
+        manager.notify(AppConstants.TOMATO_NOTIFICATION_ID.SERVICE,
+                notification);
+    }
 }

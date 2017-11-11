@@ -44,6 +44,7 @@ public class ServiceReceiver extends BroadcastReceiver {
 
         switch (action) {
             case TOMATO_CYCLE_ACTION:
+                NotifyUtil.tomatoNotify(LockApplication.getContext());
                 KeyguardManager km = (KeyguardManager)LockApplication.getContext().getSystemService(Context.KEYGUARD_SERVICE);
                 LogUtils.i("收到唤醒广播"+km.inKeyguardRestrictedInputMode());
                 if (km.inKeyguardRestrictedInputMode()) {

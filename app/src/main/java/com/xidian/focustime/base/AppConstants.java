@@ -52,6 +52,10 @@ public class AppConstants {
      */
     public static final String TOMATO_STUDY_CYCLE = "tomato_study_cycle";
     /**
+     * 番茄学习法的休息时间（毫秒） 设为1000*60*25
+     */
+    public static final String TOMATO_TIME = "tomato_time";
+    /**
      * 番茄学习法的休息时间（毫秒） 设为1000*60*5
      */
     public static final String TOMATO_BREAK_TIME = "tomato_break_time";
@@ -63,5 +67,9 @@ public class AppConstants {
     public interface NOTIFICATION_ID {
         public static int SERVICE = 101;
         public static int FOREGROUND_SERVICE = 101;
+    }
+    public interface TOMATO_NOTIFICATION_ID {
+        public static int SERVICE = 102;
+        public static int FOREGROUND_SERVICE = 102;
     }
 }

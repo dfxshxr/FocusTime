@@ -14,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.Chronometer;
 
+import com.apkfuns.logutils.LogUtils;
 import com.xidian.focustime.LockApplication;
 import com.xidian.focustime.R;
 import com.xidian.focustime.base.AppConstants;
@@ -22,6 +23,7 @@ import com.xidian.focustime.db.AppManager;
 import com.xidian.focustime.service.LockService;
 import com.xidian.focustime.utils.DataUtil;
 import com.xidian.focustime.utils.LockUtil;
+import com.xidian.focustime.utils.MyCountTimer;
 import com.xidian.focustime.utils.NotifyUtil;
 import com.xidian.focustime.utils.SpUtil;
 import com.xidian.focustime.utils.ToastUtil;
@@ -56,14 +58,21 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
             }
         });
 
-        Button mStartButton = (Button) findViewById(R.id.start_button);
+        final Button mStartButton = (Button) findViewById(R.id.start_button);
         mStartButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (SpUtil.getInstance().getBoolean(AppConstants.LOCK_STATE,false)) {
-                    ToastUtil.showToast("已在学习中");
+                    ToastUtil.showToast("当前任务尚未结束");
                 }else {
-                    startLockService();
+                    MyCountTimer myCountTimer = new MyCountTimer(4000, 1000,chronometer, ""){
+                        @Override
+                        public void onFinish() {
+                            startLockService();
+                        }
+                    };
+                    myCountTimer.start();
+
                 }
             }
         });
@@ -132,10 +141,34 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
         if (SpUtil.getInstance().getBoolean(AppConstants.LOCK_STATE,false)) {
             long lastSuccess = SpUtil.getInstance().getLong(AppConstants.LOCK_START_MILLISENCONS);
             long elapsedRealtimeOffset = System.currentTimeMillis() - SystemClock.elapsedRealtime();
-            chronometer.setBase(lastSuccess - elapsedRealtimeOffset);
+            long totalPlayTime=SpUtil.getInstance().getLong(AppConstants.TOTAL_PLAY_MILLISENCONS,0);
+            chronometer.setBase(lastSuccess - elapsedRealtimeOffset-totalPlayTime);
             chronometer.start();
         }
 
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+
+        long lastSuccess = SpUtil.getInstance().getLong(AppConstants.LOCK_START_MILLISENCONS);
+        long elapsedRealtimeOffset = System.currentTimeMillis() - SystemClock.elapsedRealtime();
+        long totalPlayTime=SpUtil.getInstance().getLong(AppConstants.TOTAL_PLAY_MILLISENCONS,0);
+
+        LogUtils.i(lastSuccess - elapsedRealtimeOffset);
+        LogUtils.i(totalPlayTime);
+        if (SpUtil.getInstance().getBoolean(AppConstants.LOCK_STATE,false)) {
+            chronometer.setBase(lastSuccess - elapsedRealtimeOffset+totalPlayTime);
+            if(SpUtil.getInstance().getBoolean(AppConstants.RUN_LOCK_STATE,false))
+            {
+                chronometer.start();
+            }else{
+                chronometer.stop();
+            }
+        }else{
+            chronometer.setBase(SystemClock.elapsedRealtime());
+        }
     }
 
     @Override

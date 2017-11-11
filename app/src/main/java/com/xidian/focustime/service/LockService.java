@@ -148,8 +148,9 @@ public class LockService extends IntentService {
 
                 //番茄学习法
                 int tomatoCycle=SpUtil.getInstance().getInt(AppConstants.TOMATO_STUDY_CYCLE,1);
+                Long tomatoTime=SpUtil.getInstance().getLong(AppConstants.TOMATO_TIME,1000*60*25);
                 Boolean tomatoBreakStatus=SpUtil.getInstance().getBoolean(AppConstants.TOMATO_LEARNING_BREAK_TIME_STATE,false);
-                if (lockState && runLockState && currentTime-startTime-totalPlayTime >tomatoCycle*1000*60*25)
+                if (lockState && runLockState && currentTime-startTime-totalPlayTime >tomatoCycle*tomatoTime)
                 {
                     LogUtils.i("唤醒屏幕"+(currentTime-startTime-totalPlayTime)/1000);
                     Intent tomatoIntent =new Intent(TOMATO_CYCLE_ACTION);
@@ -167,10 +168,11 @@ public class LockService extends IntentService {
                         //休息中
                         if(tomatoBreakStatus){
                             //番茄法
-                            if (currentTime - startPlayTime > 1000*60*5) {
+                            Long tomatoBreakTime=SpUtil.getInstance().getLong(AppConstants.TOMATO_BREAK_TIME,1000*60*5);
+                            if (currentTime - startPlayTime > tomatoBreakTime) {
                                 LockUtil.startLock();
                             }else {
-                                NotifyUtil.updateNotify("休息中","休息时间还有"+(remainPlaytime-currentTime+startPlayTime)/1000+"秒");
+                                NotifyUtil.updateNotify("休息中","休息时间还有"+(tomatoBreakTime-currentTime+startPlayTime)/1000+"秒");
                             }
                         }else {
                             //一般
