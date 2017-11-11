@@ -40,7 +40,11 @@ public class AppConstants {
     public static final String LOCK_PLAY_REMAIN_MILLISENCONS = "lock_play_remain_milliseconds"; //记录还能玩的时间（毫秒）
 
     /**
-     * 一次亮屏内是否是第一次玩 （boolen） 初始化时设为true
+     * 记录总娱乐时长（毫秒）初始化为0
+     */
+    public static final String TOTAL_PLAY_MILLISENCONS = "total_play_milliseconds";
+    /**
+     * 一次亮屏内是否是第一次玩 （boolean） 初始化时设为true
      */
     public static final String FIRST_PLAY_CYCLE = "first_play_cycle";
     /**

@@ -89,8 +89,8 @@ public class SpUtil {
         return mPref.getLong(key, 0);
     }
 
-    public long getLong(String key, int defInt) {
-        return mPref.getLong(key, defInt);
+    public long getLong(String key, long defLong) {
+        return mPref.getLong(key, defLong);
     }
 
     public int getInt(String key) {

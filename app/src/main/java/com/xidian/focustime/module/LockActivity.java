@@ -165,6 +165,7 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
         SpUtil.getInstance().putInt(AppConstants.TOMATO_STUDY_CYCLE,1);
         SpUtil.getInstance().putLong(AppConstants.TOMATO_BREAK_TIME,1000*60*5);
         SpUtil.getInstance().putBoolean(AppConstants.TOMATO_LEARNING_BREAK_TIME_STATE,false);
+        SpUtil.getInstance().putLong(AppConstants.TOTAL_PLAY_MILLISENCONS,0);
 
         //时钟显示计数
         long lastSuccess = SpUtil.getInstance().getLong(AppConstants.LOCK_START_MILLISENCONS);

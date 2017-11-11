@@ -14,6 +14,7 @@ import android.os.Build;
 import android.provider.Settings;
 import android.text.TextUtils;
 
+import com.apkfuns.logutils.LogUtils;
 import com.xidian.focustime.LockApplication;
 import com.xidian.focustime.base.AppConstants;
 import com.xidian.focustime.base.BaseActivity;
@@ -253,5 +254,29 @@ public class LockUtil {
         Intent intent = new Intent(LockApplication.getContext(), ResultActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
+    }
+
+    /**
+     * 开始学习/锁定
+     */
+    public static void startLock(){
+
+        Long currentTime =System.currentTimeMillis();
+        Long startPlayTime=SpUtil.getInstance().getLong(AppConstants.LOCK_PLAY_START_MILLISENCONS,0);
+
+        LogUtils.i("当前时间：" + currentTime + "开始时间：" + startPlayTime + "时间差：" + (currentTime - startPlayTime));
+        SpUtil.getInstance().putBoolean(AppConstants.RUN_LOCK_STATE, true);
+        SpUtil.getInstance().putBoolean(AppConstants.TOMATO_LEARNING_BREAK_TIME_STATE, false);
+
+        //记录已玩时间
+        SpUtil.getInstance().putLong(AppConstants.TOTAL_PLAY_MILLISENCONS, SpUtil.getInstance().getLong(AppConstants.TOTAL_PLAY_MILLISENCONS,0)+(currentTime - startPlayTime));
+        LogUtils.i(SpUtil.getInstance().getLong(AppConstants.TOTAL_PLAY_MILLISENCONS,0));
+        LockApplication.getInstance().clearAllActivity();
+
+        //当前玩耍时间大于2 不处于番茄休息状态 currentTime - startPlayTime > 1000 * 60 * 2||
+        if ( SpUtil.getInstance().getLong(AppConstants.LOCK_PLAY_REMAIN_MILLISENCONS, 0)<1000*60*4) {
+            SpUtil.getInstance().putLong(AppConstants.LOCK_PLAY_REMAIN_MILLISENCONS, 1000 * 60 * 4);
+        }
+
     }
 }

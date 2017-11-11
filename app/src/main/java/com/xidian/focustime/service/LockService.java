@@ -137,18 +137,21 @@ public class LockService extends IntentService {
             Long startTime = SpUtil.getInstance().getLong(AppConstants.LOCK_START_MILLISENCONS,0);
             Long continueTime =SpUtil.getInstance().getLong(AppConstants.LOCK_SETTING_MILLISENCONS,1000*60*60*2);
 
-            Long startPlayTime=SpUtil.getInstance().getLong(AppConstants.LOCK_PLAY_START_MILLISENCONS,0);
+            Long startPlayTime=SpUtil.getInstance().getLong(AppConstants.LOCK_PLAY_START_MILLISENCONS,currentTime);
             Long remainPlaytime=SpUtil.getInstance().getLong(AppConstants.LOCK_PLAY_REMAIN_MILLISENCONS,1000*60*10);
 
+            Long totalPlayTime=SpUtil.getInstance().getLong(AppConstants.TOTAL_PLAY_MILLISENCONS,0);
+
+            lockState = SpUtil.getInstance().getBoolean(AppConstants.LOCK_STATE,false);
             runLockState=SpUtil.getInstance().getBoolean(AppConstants.RUN_LOCK_STATE,true);
             try {
 
                 //番茄学习法
                 int tomatoCycle=SpUtil.getInstance().getInt(AppConstants.TOMATO_STUDY_CYCLE,1);
                 Boolean tomatoBreakStatus=SpUtil.getInstance().getBoolean(AppConstants.TOMATO_LEARNING_BREAK_TIME_STATE,false);
-                if (lockState && runLockState && currentTime-startTime >tomatoCycle*1000*60*25)
+                if (lockState && runLockState && currentTime-startTime-totalPlayTime >tomatoCycle*1000*60*25)
                 {
-                    LogUtils.i("唤醒屏幕"+(currentTime-startTime)/1000);
+                    LogUtils.i("唤醒屏幕"+(currentTime-startTime-totalPlayTime)/1000);
                     Intent tomatoIntent =new Intent(TOMATO_CYCLE_ACTION);
                     sendBroadcast(tomatoIntent);
                     SpUtil.getInstance().putInt(AppConstants.TOMATO_STUDY_CYCLE,tomatoCycle+1);
@@ -157,29 +160,23 @@ public class LockService extends IntentService {
                 //判断包名打开解锁页面
                 if (lockState && !TextUtils.isEmpty(packageName)) {
 
-                    savePkgName = SpUtil.getInstance().getString(AppConstants.LOCK_LAST_LOAD_PKG_NAME, ""); //上次解锁的应用包名
-                    LogUtils.i("packageName = " + packageName + "  savePkgName = " + savePkgName+"  activity = "+LockUtil.getLauncherTopActivity(this,activityManager));
+                    //savePkgName = SpUtil.getInstance().getString(AppConstants.LOCK_LAST_LOAD_PKG_NAME, ""); //上次解锁的应用包名
+                    //LogUtils.i("packageName = " + packageName + "  savePkgName = " + savePkgName+"  activity = "+LockUtil.getLauncherTopActivity(this,activityManager));
 
                     if(!runLockState){
                         //休息中
                         if(tomatoBreakStatus){
                             //番茄法
                             if (currentTime - startPlayTime > 1000*60*5) {
-                                LogUtils.i("当前时间：" + currentTime + "开始时间：" + startPlayTime + "时间差：" + (currentTime - startPlayTime) + "剩余时间：" + remainPlaytime);
-                                SpUtil.getInstance().putBoolean(AppConstants.TOMATO_LEARNING_BREAK_TIME_STATE, false);
-                                SpUtil.getInstance().putBoolean(AppConstants.RUN_LOCK_STATE, true);
-                                runLockState = true;
-                                LockApplication.getInstance().clearAllActivity();
+                                LockUtil.startLock();
                             }else {
                                 NotifyUtil.updateNotify("休息中","休息时间还有"+(remainPlaytime-currentTime+startPlayTime)/1000+"秒");
                             }
                         }else {
                             //一般
                             if (currentTime - startPlayTime > remainPlaytime) {
-                                LogUtils.i("当前时间：" + currentTime + "开始时间：" + startPlayTime + "时间差：" + (currentTime - startPlayTime) + "剩余时间：" + remainPlaytime);
-                                SpUtil.getInstance().putBoolean(AppConstants.RUN_LOCK_STATE, true);
-                                runLockState = true;
-                                LockApplication.getInstance().clearAllActivity();
+                                LockUtil.startLock();
+                                //当前玩耍时间大于2 不处于番茄休息状态 休息时间强制归4
                                 if (currentTime - startPlayTime > 1000 * 60 * 2) {
                                     SpUtil.getInstance().putLong(AppConstants.LOCK_PLAY_REMAIN_MILLISENCONS, 1000 * 60 * 4);
                                 }
@@ -187,7 +184,6 @@ public class LockService extends IntentService {
                                 NotifyUtil.updateNotify("愉快玩耍中","可玩时间还有"+(remainPlaytime-currentTime+startPlayTime)/1000+"秒");
                             }
                         }
-
                     }else {
                         //学习中
                         NotifyUtil.updateNotify("专心学习中","学习时间还有"+(continueTime-currentTime+startTime)/1000+"秒");
@@ -201,8 +197,9 @@ public class LockService extends IntentService {
                             LockApplication.getInstance().clearAllActivity();
                         }
                     }*/
+
                     // 如果是锁定状态，转向解锁页面
-                    if ((mAppManager.isLockedPackageName(packageName)||LockUtil.inBlackList(packageName))&&runLockState&&!LockUtil.inWhiteList(packageName)) {
+                    if ((mAppManager.isLockedPackageName(packageName)||LockUtil.inBlackList(packageName))&&SpUtil.getInstance().getBoolean(AppConstants.RUN_LOCK_STATE,true)&&!LockUtil.inWhiteList(packageName)) {
 
                         LogUtils.i("后台跳转");
                         LockUtil.gotoUnlock(this,packageName);
@@ -215,6 +212,8 @@ public class LockService extends IntentService {
             }
         }
     }
+
+
 
 
 

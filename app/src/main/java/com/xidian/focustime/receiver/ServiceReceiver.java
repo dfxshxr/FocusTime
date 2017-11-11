@@ -44,7 +44,6 @@ public class ServiceReceiver extends BroadcastReceiver {
 
         switch (action) {
             case TOMATO_CYCLE_ACTION:
-
                 KeyguardManager km = (KeyguardManager)LockApplication.getContext().getSystemService(Context.KEYGUARD_SERVICE);
                 LogUtils.i("收到唤醒广播"+km.inKeyguardRestrictedInputMode());
                 if (km.inKeyguardRestrictedInputMode()) {
@@ -53,24 +52,20 @@ public class ServiceReceiver extends BroadcastReceiver {
                     context.startActivity(alarmIntent);
                 }
                 break;
-            case Intent.ACTION_SCREEN_OFF: //屏幕关闭的广播
-                SpUtil.getInstance().putLong(AppConstants.LOCK_CURR_MILLISENCONS, System.currentTimeMillis()); //记录屏幕关闭时间
-                //锁屏的时候进行加锁
-                if (isLockOffScreen) {
-                    Long remainPlaytime=SpUtil.getInstance().getLong(AppConstants.LOCK_PLAY_REMAIN_MILLISENCONS,1000*60*10);
-                    if(remainPlaytime<1000*60*4){
-                        SpUtil.getInstance().putLong(AppConstants.LOCK_PLAY_REMAIN_MILLISENCONS,1000*60*4);
-                    }
-                    SpUtil.getInstance().putBoolean(AppConstants.TOMATO_LEARNING_BREAK_TIME_STATE, false);
-                    SpUtil.getInstance().putBoolean(AppConstants.RUN_LOCK_STATE,true);
+            case Intent.ACTION_SCREEN_OFF:
+                //屏幕关闭的广播
+                //记录屏幕关闭时间
+                SpUtil.getInstance().putLong(AppConstants.LOCK_CURR_MILLISENCONS, System.currentTimeMillis());
+                //锁屏的时候进行加锁 主锁true 运行锁false
+                if (isLockOffScreen&&SpUtil.getInstance().getBoolean(AppConstants.LOCK_STATE,false)&&!SpUtil.getInstance().getBoolean(AppConstants.RUN_LOCK_STATE,false)) {
+                    LockUtil.startLock();
                 }
                 break;
             case Intent.ACTION_SCREEN_ON:
+                    SpUtil.getInstance().putBoolean(AppConstants.FIRST_PLAY_CYCLE, true);
                 if (isLockOffScreen) {
                     NotifyUtil.updateNotify("专心学习中","专心学习中");
                     //解锁之后的第一个学习周期
-                    SpUtil.getInstance().putBoolean(AppConstants.FIRST_PLAY_CYCLE, true);
-
                     /*if(LockUtil.getLauncherTopApp(context,activityManager).equals(AppConstants.APP_PACKAGE_NAME)&&
                             !LockUtil.getLauncherTopActivity(context,activityManager).equals(AppConstants.APP_PACKAGE_NAME+".module.LockActivity"))
                     {
