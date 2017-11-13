@@ -31,6 +31,7 @@ public class TomatoWakeUpActivity extends Activity {
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SpUtil.getInstance().putBoolean(AppConstants.TOMATO_LEARNING_BREAK_TIME_STATE, false);
                 ToastUtil.showToast("请关闭屏幕");
                 finish();
             }

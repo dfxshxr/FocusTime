@@ -149,14 +149,18 @@ public class LockService extends IntentService {
                 //番茄学习法
                 int tomatoCycle=SpUtil.getInstance().getInt(AppConstants.TOMATO_STUDY_CYCLE,1);
                 Long tomatoTime=SpUtil.getInstance().getLong(AppConstants.TOMATO_TIME,1000*60*25);
+                Long tomatoStartTime=SpUtil.getInstance().getLong(AppConstants.TOMATO_START_TIME,currentTime);
                 Boolean tomatoBreakStatus=SpUtil.getInstance().getBoolean(AppConstants.TOMATO_LEARNING_BREAK_TIME_STATE,false);
-                if (lockState && runLockState && currentTime-startTime-totalPlayTime >tomatoCycle*tomatoTime)
-                {
-                    LogUtils.i("唤醒屏幕"+(currentTime-startTime-totalPlayTime)/1000);
+
+                if (lockState && runLockState && !tomatoBreakStatus && currentTime-tomatoStartTime >tomatoTime)
+                {//锁定 运行锁 非番茄状态
+                    SpUtil.getInstance().putBoolean(AppConstants.TOMATO_LEARNING_BREAK_TIME_STATE,true);
+                    LogUtils.i("唤醒屏幕"+(currentTime-tomatoStartTime)/1000);
                     Intent tomatoIntent =new Intent(TOMATO_CYCLE_ACTION);
                     sendBroadcast(tomatoIntent);
                     SpUtil.getInstance().putInt(AppConstants.TOMATO_STUDY_CYCLE,tomatoCycle+1);
                 }
+
 
                 //判断包名打开解锁页面
                 if (lockState && !TextUtils.isEmpty(packageName)) {
@@ -188,7 +192,7 @@ public class LockService extends IntentService {
                         }
                     }else {
                         //学习中
-                        NotifyUtil.updateNotify("专心学习中","学习时间还有"+(continueTime-currentTime+startTime)/1000+"秒");
+                        NotifyUtil.updateNotify("专心学习中","已学习"+(currentTime-startTime-totalPlayTime)/1000/60+"分钟,连续"+(currentTime-tomatoStartTime)/1000/60+"分钟");
                     }
 
                     /*//返回桌面加锁

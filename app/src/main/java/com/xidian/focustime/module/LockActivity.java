@@ -198,6 +198,7 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
         SpUtil.getInstance().putInt(AppConstants.TOMATO_STUDY_CYCLE,1);
         SpUtil.getInstance().putLong(AppConstants.TOMATO_BREAK_TIME,1000*60*5);
         SpUtil.getInstance().putBoolean(AppConstants.TOMATO_LEARNING_BREAK_TIME_STATE,false);
+        SpUtil.getInstance().putLong(AppConstants.TOMATO_START_TIME, System.currentTimeMillis());
         SpUtil.getInstance().putLong(AppConstants.TOTAL_PLAY_MILLISENCONS,0);
 
         //时钟显示计数
@@ -236,11 +237,12 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
         Long startTime = SpUtil.getInstance().getLong(AppConstants.LOCK_START_MILLISENCONS,0);
         Long settingTime =SpUtil.getInstance().getLong(AppConstants.LOCK_SETTING_MILLISENCONS,1000*60*60*2);
         Long thisTime =currentTime-startTime;
-
-        if(thisTime>settingTime){
+        Boolean tomatoBreakTimeStatus =SpUtil.getInstance().getBoolean(AppConstants.TOMATO_LEARNING_BREAK_TIME_STATE, false);
+        if(thisTime>settingTime||tomatoBreakTimeStatus){
             //这里逻辑存在漏洞 如果一直没有亮屏操作 还有初始化结果未知 似乎初始化为true可以
-            if(SpUtil.getInstance().getBoolean(AppConstants.FIRST_PLAY_CYCLE, true) )
-            {
+            if(tomatoBreakTimeStatus){
+                ToastUtil.showToast("番茄时间到，本次可休息"+ DataUtil.timeParse(remainPlaytime));
+            }else if(SpUtil.getInstance().getBoolean(AppConstants.FIRST_PLAY_CYCLE, true)){
                 ToastUtil.showToast("已达到规定学习时长，本次最多可玩"+ DataUtil.timeParse(remainPlaytime));
                 SpUtil.getInstance().putBoolean(AppConstants.FIRST_PLAY_CYCLE, false);
             }else {
@@ -255,7 +257,7 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
 
         SpUtil.getInstance().putLong(AppConstants.LOCK_PLAY_REMAIN_MILLISENCONS,remainPlaytime);
         SpUtil.getInstance().putLong(AppConstants.LOCK_PLAY_START_MILLISENCONS,System.currentTimeMillis());
-        SpUtil.getInstance().putBoolean(AppConstants.TOMATO_LEARNING_BREAK_TIME_STATE, false);
+        //SpUtil.getInstance().putBoolean(AppConstants.TOMATO_LEARNING_BREAK_TIME_STATE, false);
         SpUtil.getInstance().putBoolean(AppConstants.RUN_LOCK_STATE,false);
 
         //记录解锁包名
