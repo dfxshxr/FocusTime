@@ -265,6 +265,8 @@ public class LockUtil {
         Long startPlayTime=SpUtil.getInstance().getLong(AppConstants.LOCK_PLAY_START_MILLISENCONS,0);
 
         LogUtils.i("当前时间：" + currentTime + "开始时间：" + startPlayTime + "时间差：" + (currentTime - startPlayTime));
+
+        SpUtil.getInstance().putLong(AppConstants.TOMATO_START_TIME,currentTime);
         SpUtil.getInstance().putBoolean(AppConstants.RUN_LOCK_STATE, true);
         SpUtil.getInstance().putBoolean(AppConstants.TOMATO_LEARNING_BREAK_TIME_STATE, false);
 

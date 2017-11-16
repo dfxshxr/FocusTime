@@ -60,6 +60,10 @@ public class AppConstants {
      */
     public static final String TOMATO_BREAK_TIME = "tomato_break_time";
     /**
+     * 番茄学习法一个周期的开始时间（毫秒）
+     */
+    public static final String TOMATO_START_TIME = "tomato_start_time";
+    /**
      * 番茄学习法的状态 如果是以番茄模式进入的休息则为true
      */
     public static final String TOMATO_LEARNING_BREAK_TIME_STATE = "tomato_learning_break_time_state";
