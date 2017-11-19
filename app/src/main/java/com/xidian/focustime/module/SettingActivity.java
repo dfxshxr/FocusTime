@@ -4,11 +4,13 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.apkfuns.logutils.LogUtils;
+import com.lqr.optionitemview.OptionItemView;
 import com.xidian.focustime.R;
 import com.xidian.focustime.base.AppConstants;
 import com.xidian.focustime.base.BaseActivity;
@@ -18,7 +20,7 @@ import cn.qqtheme.framework.picker.TimePicker;
 
 public class SettingActivity extends BaseActivity {
 
-    Button mStudyButton,mplayButton,mTomatoCycleButton,mTomatoBreakTimeButton;
+    OptionItemView mStudyButton,mplayButton,mTomatoCycleButton,mTomatoBreakTimeButton;
     TextView mVersionTextView;
     @Override
     public int getLayoutId() {
@@ -27,32 +29,18 @@ public class SettingActivity extends BaseActivity {
 
     @Override
     protected void initViews(Bundle savedInstanceState) {
-        mStudyButton = (Button) findViewById(R.id.study);
+        mStudyButton = (OptionItemView) findViewById(R.id.study);
         mStudyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onStudyTimePicker(view);
             }
         });
-        mplayButton = (Button) findViewById(R.id.play);
+        mplayButton = (OptionItemView) findViewById(R.id.play);
         mplayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onPlayTimePicker(view);
-            }
-        });
-        mTomatoCycleButton = (Button) findViewById(R.id.tomato_cycle);
-        mTomatoCycleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onTomatoTimePicker(view);
-            }
-        });
-        mTomatoBreakTimeButton = (Button) findViewById(R.id.tomato_break);
-        mTomatoBreakTimeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onTomatoBreakTimePicker(view);
             }
         });
         mVersionTextView=(TextView) findViewById(R.id.version);
@@ -81,6 +69,10 @@ public class SettingActivity extends BaseActivity {
         picker.setCycleDisable(false);
         picker.setRangeStart(0, 10);//00:00
         picker.setRangeEnd(23, 59);//23:59
+        picker.setTextColor(ContextCompat.getColor(this,R.color.black0));
+        picker.setDividerColor(ContextCompat.getColor(this,R.color.black0));
+        picker.setCancelTextColor(ContextCompat.getColor(this,R.color.black0));
+        picker.setSubmitTextColor(ContextCompat.getColor(this,R.color.black0));
         int currentHour =(int)SpUtil.getInstance().getLong(AppConstants.LOCK_SETTING_MILLISENCONS,1000*60*10)/(1000*60*60);
         int currentMinute = (int)SpUtil.getInstance().getLong(AppConstants.LOCK_SETTING_MILLISENCONS,1000*60*10)/(1000*60);
         picker.setSelectedItem(currentHour, currentMinute);
@@ -105,7 +97,10 @@ public class SettingActivity extends BaseActivity {
         picker.setUseWeight(false);
         picker.setCycleDisable(false);
         picker.setRangeStart(0, 1);//00:00
-
+        picker.setTextColor(ContextCompat.getColor(this,R.color.black0));
+        picker.setDividerColor(ContextCompat.getColor(this,R.color.black0));
+        picker.setCancelTextColor(ContextCompat.getColor(this,R.color.black0));
+        picker.setSubmitTextColor(ContextCompat.getColor(this,R.color.black0));
         Long continueTime =SpUtil.getInstance().getLong(AppConstants.LOCK_SETTING_MILLISENCONS,1000*60*60*2);
         Long remainPlaytime=SpUtil.getInstance().getLong(AppConstants.LOCK_PLAY_SETTING_MILLISENCONS,1000*60*10);
 

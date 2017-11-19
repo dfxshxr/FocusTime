@@ -46,4 +46,12 @@
     <string name="add_white_list_tip2">在弹出的最近运行任务页面中，长按/上滑/下滑本应用，点击加锁按钮。需要解除锁定时，你需要回到这个页面，然后在最近运行的任务中对本应用解除锁定。同时如果您的手机中有手机管家，您需要将本应用加入内存清理白名单当中。</string>
     <string name="add_white_list_toast_tip1">单击系统菜单键，（长按/上滑/下滑本应用）点击加锁按钮</string>
     <string name="add_white_list_toast_tip2">（长按/上滑/下滑应用图标）点击加锁按钮</string>
+
+
+    <!--设置-->
+    <string name="about">关于「专注时间」</string>
+    <string name="exit">退出</string>
+    <string name="exit_account">退出当前账号</string>
+    <string name="exit_app">退出应用</string>
+    <string name="help_feedback">帮助与反馈</string>
 </resources>

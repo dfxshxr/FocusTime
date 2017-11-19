@@ -1,51 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<com.zhy.autolayout.AutoLinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.xidian.focustime.module.SettingActivity">
+    android:background="@color/gray5"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="368dp"
-        android:layout_height="495dp"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteY="8dp"
-        tools:layout_editor_absoluteX="8dp">
+   <include layout="@layout/include_toolbar"/>
 
-        <Button
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/option_item_margin_top"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <com.lqr.optionitemview.OptionItemView
             android:id="@+id/study"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="设置每次学习时长" />
+            style="@style/OptionItem"
+            android:background="@drawable/selector_option_item"
+            app:left_text="单次学习最短时长"
+            app:left_text_color="@color/black0"
+            app:left_text_margin_left="@dimen/option_item_margin_left"
+            app:left_text_size="16sp"/>
 
-        <Button
+        <View
+            style="@style/Line"
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
+            />
 
+        <com.lqr.optionitemview.OptionItemView
             android:id="@+id/play"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="设置最大娱乐时长" />
+            style="@style/OptionItem"
+            android:background="@drawable/selector_option_item"
+            app:left_text="单次休息最大时长"
+            app:left_text_color="@color/black0"
+            app:left_text_margin_left="@dimen/option_item_margin_left"
+            app:left_text_size="16sp"/>
 
-        <Button
-            android:id="@+id/tomato_cycle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="设置番茄时间周期" />
 
-        <Button
 
-            android:id="@+id/tomato_break"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="设置番茄休息时间" />
+    </com.zhy.autolayout.AutoLinearLayout>
 
-        <TextView
-            android:id="@+id/version"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textAlignment="center"/>
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/option_item_margin_top"
+        android:background="@color/white"
+        android:orientation="vertical">
 
-    </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+        <com.lqr.optionitemview.OptionItemView
+            android:id="@+id/oivAbout"
+            style="@style/OptionItem"
+            android:background="@drawable/selector_option_item"
+            app:left_text="@string/about"
+            app:left_text_color="@color/black0"
+            app:left_text_margin_left="@dimen/option_item_margin_left"
+            app:left_text_size="16sp"/>
+
+        <View
+            style="@style/Line"
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
+            />
+
+        <com.lqr.optionitemview.OptionItemView
+            android:id="@+id/oivHelpFeedback"
+            style="@style/OptionItem"
+            android:background="@drawable/selector_option_item"
+            app:left_text="@string/help_feedback"
+            app:left_text_color="@color/black0"
+            app:left_text_margin_left="@dimen/option_item_margin_left"
+            app:left_text_size="16sp"/>
+
+        <View
+            style="@style/Line"
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
+            />
+
+        <com.lqr.optionitemview.OptionItemView
+            android:id="@+id/oivExit"
+            style="@style/OptionItem"
+            android:background="@drawable/selector_option_item"
+            app:left_text="@string/exit"
+            app:left_text_color="@color/black0"
+            app:left_text_margin_left="@dimen/option_item_margin_left"
+            app:left_text_size="16sp"/>
+    </com.zhy.autolayout.AutoLinearLayout>
+    <TextView
+        android:id="@+id/version"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textAlignment="center"/>
+</com.zhy.autolayout.AutoLinearLayout>
