@@ -11,8 +11,8 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.ImageView;
 
 import com.apkfuns.logutils.LogUtils;
 import com.xidian.focustime.LockApplication;
@@ -39,33 +39,37 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
     private String actionFrom;//按返回键的操作
     private AppManager mAppManager;
 
+    private final int START=1;
+    private final int STOP =2;
+    private final int PAUSE=3;
+    private final int READY=4;
     private Chronometer chronometer;
-
+    ImageView mUserButton, mStartButton,mPlayButton, mStopButton, mSettingButton,mReStartButton,mPhoneButton,mAppButton;
     @Override
     public int getLayoutId() {
-        return R.layout.activity_lock;
+        return R.layout.activity_main;
     }
 
     @Override
     protected void initViews(Bundle savedInstanceState) {
         chronometer = (Chronometer) findViewById(R.id.chronometer);
-
-        Button mOpenAccessButton = (Button) findViewById(R.id.open_access_button);
-        mOpenAccessButton.setOnClickListener(new OnClickListener() {
+        mUserButton = (ImageView) findViewById(R.id.user_button);
+        mUserButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 checkAccessPermission();
             }
         });
 
-        final Button mStartButton = (Button) findViewById(R.id.start_button);
+        mStartButton = (ImageView) findViewById(R.id.start_button);
         mStartButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (SpUtil.getInstance().getBoolean(AppConstants.LOCK_STATE,false)) {
                     ToastUtil.showToast("当前任务尚未结束");
                 }else {
-                    MyCountTimer myCountTimer = new MyCountTimer(4000, 1000,chronometer, ""){
+                    UpdateUI(READY);
+                    MyCountTimer myCountTimer = new MyCountTimer(3000, 1000,chronometer, ""){
                         @Override
                         public void onFinish() {
                             startLockService();
@@ -77,7 +81,7 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
             }
         });
 
-        Button mPlayButton = (Button) findViewById(R.id.paly_button);
+        mPlayButton = (ImageView) findViewById(R.id.play_button);
         mPlayButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,8 +93,8 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
             }
         });
 
-        Button mCancleButton = (Button) findViewById(R.id.cancle_button);
-        mCancleButton.setOnClickListener(new OnClickListener() {
+        mStopButton = (ImageView) findViewById(R.id.stop_button);
+        mStopButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (SpUtil.getInstance().getBoolean(AppConstants.LOCK_STATE,false)) {
@@ -102,8 +106,8 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
             }
         });
 
-        Button mMenuButton = (Button) findViewById(R.id.menu_button);
-        mMenuButton.setOnClickListener(new OnClickListener() {
+        mSettingButton = (ImageView) findViewById(R.id.setting_button);
+        mSettingButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (SpUtil.getInstance().getBoolean(AppConstants.LOCK_STATE,false)) {
@@ -115,19 +119,34 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
             }
         });
 
-        Button mAdvancedButton = (Button) findViewById(R.id.advanced_menu_button);
+        mReStartButton = (ImageView) findViewById(R.id.restart_button);
+        mReStartButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (SpUtil.getInstance().getBoolean(AppConstants.LOCK_STATE,false)&&!SpUtil.getInstance().getBoolean(AppConstants.RUN_LOCK_STATE,false)) {
+                    LockUtil.startLock();
+                    UpdateUI(START);
+                    chronometer.start();
+                }else {
+                    ToastUtil.showToast("不在休息中");
+                }
+            }
+        });
+
+        mPhoneButton = (ImageView) findViewById(R.id.phone_button);
+        mAppButton =(ImageView) findViewById(R.id.app_button);
+       /* Button mAdvancedButton = (Button) findViewById(R.id.advanced_menu_button);
         mAdvancedButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (SpUtil.getInstance().getBoolean(AppConstants.LOCK_STATE,false)) {
                     ToastUtil.showToast("学习中不能修改设置");
                 }else {
-                    Intent intent = new Intent(LockActivity.this, AdvancedSettingActivity.class);
+                    Intent intent = new Intent(LockActivity.this, MainActivity.class);
                     startActivity(intent);
                 }
             }
-        });
-
+        });*/
     }
 
     @Override
@@ -144,6 +163,9 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
             long totalPlayTime=SpUtil.getInstance().getLong(AppConstants.TOTAL_PLAY_MILLISENCONS,0);
             chronometer.setBase(lastSuccess - elapsedRealtimeOffset-totalPlayTime);
             chronometer.start();
+            UpdateUI(START);
+        }else {
+            UpdateUI(STOP);
         }
 
     }
@@ -162,12 +184,15 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
             chronometer.setBase(lastSuccess - elapsedRealtimeOffset+totalPlayTime);
             if(SpUtil.getInstance().getBoolean(AppConstants.RUN_LOCK_STATE,false))
             {
+                UpdateUI(START);
                 chronometer.start();
             }else{
+                UpdateUI(PAUSE);
                 chronometer.stop();
             }
         }else{
             chronometer.setBase(SystemClock.elapsedRealtime());
+            chronometer.stop();
         }
     }
 
@@ -209,7 +234,7 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
 
         Intent intent = new Intent(LockActivity.this, LockService.class);
         startService(intent);
-
+        UpdateUI(START);
     }
 
     /**
@@ -223,14 +248,14 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
         NotifyUtil.stopServiceNotify(LockApplication.getContext());
 
         startActivity(new Intent(LockActivity.this, ResultActivity.class));
-
+        UpdateUI(STOP);
     }
 
     /**
      * 小玩一下
      */
     private void allowPlay() {
-
+        UpdateUI(PAUSE);
         Long remainPlaytime=SpUtil.getInstance().getLong(AppConstants.LOCK_PLAY_REMAIN_MILLISENCONS,1000*60*10);
 
         Long currentTime =System.currentTimeMillis();
@@ -326,6 +351,47 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
     @Override
     public void onDismiss(DialogInterface dialogInterface) {
 
+    }
+
+    private void UpdateUI(int i){
+        switch (i){
+            case READY:
+                mStartButton.setVisibility(View.GONE);
+                mUserButton.setVisibility(View.GONE);
+                mSettingButton.setVisibility(View.GONE);
+                mStopButton.setVisibility(View.GONE);
+                mPlayButton.setVisibility(View.GONE);
+                mReStartButton.setVisibility(View.GONE);
+                mPhoneButton.setVisibility(View.GONE);
+                mAppButton.setVisibility(View.GONE);
+                break;
+            case START:
+                mStartButton.setVisibility(View.GONE);
+                mUserButton.setVisibility(View.GONE);
+                mSettingButton.setVisibility(View.GONE);
+                mReStartButton.setVisibility(View.GONE);
+                mStopButton.setVisibility(View.VISIBLE);
+                mPlayButton.setVisibility(View.VISIBLE);
+                mPhoneButton.setVisibility(View.VISIBLE);
+                mAppButton.setVisibility(View.VISIBLE);
+                break;
+            case PAUSE:
+                mPlayButton.setVisibility(View.GONE);
+                mReStartButton.setVisibility(View.VISIBLE);
+                break;
+            case STOP:
+                mStartButton.setVisibility(View.VISIBLE);
+                mUserButton.setVisibility(View.VISIBLE);
+                mSettingButton.setVisibility(View.VISIBLE);
+                mPlayButton.setVisibility(View.GONE);
+                mStopButton.setVisibility(View.GONE);
+                mReStartButton.setVisibility(View.GONE);
+                mPhoneButton.setVisibility(View.GONE);
+                mAppButton.setVisibility(View.GONE);
+                break;
+            default:
+                break;
+        }
     }
 }
 

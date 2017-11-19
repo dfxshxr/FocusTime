@@ -26,4 +26,7 @@
     <color name="bg_white_selected">#f3f3f3</color>
 
     <color name="black_overlay">#66000000</color>
+
+    <color name="colorWhite_t8">#8FFF</color>
+    <color name="colorWhite_tD">#D8FFFFFF</color>
 </resources>
