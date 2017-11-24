@@ -22,7 +22,10 @@
             android:background="@drawable/selector_option_item"
             app:left_text="壁纸设置"
             app:left_text_color="@color/black0"
-            app:left_text_margin_left="@dimen/option_item_margin_left"
+            app:left_image_margin_left="@dimen/option_item_margin_left"
+            app:left_image_margin_right="@dimen/option_item_margin_right"
+            app:left_src="@mipmap/setting_wallpaper"
+            app:right_src="@mipmap/setting_right"
             app:left_text_size="16sp"/>
 
     </com.zhy.autolayout.AutoLinearLayout>
@@ -40,7 +43,12 @@
             android:background="@drawable/selector_option_item"
             app:left_text="预计专注时长"
             app:left_text_color="@color/black0"
-            app:left_text_margin_left="@dimen/option_item_margin_left"
+            app:left_image_margin_left="@dimen/option_item_margin_left"
+            app:left_image_margin_right="@dimen/option_item_margin_right"
+            app:left_src="@mipmap/setting_time"
+            app:right_text="00:00"
+            app:right_text_color="@color/gray2"
+            app:right_image_margin_right="@dimen/option_item_margin_right"
             app:left_text_size="16sp"/>
 
         <View
@@ -55,8 +63,14 @@
             android:background="@drawable/selector_option_item"
             app:left_text="首次休息时长"
             app:left_text_color="@color/black0"
-            app:left_text_margin_left="@dimen/option_item_margin_left"
-            app:left_text_size="16sp"/>
+            app:left_image_margin_left="@dimen/option_item_margin_left"
+            app:left_image_margin_right="@dimen/option_item_margin_right"
+            app:left_src="@mipmap/setting_rest"
+            app:left_text_size="16sp"
+            app:right_text="00:00"
+            app:right_text_color="@color/gray2"
+            app:right_image_margin_right="@dimen/option_item_margin_right"
+            />
     </com.zhy.autolayout.AutoLinearLayout>
 
 
@@ -73,7 +87,10 @@
             android:background="@drawable/selector_option_item"
             app:left_text="应用白名单"
             app:left_text_color="@color/black0"
-            app:left_text_margin_left="@dimen/option_item_margin_left"
+            app:left_image_margin_left="@dimen/option_item_margin_left"
+            app:left_image_margin_right="@dimen/option_item_margin_right"
+            app:left_src="@mipmap/setting_app"
+            app:right_src="@mipmap/setting_right"
             app:left_text_size="16sp"/>
 
     </com.zhy.autolayout.AutoLinearLayout>
@@ -89,9 +106,12 @@
             android:id="@+id/oivHelpFeedback"
             style="@style/OptionItem"
             android:background="@drawable/selector_option_item"
+            app:left_image_margin_left="@dimen/option_item_margin_left"
+            app:left_image_margin_right="@dimen/option_item_margin_right"
+            app:left_src="@mipmap/setting_tomato"
             app:left_text="番茄法则"
             app:left_text_color="@color/black0"
-            app:left_text_margin_left="@dimen/option_item_margin_left"
+            app:right_src="@mipmap/setting_right"
             app:left_text_size="16sp"/>
 
         <View
@@ -103,9 +123,12 @@
             android:id="@+id/oivAbout"
             style="@style/OptionItem"
             android:background="@drawable/selector_option_item"
+            app:left_image_margin_left="@dimen/option_item_margin_left"
+            app:left_image_margin_right="@dimen/option_item_margin_right"
+            app:left_src="@mipmap/setting_about"
             app:left_text="@string/about"
             app:left_text_color="@color/black0"
-            app:left_text_margin_left="@dimen/option_item_margin_left"
+            app:right_src="@mipmap/setting_right"
             app:left_text_size="16sp"/>
 
 

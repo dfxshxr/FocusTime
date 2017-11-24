@@ -49,7 +49,7 @@
 
 
     <!--设置-->
-    <string name="about">关于「专注时间」</string>
+    <string name="about">关于专注时间</string>
     <string name="exit">退出</string>
     <string name="exit_account">退出当前账号</string>
     <string name="exit_app">退出应用</string>

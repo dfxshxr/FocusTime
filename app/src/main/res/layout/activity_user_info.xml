@@ -59,7 +59,9 @@
         app:left_image_margin_right="@dimen/option_item_margin_right"
         app:left_text="历史数据"
         app:left_text_color="@color/black0"
-        app:left_text_size="16sp"/>
+        app:left_text_size="16sp"
+        app:right_src="@mipmap/setting_right"
+        />
 
 
 
