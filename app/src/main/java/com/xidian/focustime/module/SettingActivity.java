@@ -3,8 +3,11 @@ package com.xidian.focustime.module;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.content.ContextCompat;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,55 +16,51 @@ import com.apkfuns.logutils.LogUtils;
 import com.lqr.optionitemview.OptionItemView;
 import com.xidian.focustime.R;
 import com.xidian.focustime.base.AppConstants;
-import com.xidian.focustime.base.BaseActivity;
+import com.xidian.focustime.base2.BaseActivity;
+import com.xidian.focustime.base2.BasePresenter;
 import com.xidian.focustime.utils.SpUtil;
 
+import butterknife.BindView;
 import cn.qqtheme.framework.picker.TimePicker;
 
 public class SettingActivity extends BaseActivity {
 
-    OptionItemView mStudyButton,mplayButton,mTomatoCycleButton,mTomatoBreakTimeButton;
+    @BindView(R.id.appBar)
+    protected AppBarLayout mAppBar;
+    @BindView(R.id.tvToolbarTitle)
+    public TextView mToolbarTitle;
+    @BindView(R.id.tvToolbarSubTitle)
+    public TextView mToolbarSubTitle;
+    @BindView(R.id.study)
+    OptionItemView mStudyButton;
+    @BindView(R.id.play)
+    OptionItemView mplayButton;
+    @BindView(R.id.version)
     TextView mVersionTextView;
-    @Override
-    public int getLayoutId() {
-        return R.layout.activity_setting;
-    }
+
 
     @Override
-    protected void initViews(Bundle savedInstanceState) {
-        mStudyButton = (OptionItemView) findViewById(R.id.study);
+    public void initData() {
+        mVersionTextView.setText("版本号："+getVersionName()+"("+getVersionCode()+")");
+    }
+
+
+    @Override
+    public void initListener() {
         mStudyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onStudyTimePicker(view);
             }
         });
-        mplayButton = (OptionItemView) findViewById(R.id.play);
         mplayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onPlayTimePicker(view);
             }
         });
-        mVersionTextView=(TextView) findViewById(R.id.version);
     }
 
-    @Override
-    protected void initData() {
-        mVersionTextView.setText("版本号："+getVersionName()+"("+getVersionCode()+")");
-    }
-
-
-    @Override
-    protected void initAction() {
-
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-    }
 
     public void onStudyTimePicker(View view) {
         TimePicker picker = new TimePicker(this, TimePicker.HOUR_24);
@@ -206,5 +205,16 @@ public class SettingActivity extends BaseActivity {
         }
 
         return -1;
+    }
+
+
+    @Override
+    protected BasePresenter createPresenter() {
+        return null;
+    }
+
+    @Override
+    protected int provideContentViewId() {
+        return R.layout.activity_setting;
     }
 }

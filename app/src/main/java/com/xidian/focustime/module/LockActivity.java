@@ -54,13 +54,24 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
     protected void initViews(Bundle savedInstanceState) {
         chronometer = (Chronometer) findViewById(R.id.chronometer);
         mUserButton = (ImageView) findViewById(R.id.user_button);
-        mUserButton.setOnClickListener(new OnClickListener() {
+        mAppButton =(ImageView) findViewById(R.id.app_button);
+        mAppButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 checkAccessPermission();
             }
         });
-
+        mUserButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (SpUtil.getInstance().getBoolean(AppConstants.LOCK_STATE,false)) {
+                    ToastUtil.showToast("学习中不能修改设置");
+                }else {
+                    Intent intent = new Intent(LockActivity.this, MyInfoActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
         mStartButton = (ImageView) findViewById(R.id.start_button);
         mStartButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -134,7 +145,6 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
         });
 
         mPhoneButton = (ImageView) findViewById(R.id.phone_button);
-        mAppButton =(ImageView) findViewById(R.id.app_button);
        /* Button mAdvancedButton = (Button) findViewById(R.id.advanced_menu_button);
         mAdvancedButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -173,7 +183,6 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
     @Override
     protected void onResume(){
         super.onResume();
-
         long lastSuccess = SpUtil.getInstance().getLong(AppConstants.LOCK_START_MILLISENCONS);
         long elapsedRealtimeOffset = System.currentTimeMillis() - SystemClock.elapsedRealtime();
         long totalPlayTime=SpUtil.getInstance().getLong(AppConstants.TOTAL_PLAY_MILLISENCONS,0);
@@ -255,7 +264,6 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
      * 小玩一下
      */
     private void allowPlay() {
-        UpdateUI(PAUSE);
         Long remainPlaytime=SpUtil.getInstance().getLong(AppConstants.LOCK_PLAY_REMAIN_MILLISENCONS,1000*60*10);
 
         Long currentTime =System.currentTimeMillis();
@@ -292,8 +300,6 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
             imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
         }
         finish();
-
-
     }
 
 

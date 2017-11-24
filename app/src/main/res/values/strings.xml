@@ -54,4 +54,48 @@
     <string name="exit_account">退出当前账号</string>
     <string name="exit_app">退出应用</string>
     <string name="help_feedback">帮助与反馈</string>
+
+    <!--我的个人信息-->
+    <string name="header_pic">头像</string>
+    <string name="wechat_account">微信号</string>
+    <string name="qr_code_card">二维码名片</string>
+    <string name="my_location">我的地址</string>
+    <string name="gender">性别</string>
+    <string name="not_fill">未填写</string>
+    <!--用户信息-->
+    <string name="nickname_colon">昵称:%1$s</string>
+    <string name="set_alias_and_tag">设置备注和标签</string>
+    <string name="signature">个性签名</string>
+    <string name="send_message">发消息</string>
+    <string name="add_to_contact">添加到通讯录</string>
+    <string name="add_to_black_list">加入黑名单</string>
+    <string name="delete">删除</string>
+    <string name="add_to_desktop">添加到桌面</string>
+    <string name="change_my_name_tip">好名字可以让你的朋友 更容易记住你。</string>
+    <string name="delete_contact">删除联系人</string>
+    <string name="delete_contact_content">将联系人%1$s删除，将同时删除与该联系人的聊天记录</string>
+    <string name="delete_success">删除成功</string>
+    <string name="delete_fail">删除失败</string>
+    <string name="save_to_phone">保存到手机</string>
+    <!--注册-->
+    <string name="nickname">昵称</string>
+    <string name="password">密码</string>
+    <string name="area">国家/地区</string>
+    <string name="verification_code">验证码</string>
+    <string name="error_code">异常码：</string>
+    <string name="please_check_net">请检查网络</string>
+    <string name="load_error">加载失败</string>
+    <string name="please_wait">请稍等</string>
+    <string name="content_no_empty">内容不能为空</string>
+    <string name="complete">完成</string>
+    <string name="change_success">修改成功</string>
+    <string name="change_fail">修改失败</string>
+    <string name="set_success">设置成功</string>
+    <string name="set_fail">设置失败</string>
+    <string name="save">保存</string>
+    <string name="save_success">保存成功</string>
+    <string name="save_fail">保存失败</string>
+    <string name="cancel">取消</string>
+    <string name="sure">确定</string>
+
 </resources>

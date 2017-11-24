@@ -16,7 +16,6 @@
     <color name="bg_blue_normal">#2c9ffe</color>
     <color name="bg_blue_normal_50">#7f2c9ffe</color>
     <color name="bg_blue_selected">#2994ec</color>
-    <color name="transparent">#00000000</color>
     <color name="bg_white_normal">#ffffff</color>
     <color name="bg_white_selected">#f3f3f3</color>
 
@@ -87,4 +86,10 @@
     <!--快速索引bar颜色-->
     <color name="side_bar">#919091</color>
     <color name="side_bar_pressed">#BFBFBF</color>
+
+    <color name="black">#000000</color>
+    <color name="status_bar">#303135</color>
+    <color name="theme_body">#cc22292c</color>
+    <color name="top_bar">#9f556061</color>
+    <color name="transparent">#00000000</color>
 </resources>
