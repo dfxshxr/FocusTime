@@ -67,7 +67,7 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
                 if (SpUtil.getInstance().getBoolean(AppConstants.LOCK_STATE,false)) {
                     ToastUtil.showToast("学习中不能修改设置");
                 }else {
-                    Intent intent = new Intent(LockActivity.this, MyInfoActivity.class);
+                    Intent intent = new Intent(LockActivity.this, UserInfoActivity.class);
                     startActivity(intent);
                 }
             }

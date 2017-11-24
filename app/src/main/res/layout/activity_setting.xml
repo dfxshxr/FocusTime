@@ -17,10 +17,28 @@
         android:orientation="vertical">
 
         <com.lqr.optionitemview.OptionItemView
+            android:id="@+id/wallpaper"
+            style="@style/OptionItem"
+            android:background="@drawable/selector_option_item"
+            app:left_text="壁纸设置"
+            app:left_text_color="@color/black0"
+            app:left_text_margin_left="@dimen/option_item_margin_left"
+            app:left_text_size="16sp"/>
+
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/option_item_margin_top"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <com.lqr.optionitemview.OptionItemView
             android:id="@+id/study"
             style="@style/OptionItem"
             android:background="@drawable/selector_option_item"
-            app:left_text="单次学习最短时长"
+            app:left_text="预计专注时长"
             app:left_text_color="@color/black0"
             app:left_text_margin_left="@dimen/option_item_margin_left"
             app:left_text_size="16sp"/>
@@ -35,12 +53,28 @@
             android:id="@+id/play"
             style="@style/OptionItem"
             android:background="@drawable/selector_option_item"
-            app:left_text="单次休息最大时长"
+            app:left_text="首次休息时长"
             app:left_text_color="@color/black0"
             app:left_text_margin_left="@dimen/option_item_margin_left"
             app:left_text_size="16sp"/>
+    </com.zhy.autolayout.AutoLinearLayout>
 
 
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/option_item_margin_top"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <com.lqr.optionitemview.OptionItemView
+            android:id="@+id/app_white_list"
+            style="@style/OptionItem"
+            android:background="@drawable/selector_option_item"
+            app:left_text="应用白名单"
+            app:left_text_color="@color/black0"
+            app:left_text_margin_left="@dimen/option_item_margin_left"
+            app:left_text_size="16sp"/>
 
     </com.zhy.autolayout.AutoLinearLayout>
 
@@ -52,6 +86,20 @@
         android:orientation="vertical">
 
         <com.lqr.optionitemview.OptionItemView
+            android:id="@+id/oivHelpFeedback"
+            style="@style/OptionItem"
+            android:background="@drawable/selector_option_item"
+            app:left_text="番茄法则"
+            app:left_text_color="@color/black0"
+            app:left_text_margin_left="@dimen/option_item_margin_left"
+            app:left_text_size="16sp"/>
+
+        <View
+            style="@style/Line"
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
+            />
+        <com.lqr.optionitemview.OptionItemView
             android:id="@+id/oivAbout"
             style="@style/OptionItem"
             android:background="@drawable/selector_option_item"
@@ -60,35 +108,8 @@
             app:left_text_margin_left="@dimen/option_item_margin_left"
             app:left_text_size="16sp"/>
 
-        <View
-            style="@style/Line"
-            android:layout_marginLeft="30px"
-            android:layout_marginRight="30px"
-            />
 
-        <com.lqr.optionitemview.OptionItemView
-            android:id="@+id/oivHelpFeedback"
-            style="@style/OptionItem"
-            android:background="@drawable/selector_option_item"
-            app:left_text="@string/help_feedback"
-            app:left_text_color="@color/black0"
-            app:left_text_margin_left="@dimen/option_item_margin_left"
-            app:left_text_size="16sp"/>
 
-        <View
-            style="@style/Line"
-            android:layout_marginLeft="30px"
-            android:layout_marginRight="30px"
-            />
-
-        <com.lqr.optionitemview.OptionItemView
-            android:id="@+id/oivExit"
-            style="@style/OptionItem"
-            android:background="@drawable/selector_option_item"
-            app:left_text="@string/exit"
-            app:left_text_color="@color/black0"
-            app:left_text_margin_left="@dimen/option_item_margin_left"
-            app:left_text_size="16sp"/>
     </com.zhy.autolayout.AutoLinearLayout>
     <TextView
         android:id="@+id/version"

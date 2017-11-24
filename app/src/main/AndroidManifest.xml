@@ -108,6 +108,10 @@
         </activity>
         <activity
             android:name=".module.MyInfoActivity"
+            android:label="修改信息">
+        </activity>
+        <activity
+            android:name=".module.UserInfoActivity"
             android:label="用户中心">
         </activity>
         <!-- 友盟统计 -->
