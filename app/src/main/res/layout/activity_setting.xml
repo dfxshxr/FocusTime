@@ -17,7 +17,7 @@
         android:orientation="vertical">
 
         <com.lqr.optionitemview.OptionItemView
-            android:id="@+id/wallpaper"
+            android:id="@+id/oivWllpaper"
             style="@style/OptionItem"
             android:background="@drawable/selector_option_item"
             app:left_text="壁纸设置"
@@ -38,7 +38,7 @@
         android:orientation="vertical">
 
         <com.lqr.optionitemview.OptionItemView
-            android:id="@+id/study"
+            android:id="@+id/oivStudy"
             style="@style/OptionItem"
             android:background="@drawable/selector_option_item"
             app:left_text="预计专注时长"
@@ -58,7 +58,7 @@
             />
 
         <com.lqr.optionitemview.OptionItemView
-            android:id="@+id/play"
+            android:id="@+id/oivPlay"
             style="@style/OptionItem"
             android:background="@drawable/selector_option_item"
             app:left_text="首次休息时长"
@@ -82,7 +82,7 @@
         android:orientation="vertical">
 
         <com.lqr.optionitemview.OptionItemView
-            android:id="@+id/app_white_list"
+            android:id="@+id/oivAppWhiteList"
             style="@style/OptionItem"
             android:background="@drawable/selector_option_item"
             app:left_text="应用白名单"
@@ -103,7 +103,7 @@
         android:orientation="vertical">
 
         <com.lqr.optionitemview.OptionItemView
-            android:id="@+id/oivHelpFeedback"
+            android:id="@+id/oivTomatoHelp"
             style="@style/OptionItem"
             android:background="@drawable/selector_option_item"
             app:left_image_margin_left="@dimen/option_item_margin_left"
@@ -134,10 +134,4 @@
 
 
     </com.zhy.autolayout.AutoLinearLayout>
-    <TextView
-        android:id="@+id/version"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textAlignment="center"/>
 </com.zhy.autolayout.AutoLinearLayout>

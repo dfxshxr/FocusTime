@@ -1,15 +1,12 @@
 package com.xidian.focustime.module;
 
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
-import android.os.Build;
-import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.content.ContextCompat;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.apkfuns.logutils.LogUtils;
@@ -19,6 +16,7 @@ import com.xidian.focustime.base.AppConstants;
 import com.xidian.focustime.base2.BaseActivity;
 import com.xidian.focustime.base2.BasePresenter;
 import com.xidian.focustime.utils.SpUtil;
+import com.xidian.focustime.utils.ToastUtil;
 
 import butterknife.BindView;
 import cn.qqtheme.framework.picker.TimePicker;
@@ -31,32 +29,63 @@ public class SettingActivity extends BaseActivity {
     public TextView mToolbarTitle;
     @BindView(R.id.tvToolbarSubTitle)
     public TextView mToolbarSubTitle;
-    @BindView(R.id.study)
-    OptionItemView mStudyButton;
-    @BindView(R.id.play)
-    OptionItemView mplayButton;
-    @BindView(R.id.version)
-    TextView mVersionTextView;
+    @BindView(R.id.oivStudy)
+    OptionItemView oivStudy;
+    @BindView(R.id.oivPlay)
+    OptionItemView oivPlay;
+    @BindView(R.id.oivAppWhiteList)
+    OptionItemView oivAppWhiteList;
+    @BindView(R.id.oivWllpaper)
+    OptionItemView oivWllpaper;
+    @BindView(R.id.oivAbout)
+    OptionItemView oivAbout;
+    @BindView(R.id.oivTomatoHelp)
+    OptionItemView oivTomatoHelp;
 
 
     @Override
     public void initData() {
-        mVersionTextView.setText("版本号："+getVersionName()+"("+getVersionCode()+")");
+        setToolbarTitle("设置");
     }
 
 
     @Override
     public void initListener() {
-        mStudyButton.setOnClickListener(new View.OnClickListener() {
+        oivStudy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onStudyTimePicker(view);
             }
         });
-        mplayButton.setOnClickListener(new View.OnClickListener() {
+        oivPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onPlayTimePicker(view);
+            }
+        });
+        oivAppWhiteList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SettingActivity.this, AppManageActivity.class);
+                startActivity(intent);
+            }
+        });
+        oivWllpaper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ToastUtil.showToast("暂不可用");
+            }
+        });
+        oivAbout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ToastUtil.showToast("版本号："+getVersionName()+"("+getVersionCode()+")");
+            }
+        });
+        oivTomatoHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ToastUtil.showToast("暂不可用");
             }
         });
     }
@@ -123,49 +152,7 @@ public class SettingActivity extends BaseActivity {
         picker.show();
     }
 
-    public void onTomatoTimePicker(View view) {
-        TimePicker picker = new TimePicker(this, TimePicker.HOUR_24);
-        picker.setUseWeight(false);
-        picker.setCycleDisable(false);
-        picker.setRangeStart(0, 10);
-        Long tomatoTime=SpUtil.getInstance().getLong(AppConstants.TOMATO_TIME,1000*60*25);
 
-        int currentHour =(int)(tomatoTime/(1000*60*60));
-        int currentMinute = (int)(tomatoTime/(1000*60)-currentHour*60);
-
-        picker.setRangeEnd(23,59);
-        picker.setSelectedItem(currentHour, currentMinute);
-        picker.setTopLineVisible(false);
-        picker.setOnTimePickListener(new TimePicker.OnTimePickListener() {
-            @Override
-            public void onTimePicked(String hour, String minute) {
-                SpUtil.getInstance().putLong(AppConstants.TOMATO_TIME,1000*60*Integer.parseInt(minute)+1000*60*60*Integer.parseInt(hour));
-            }
-        });
-        picker.show();
-    }
-
-    public void onTomatoBreakTimePicker(View view) {
-        TimePicker picker = new TimePicker(this, TimePicker.HOUR_24);
-        picker.setUseWeight(false);
-        picker.setCycleDisable(false);
-        picker.setRangeStart(0, 1);
-        Long tomatoBreakTime=SpUtil.getInstance().getLong(AppConstants.TOMATO_BREAK_TIME,1000*60*5);
-
-        int currentHour =(int)(tomatoBreakTime/(1000*60*60));
-        int currentMinute = (int)(tomatoBreakTime/(1000*60)-currentHour*60);
-
-        picker.setRangeEnd(0,10);
-        picker.setSelectedItem(currentHour, currentMinute);
-        picker.setTopLineVisible(false);
-        picker.setOnTimePickListener(new TimePicker.OnTimePickListener() {
-            @Override
-            public void onTimePicked(String hour, String minute) {
-                SpUtil.getInstance().putLong(AppConstants.TOMATO_BREAK_TIME,1000*60*Integer.parseInt(minute)+1000*60*60*Integer.parseInt(hour));
-            }
-        });
-        picker.show();
-    }
 
     /**
      * 获取版本名称
