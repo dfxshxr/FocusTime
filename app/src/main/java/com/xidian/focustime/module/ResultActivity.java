@@ -53,9 +53,9 @@ public class ResultActivity extends BaseActivity {
         long thisTime =currentTime-startTime-totalPlayTime-totalErrorTime;
 
         if(thisTime>settingTime){
-            mResultText.setText("任务成功：\n本次学习时长"+ DataUtil.timeParse(thisTime)+"\n休息时长"+DataUtil.timeParse(totalPlayTime)+"\n应用状态异常时间"+DataUtil.timeParse(totalErrorTime));
+            mResultText.setText("任务成功\n本次学习时长："+ DataUtil.timeParse(thisTime)+"\n休息时长："+DataUtil.timeParse(totalPlayTime)+"\n应用状态异常时间："+DataUtil.timeParse(totalErrorTime));
         }else{
-            mResultText.setText("任务失败：\n本次学习时长"+ DataUtil.timeParse(thisTime)+"\n设定学习时长"+ DataUtil.timeParse(settingTime)+"\n休息时长"+DataUtil.timeParse(totalPlayTime)+"\n应用状态异常时间"+DataUtil.timeParse(totalErrorTime));
+            mResultText.setText("任务失败\n本次学习时长："+ DataUtil.timeParse(thisTime)+"\n设定学习时长："+ DataUtil.timeParse(settingTime)+"\n休息时长："+DataUtil.timeParse(totalPlayTime)+"\n应用状态异常时间："+DataUtil.timeParse(totalErrorTime));
         }
 
     }
