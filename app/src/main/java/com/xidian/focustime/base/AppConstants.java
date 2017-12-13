@@ -68,6 +68,14 @@ public class AppConstants {
      */
     public static final String TOMATO_LEARNING_BREAK_TIME_STATE = "tomato_learning_break_time_state";
 
+    /**
+     * 上一次状态正常时间
+     */
+    public static final String LAST_NORMAL_STATE_MILLISENCONS = "last_normal_state_milliseconds";
+    /**
+     * 应用状态异常时间 初始化为0
+     */
+    public static final String TOTAL_ERROR_STATE_MILLISENCONS = "total_error_state_milliseconds";
     public interface NOTIFICATION_ID {
         public static int SERVICE = 101;
         public static int FOREGROUND_SERVICE = 101;

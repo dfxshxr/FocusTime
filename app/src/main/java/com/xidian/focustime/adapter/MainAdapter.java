@@ -62,8 +62,8 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
      */
     private void initData(TextView AppName, CheckBox switchCompat, ImageView mAppIcon, App app) {
 
-        if(app.isRecommendApp()&&!app.isLocked()){
-            AppName.setText(packageManager.getApplicationLabel(app.getAppInfo())+" (推荐加锁)");
+        if(app.isRecommendApp()&&app.isLocked()){
+            AppName.setText(packageManager.getApplicationLabel(app.getAppInfo())+" (推荐加入白名单)");
         }else{
             AppName.setText(packageManager.getApplicationLabel(app.getAppInfo()));
         }

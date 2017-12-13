@@ -68,12 +68,12 @@ public class AppManager {
             String appName = mPackageManager.getApplicationLabel(appInfo).toString();
             //过滤掉一些应用  !App.getPackageName().equals("com.android.settings")&&
             if (!App.getPackageName().equals(AppConstants.APP_PACKAGE_NAME)) {
-                /*
+
                 if (isRecommendApp) { //如果是推荐的
-                    App.setLocked(true);
-                } else {
                     App.setLocked(false);
-                }*/
+                } else {
+                    App.setLocked(true);
+                }
                 App.setAppName(appName);
 
                 list.add(App);
@@ -140,11 +140,11 @@ public class AppManager {
 
             if (leftApp.isRecommendApp() && !rightApp.isRecommendApp())
             {
-                return -1;
+                return 1;
             }
             else if (!leftApp.isRecommendApp()
                     && rightApp.isRecommendApp()) {
-                return 1;
+                return -1;
             }
             return 0;
         }
@@ -159,11 +159,11 @@ public class AppManager {
 
             if (leftApp.isLocked() && !rightApp.isLocked())
             {
-                return -1;
+                return 1;
             }
             else if (!leftApp.isLocked()
                     && rightApp.isLocked()) {
-                return 1;
+                return -1;
             }
             return 0;
         }

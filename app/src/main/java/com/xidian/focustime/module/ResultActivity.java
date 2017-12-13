@@ -39,23 +39,23 @@ public class ResultActivity extends BaseActivity {
     @Override
     protected void initData() {
 
-        Long currentTime =System.currentTimeMillis();
-        Long startTime = SpUtil.getInstance().getLong(AppConstants.LOCK_START_MILLISENCONS,0);
-        Long settingTime =SpUtil.getInstance().getLong(AppConstants.LOCK_SETTING_MILLISENCONS,1000*60*60*2);
-
-        Long totalPlayTime=SpUtil.getInstance().getLong(AppConstants.TOTAL_PLAY_MILLISENCONS,0);
+        long currentTime =System.currentTimeMillis();
+        long startTime = SpUtil.getInstance().getLong(AppConstants.LOCK_START_MILLISENCONS,0);
+        long settingTime =SpUtil.getInstance().getLong(AppConstants.LOCK_SETTING_MILLISENCONS,1000*60*60*2);
+        long totalErrorTime=SpUtil.getInstance().getLong(AppConstants.TOTAL_ERROR_STATE_MILLISENCONS,0);
+        long totalPlayTime=SpUtil.getInstance().getLong(AppConstants.TOTAL_PLAY_MILLISENCONS,0);
         if(!SpUtil.getInstance().getBoolean(AppConstants.RUN_LOCK_STATE,true)) {
             //只有解过锁后开始可玩时间才有值
-            Long startPlayTime = SpUtil.getInstance().getLong(AppConstants.LOCK_PLAY_START_MILLISENCONS, currentTime);
+            long startPlayTime = SpUtil.getInstance().getLong(AppConstants.LOCK_PLAY_START_MILLISENCONS, currentTime);
             totalPlayTime =totalPlayTime + (currentTime - startPlayTime);
         }
 
-        Long thisTime =currentTime-startTime-totalPlayTime;
+        long thisTime =currentTime-startTime-totalPlayTime-totalErrorTime;
 
         if(thisTime>settingTime){
-            mResultText.setText("任务成功："+"本次学习时长"+ DataUtil.timeParse(thisTime)+"休息时长"+DataUtil.timeParse(totalPlayTime));
+            mResultText.setText("任务成功："+"本次学习时长"+ DataUtil.timeParse(thisTime)+"休息时长"+DataUtil.timeParse(totalPlayTime)+"应用状态异常时间"+DataUtil.timeParse(totalErrorTime));
         }else{
-            mResultText.setText("任务失败："+"本次学习时长"+ DataUtil.timeParse(thisTime)+"设定学习时长"+ DataUtil.timeParse(settingTime)+"休息时长"+DataUtil.timeParse(totalPlayTime));
+            mResultText.setText("任务失败："+"本次学习时长"+ DataUtil.timeParse(thisTime)+"设定学习时长"+ DataUtil.timeParse(settingTime)+"休息时长"+DataUtil.timeParse(totalPlayTime)+"应用状态异常时间"+DataUtil.timeParse(totalErrorTime));
         }
 
     }

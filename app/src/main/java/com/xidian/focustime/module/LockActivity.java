@@ -145,6 +145,14 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
         });
 
         mPhoneButton = (ImageView) findViewById(R.id.phone_button);
+        mPhoneButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent();
+                intent.setAction("android.intent.action.CALL_BUTTON");
+                startActivity(intent);
+            }
+        });
        /* Button mAdvancedButton = (Button) findViewById(R.id.advanced_menu_button);
         mAdvancedButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -171,7 +179,8 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
             long lastSuccess = SpUtil.getInstance().getLong(AppConstants.LOCK_START_MILLISENCONS);
             long elapsedRealtimeOffset = System.currentTimeMillis() - SystemClock.elapsedRealtime();
             long totalPlayTime=SpUtil.getInstance().getLong(AppConstants.TOTAL_PLAY_MILLISENCONS,0);
-            chronometer.setBase(lastSuccess - elapsedRealtimeOffset-totalPlayTime);
+            long totalErrorTime=SpUtil.getInstance().getLong(AppConstants.TOTAL_ERROR_STATE_MILLISENCONS,0);
+            chronometer.setBase(lastSuccess - elapsedRealtimeOffset+totalPlayTime+totalErrorTime);
             chronometer.start();
             UpdateUI(START);
         }else {
@@ -186,11 +195,12 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
         long lastSuccess = SpUtil.getInstance().getLong(AppConstants.LOCK_START_MILLISENCONS);
         long elapsedRealtimeOffset = System.currentTimeMillis() - SystemClock.elapsedRealtime();
         long totalPlayTime=SpUtil.getInstance().getLong(AppConstants.TOTAL_PLAY_MILLISENCONS,0);
-
-        LogUtils.i(lastSuccess - elapsedRealtimeOffset);
-        LogUtils.i(totalPlayTime);
+        long totalErrorTime=SpUtil.getInstance().getLong(AppConstants.TOTAL_ERROR_STATE_MILLISENCONS,0);
+       // LogUtils.i(lastSuccess - elapsedRealtimeOffset);
+        //LogUtils.i(totalPlayTime);
         if (SpUtil.getInstance().getBoolean(AppConstants.LOCK_STATE,false)) {
-            chronometer.setBase(lastSuccess - elapsedRealtimeOffset+totalPlayTime);
+
+            chronometer.setBase(lastSuccess - elapsedRealtimeOffset+totalPlayTime+totalErrorTime);
             if(SpUtil.getInstance().getBoolean(AppConstants.RUN_LOCK_STATE,false))
             {
                 UpdateUI(START);
@@ -234,7 +244,7 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
         SpUtil.getInstance().putBoolean(AppConstants.TOMATO_LEARNING_BREAK_TIME_STATE,false);
         SpUtil.getInstance().putLong(AppConstants.TOMATO_START_TIME, System.currentTimeMillis());
         SpUtil.getInstance().putLong(AppConstants.TOTAL_PLAY_MILLISENCONS,0);
-
+        SpUtil.getInstance().putLong(AppConstants.TOTAL_ERROR_STATE_MILLISENCONS,0);
         //时钟显示计数
         long lastSuccess = SpUtil.getInstance().getLong(AppConstants.LOCK_START_MILLISENCONS);
         long elapsedRealtimeOffset = System.currentTimeMillis() - SystemClock.elapsedRealtime();

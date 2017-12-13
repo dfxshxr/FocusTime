@@ -51,4 +51,24 @@ public class DataUtil {
         return time ;
     }
 
+    /**
+     *
+     * @return 将时间毫秒数转为小时分钟数
+     */
+    public static String timeParseInSetting(long mss) {
+
+        long hours = (mss / (1000 * 60 * 60));
+        long minutes = (mss % (1000 * 60 * 60)) / (1000 * 60);
+        StringBuilder stringBuilder = new StringBuilder("");
+
+        if(hours>0){
+            stringBuilder.append(hours);
+            stringBuilder.append("小时");
+        }
+        if(minutes>0){
+            stringBuilder.append(minutes);
+            stringBuilder.append("分钟");
+        }
+    return new String(stringBuilder);
+    }
 }

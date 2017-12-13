@@ -59,7 +59,8 @@ public class TomatoWakeUpActivity extends Activity {
             long lastSuccess = SpUtil.getInstance().getLong(AppConstants.LOCK_START_MILLISENCONS);
             long elapsedRealtimeOffset = System.currentTimeMillis() - SystemClock.elapsedRealtime();
             long totalPlayTime=SpUtil.getInstance().getLong(AppConstants.TOTAL_PLAY_MILLISENCONS,0);
-            chronometer.setBase(lastSuccess - elapsedRealtimeOffset+totalPlayTime);
+            Long totalErrorTime=SpUtil.getInstance().getLong(AppConstants.TOTAL_ERROR_STATE_MILLISENCONS,0);
+            chronometer.setBase(lastSuccess - elapsedRealtimeOffset+totalPlayTime+totalErrorTime);
             chronometer.start();
         }
     }
