@@ -63,7 +63,9 @@ public class AppManageActivity extends BaseActivity implements MainContract.View
     }
 
     @Override
-    protected void initData() {}
+    protected void initData() {
+        setToolbarTitle("应用白名单");
+    }
 
     @Override
     protected void initAction() {}

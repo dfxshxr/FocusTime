@@ -19,10 +19,6 @@ import com.xidian.focustime.utils.DataUtil;
 import com.xidian.focustime.utils.SpUtil;
 import com.xidian.focustime.utils.ToastUtil;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
 
 import butterknife.BindView;
 import cn.qqtheme.framework.picker.TimePicker;
