@@ -148,9 +148,13 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
         mPhoneButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent =new Intent();
-                intent.setAction("android.intent.action.CALL_BUTTON");
-                startActivity(intent);
+                if(checkAccessPermission()){
+                    Intent intent =new Intent();
+                    intent.setAction("android.intent.action.CALL_BUTTON");
+                    startActivity(intent);
+
+                }
+
             }
         });
        /* Button mAdvancedButton = (Button) findViewById(R.id.advanced_menu_button);
@@ -316,7 +320,7 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
     /**
      * 权限检查并显示弹框
      */
-    private void checkAccessPermission(){
+    private boolean checkAccessPermission(){
         if (Build.VERSION.SDK_INT >21&&!LockUtil.isStatAccessPermissionSet(LockActivity.this)) {
 
             AlertDialog.Builder dialog = new AlertDialog.Builder(LockActivity.this);
@@ -329,6 +333,7 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
                 {
                     Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
                     startActivityForResult(intent, RESULT_ACTION_USAGE_ACCESS_SETTINGS);
+                    allowPlay();
                 }
             });
 
@@ -337,16 +342,14 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
                 public void onClick(DialogInterface dialog, int which)
                 {
                     ToastUtil.showToast("开启失败，没有权限");
-                    SpUtil.getInstance().putBoolean(AppConstants.LOCK_STATE, false);
-                    Intent intent = new Intent(LockActivity.this, LockService.class);
-                    stopService(intent);
-                    NotifyUtil.stopServiceNotify(LockActivity.this);
                 }
             });
 
             dialog.show();
+            return false;
         }else {
-            ToastUtil.showToast("已获得权限");
+            return true;
+           // ToastUtil.showToast("已获得权限");
         }
     }
 

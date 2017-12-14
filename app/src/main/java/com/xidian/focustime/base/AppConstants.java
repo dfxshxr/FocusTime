@@ -1,6 +1,7 @@
 package com.xidian.focustime.base;
 
 
+import com.xidian.focustime.BuildConfig;
 
 public class AppConstants {
 
@@ -11,7 +12,7 @@ public class AppConstants {
     public static final String LOCK_USER_APP_NUM = "lock_user_app_num"; //非系统应用个数
     public static final String LOCK_IS_INIT_RECOMMEND = "lock_is_init_recommend"; //是否初始化了recommend数据表
     public static final String LOCK_IS_INIT_DB = "lock_is_init_db"; //是否初始化了数据库表
-    public static final String APP_PACKAGE_NAME = "com.xidian.focustime"; //包名
+    public static final String APP_PACKAGE_NAME = BuildConfig.APPLICATION_ID; //包名
     public static final String LOCK_IS_HIDE_LINE = "lock_is_hide_line"; //是否隐藏路径
     public static final String LOCK_USER = "lock_user";//应用锁密码
     public static final String LOCK_PWD = "lock_pwd";//应用锁密码

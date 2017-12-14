@@ -1,5 +1,8 @@
 package com.xidian.focustime;
 
+import android.app.Activity;
+import android.os.Bundle;
+
 import com.umeng.analytics.MobclickAgent;
 import com.xidian.focustime.base.AppConstants;
 import com.xidian.focustime.base.BaseActivity;
@@ -21,7 +24,7 @@ public class LockApplication extends LitePalApplication {
 
     private static LockApplication application;
     private static List<BaseActivity> activityList; //acticity管理
-
+    private int appCount = 0;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -30,6 +33,40 @@ public class LockApplication extends LitePalApplication {
         activityList = new ArrayList<>();
         MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType. E_UM_NORMAL);
         SpUtil.getInstance().putBoolean(AppConstants.RUN_LOCK_STATE,true);
+
+        registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
+            @Override
+            public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+            }
+
+            @Override
+            public void onActivityStarted(Activity activity) {
+                appCount++;
+            }
+
+            @Override
+            public void onActivityResumed(Activity activity) {
+            }
+
+            @Override
+            public void onActivityPaused(Activity activity) {
+            }
+
+            @Override
+            public void onActivityStopped(Activity activity) {
+                appCount--;
+            }
+
+            @Override
+            public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+
+            }
+
+            @Override
+            public void onActivityDestroyed(Activity activity) {
+
+            }
+        });
     }
 
     public static LockApplication getInstance() {
@@ -62,4 +99,11 @@ public class LockApplication extends LitePalApplication {
         return activity instanceof LockActivity;
     }
 
+    public int getAppCount() {
+        return appCount;
+    }
+
+    public void setAppCount(int appCount) {
+        this.appCount = appCount;
+    }
 }

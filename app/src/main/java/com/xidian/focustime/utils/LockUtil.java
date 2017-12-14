@@ -2,6 +2,7 @@ package com.xidian.focustime.utils;
 
 import android.app.ActivityManager;
 import android.app.AppOpsManager;
+import android.app.Service;
 import android.app.usage.UsageEvents;
 import android.app.usage.UsageStatsManager;
 import android.content.ComponentName;
@@ -123,25 +124,24 @@ public class LockUtil {
      */
     public static String getLauncherTopApp(Context context, ActivityManager activityManager) {
 
-        //LogUtils.d("当前版本号"+Integer.toString(Build.VERSION.SDK_INT));
-
+        //LogUtil.d("当前版本号"+Integer.toString(Build.VERSION.SDK_INT));
+        String result = "";
         if (Build.VERSION.SDK_INT < 21) {
-            // LogUtils.d("小于5.0");
+            // LogUtil.d("小于5.0");
             List<ActivityManager.RunningTaskInfo> appTasks = activityManager.getRunningTasks(1);
             if (null != appTasks && !appTasks.isEmpty()) {
-                return appTasks.get(0).topActivity.getPackageName();
+                result= appTasks.get(0).topActivity.getPackageName();
             }
-        } else {
+        } else if(isStatAccessPermissionSet(LockApplication.getContext())) {
             /*
             使用它之前需要在清单文件中配置 “android.permission.PACKAGE_USAGE_STATS”的权限
             用户必须在 设置–安全–有权查看使用情况的应用 中勾选相应的应用
             对应设备 Android 5.0 及其以上。
              */
-            //LogUtils.d("大于5.0");
+            //LogUtil.d("大于5.0");
             UsageStatsManager sUsageStatsManager = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
             long endTime = System.currentTimeMillis();
             long beginTime = endTime - 10000;
-            String result = "";
             UsageEvents.Event event = new UsageEvents.Event();
             UsageEvents usageEvents = sUsageStatsManager.queryEvents(beginTime, endTime);
             while (usageEvents.hasNextEvent()) {
@@ -149,28 +149,33 @@ public class LockUtil {
                 if (event.getEventType() == UsageEvents.Event.MOVE_TO_FOREGROUND) {
                     result = event.getPackageName();
 
-                    // LogUtils.d(result);
+                    // LogUtil.d(result);
                 }
             }
-
-            if (!android.text.TextUtils.isEmpty(result)) {
-
-                return result;
+        }else{
+            if(getApplicationValue((LockApplication) ((Service) context).getApplication())){
+                result=AppConstants.APP_PACKAGE_NAME;
             }
         }
+
+        if (!android.text.TextUtils.isEmpty(result)) {
+
+            return result;
+        }
+
         return "";
     }
 
 
     public static String getLauncherTopActivity(Context context, ActivityManager activityManager) {
 
-        //LogUtils.d("当前版本号"+Integer.toString(Build.VERSION.SDK_INT));
-
+        //LogUtil.d("当前版本号"+Integer.toString(Build.VERSION.SDK_INT));
+        String result = "";
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            // LogUtils.d("小于5.0");
+            // LogUtil.d("小于5.0");
             List<ActivityManager.RunningTaskInfo> appTasks = activityManager.getRunningTasks(1);
             if (null != appTasks && !appTasks.isEmpty()) {
-                return appTasks.get(0).topActivity.getClassName();
+                result = appTasks.get(0).topActivity.getClassName();
             }
         } else {
             /*
@@ -178,11 +183,10 @@ public class LockUtil {
             用户必须在 设置–安全–有权查看使用情况的应用 中勾选相应的应用
             对应设备 Android 5.0 及其以上。
              */
-            //LogUtils.d("大于5.0");
+            //LogUtil.d("大于5.0");
             UsageStatsManager sUsageStatsManager = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
             long endTime = System.currentTimeMillis();
             long beginTime = endTime - 10000;
-            String result = "";
             UsageEvents.Event event = new UsageEvents.Event();
             UsageEvents usageEvents = sUsageStatsManager.queryEvents(beginTime, endTime);
             while (usageEvents.hasNextEvent()) {
@@ -190,14 +194,13 @@ public class LockUtil {
                 if (event.getEventType() == UsageEvents.Event.MOVE_TO_FOREGROUND) {
                     result = event.getClassName();
 
-                    // LogUtils.d(result);
+                    // LogUtil.d(result);
                 }
             }
+        }
+        if (!android.text.TextUtils.isEmpty(result)) {
 
-            if (!android.text.TextUtils.isEmpty(result)) {
-
-                return result;
-            }
+            return result;
         }
         return "";
     }
@@ -280,5 +283,9 @@ public class LockUtil {
             SpUtil.getInstance().putLong(AppConstants.LOCK_PLAY_REMAIN_MILLISENCONS, 1000 * 60 * 4);
         }
 
+    }
+
+    public static boolean getApplicationValue(LockApplication myApplication) {
+        return myApplication.getAppCount() > 0;
     }
 }
