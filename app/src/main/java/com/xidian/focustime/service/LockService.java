@@ -164,7 +164,7 @@ public class LockService extends IntentService {
                 //应用状态检测
                 Long lastnormalTime=SpUtil.getInstance().getLong(AppConstants.LAST_NORMAL_STATE_MILLISENCONS,currentTime);
                 Long timeIncrement=currentTime-lastnormalTime;
-                if(timeIncrement>1000*10){
+                if(timeIncrement>1000*5){
                     SpUtil.getInstance().putLong(
                             AppConstants.TOTAL_ERROR_STATE_MILLISENCONS,
                             SpUtil.getInstance().getLong(AppConstants.TOTAL_ERROR_STATE_MILLISENCONS,0)+timeIncrement

@@ -267,7 +267,7 @@ public class LockUtil {
         Long currentTime =System.currentTimeMillis();
         Long startPlayTime=SpUtil.getInstance().getLong(AppConstants.LOCK_PLAY_START_MILLISENCONS,0);
 
-        LogUtils.i("当前时间：" + currentTime + "开始时间：" + startPlayTime + "时间差：" + (currentTime - startPlayTime));
+        LogUtils.i("当前时间：" + DataUtil.timeParse(currentTime) + "开始时间：" + DataUtil.timeParse(startPlayTime) + "时间差：" + DataUtil.timeParse(currentTime - startPlayTime));
 
         SpUtil.getInstance().putLong(AppConstants.TOMATO_START_TIME,currentTime);
         SpUtil.getInstance().putBoolean(AppConstants.RUN_LOCK_STATE, true);
@@ -275,7 +275,7 @@ public class LockUtil {
 
         //记录已玩时间
         SpUtil.getInstance().putLong(AppConstants.TOTAL_PLAY_MILLISENCONS, SpUtil.getInstance().getLong(AppConstants.TOTAL_PLAY_MILLISENCONS,0)+(currentTime - startPlayTime));
-        LogUtils.i(SpUtil.getInstance().getLong(AppConstants.TOTAL_PLAY_MILLISENCONS,0));
+        //LogUtils.i(SpUtil.getInstance().getLong(AppConstants.TOTAL_PLAY_MILLISENCONS,0));
         LockApplication.getInstance().clearAllActivity();
 
         //当前玩耍时间大于2 不处于番茄休息状态 currentTime - startPlayTime > 1000 * 60 * 2||
