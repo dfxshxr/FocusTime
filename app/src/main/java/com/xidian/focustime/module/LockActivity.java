@@ -204,9 +204,10 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
         //LogUtils.i(totalPlayTime);
         if (SpUtil.getInstance().getBoolean(AppConstants.LOCK_STATE,false)) {
 
-            chronometer.setBase(lastSuccess - elapsedRealtimeOffset+totalPlayTime+totalErrorTime);
+
             if(SpUtil.getInstance().getBoolean(AppConstants.RUN_LOCK_STATE,false))
             {
+                chronometer.setBase(lastSuccess - elapsedRealtimeOffset+totalPlayTime+totalErrorTime);
                 UpdateUI(START);
                 chronometer.start();
             }else{
