@@ -121,12 +121,13 @@ public class LoadAppListService extends IntentService {
     }
 
     /**
-     * 初始化推荐加锁的应用
+     * 初始化白名单的应用
      */
     public void initRecommendApps() {
         List<String> packageList = new ArrayList<>();
         List<RecommendApp> recommendApps = new ArrayList<>();
 
+        packageList.add("com.android.contacts");
        /* packageList.add("com.android.settings");       //设置菜单
         packageList.add("com.tencent.android.qqdownloader");       //腾讯应用宝
         packageList.add("com.qihoo.appstore");       //360手机助手

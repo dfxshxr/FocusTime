@@ -25,7 +25,7 @@
             android:layout_marginLeft="30px"
             android:layout_marginRight="@dimen/option_item_margin_right"
             android:scaleType="centerCrop"
-            android:src="@mipmap/ic_launcher_round"/>
+            android:src="@drawable/default_head"/>
 
         <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="0dp"
@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="6px"
                 android:singleLine="true"
-                android:text="昵称"
+                android:text="我爱学习"
                 android:textColor="@color/gray0"
                 android:textSize="50px"/>
 
@@ -51,7 +51,7 @@
     </com.zhy.autolayout.AutoLinearLayout>
 
     <com.lqr.optionitemview.OptionItemView
-        android:id="@+id/oivWallet"
+        android:id="@+id/oivHistory"
         style="@style/OptionItem"
         android:layout_marginTop="@dimen/option_item_margin_top"
         android:background="@drawable/selector_common_item"

@@ -161,9 +161,20 @@ public class LockService extends IntentService {
                     SpUtil.getInstance().putInt(AppConstants.TOMATO_STUDY_CYCLE,tomatoCycle+1);
                 }
 
+                //应用状态检测
+                Long lastnormalTime=SpUtil.getInstance().getLong(AppConstants.LAST_NORMAL_STATE_MILLISENCONS,currentTime);
+                Long timeIncrement=currentTime-lastnormalTime;
+                if(timeIncrement>1000*10){
+                    SpUtil.getInstance().putLong(
+                            AppConstants.TOTAL_ERROR_STATE_MILLISENCONS,
+                            SpUtil.getInstance().getLong(AppConstants.TOTAL_ERROR_STATE_MILLISENCONS,0)+timeIncrement
+                    );
+                }
+                SpUtil.getInstance().putLong(AppConstants.LAST_NORMAL_STATE_MILLISENCONS,currentTime);
+                Long totalErrorTime=SpUtil.getInstance().getLong(AppConstants.TOTAL_ERROR_STATE_MILLISENCONS,0);
 
                 //判断包名打开解锁页面
-                if (lockState && !TextUtils.isEmpty(packageName)) {
+                if (lockState ) {//&& !TextUtils.isEmpty(packageName)
 
                     //savePkgName = SpUtil.getInstance().getString(AppConstants.LOCK_LAST_LOAD_PKG_NAME, ""); //上次解锁的应用包名
                     //LogUtils.i("packageName = " + packageName + "  savePkgName = " + savePkgName+"  activity = "+LockUtil.getLauncherTopActivity(this,activityManager));
@@ -192,7 +203,7 @@ public class LockService extends IntentService {
                         }
                     }else {
                         //学习中
-                        NotifyUtil.updateNotify("专心学习中","已学习"+(currentTime-startTime-totalPlayTime)/1000/60+"分钟,连续"+(currentTime-tomatoStartTime)/1000/60+"分钟");
+                        NotifyUtil.updateNotify("专心学习中","已学习"+(currentTime-startTime-totalPlayTime-totalErrorTime)/1000/60+"分钟,连续"+(currentTime-tomatoStartTime)/1000/60+"分钟");
                     }
 
                     /*//返回桌面加锁
@@ -205,9 +216,9 @@ public class LockService extends IntentService {
                     }*/
 
                     // 如果是锁定状态，转向解锁页面
-                    if ((mAppManager.isLockedPackageName(packageName)||LockUtil.inBlackList(packageName))&&SpUtil.getInstance().getBoolean(AppConstants.RUN_LOCK_STATE,true)&&!LockUtil.inWhiteList(packageName)) {
+                    if ((TextUtils.isEmpty(packageName)||mAppManager.isLockedPackageName(packageName)||LockUtil.inBlackList(packageName))&&SpUtil.getInstance().getBoolean(AppConstants.RUN_LOCK_STATE,true)&&!LockUtil.inWhiteList(packageName)) {
 
-                        LogUtils.i("后台跳转");
+                        LogUtils.i("后台跳转:"+packageName);
                         LockUtil.gotoUnlock(this,packageName);
                         continue;
                     }

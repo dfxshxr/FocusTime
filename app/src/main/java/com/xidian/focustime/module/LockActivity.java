@@ -145,6 +145,18 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
         });
 
         mPhoneButton = (ImageView) findViewById(R.id.phone_button);
+        mPhoneButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(checkAccessPermission()){
+                    Intent intent =new Intent();
+                    intent.setAction("android.intent.action.CALL_BUTTON");
+                    startActivity(intent);
+
+                }
+
+            }
+        });
        /* Button mAdvancedButton = (Button) findViewById(R.id.advanced_menu_button);
         mAdvancedButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -171,7 +183,8 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
             long lastSuccess = SpUtil.getInstance().getLong(AppConstants.LOCK_START_MILLISENCONS);
             long elapsedRealtimeOffset = System.currentTimeMillis() - SystemClock.elapsedRealtime();
             long totalPlayTime=SpUtil.getInstance().getLong(AppConstants.TOTAL_PLAY_MILLISENCONS,0);
-            chronometer.setBase(lastSuccess - elapsedRealtimeOffset-totalPlayTime);
+            long totalErrorTime=SpUtil.getInstance().getLong(AppConstants.TOTAL_ERROR_STATE_MILLISENCONS,0);
+            chronometer.setBase(lastSuccess - elapsedRealtimeOffset+totalPlayTime+totalErrorTime);
             chronometer.start();
             UpdateUI(START);
         }else {
@@ -186,13 +199,15 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
         long lastSuccess = SpUtil.getInstance().getLong(AppConstants.LOCK_START_MILLISENCONS);
         long elapsedRealtimeOffset = System.currentTimeMillis() - SystemClock.elapsedRealtime();
         long totalPlayTime=SpUtil.getInstance().getLong(AppConstants.TOTAL_PLAY_MILLISENCONS,0);
-
-        LogUtils.i(lastSuccess - elapsedRealtimeOffset);
-        LogUtils.i(totalPlayTime);
+        long totalErrorTime=SpUtil.getInstance().getLong(AppConstants.TOTAL_ERROR_STATE_MILLISENCONS,0);
+       // LogUtils.i(lastSuccess - elapsedRealtimeOffset);
+        //LogUtils.i(totalPlayTime);
         if (SpUtil.getInstance().getBoolean(AppConstants.LOCK_STATE,false)) {
-            chronometer.setBase(lastSuccess - elapsedRealtimeOffset+totalPlayTime);
+
+
             if(SpUtil.getInstance().getBoolean(AppConstants.RUN_LOCK_STATE,false))
             {
+                chronometer.setBase(lastSuccess - elapsedRealtimeOffset+totalPlayTime+totalErrorTime);
                 UpdateUI(START);
                 chronometer.start();
             }else{
@@ -234,7 +249,7 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
         SpUtil.getInstance().putBoolean(AppConstants.TOMATO_LEARNING_BREAK_TIME_STATE,false);
         SpUtil.getInstance().putLong(AppConstants.TOMATO_START_TIME, System.currentTimeMillis());
         SpUtil.getInstance().putLong(AppConstants.TOTAL_PLAY_MILLISENCONS,0);
-
+        SpUtil.getInstance().putLong(AppConstants.TOTAL_ERROR_STATE_MILLISENCONS,0);
         //时钟显示计数
         long lastSuccess = SpUtil.getInstance().getLong(AppConstants.LOCK_START_MILLISENCONS);
         long elapsedRealtimeOffset = System.currentTimeMillis() - SystemClock.elapsedRealtime();
@@ -306,7 +321,7 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
     /**
      * 权限检查并显示弹框
      */
-    private void checkAccessPermission(){
+    private boolean checkAccessPermission(){
         if (Build.VERSION.SDK_INT >21&&!LockUtil.isStatAccessPermissionSet(LockActivity.this)) {
 
             AlertDialog.Builder dialog = new AlertDialog.Builder(LockActivity.this);
@@ -319,6 +334,7 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
                 {
                     Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
                     startActivityForResult(intent, RESULT_ACTION_USAGE_ACCESS_SETTINGS);
+                    allowPlay();
                 }
             });
 
@@ -327,16 +343,14 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
                 public void onClick(DialogInterface dialog, int which)
                 {
                     ToastUtil.showToast("开启失败，没有权限");
-                    SpUtil.getInstance().putBoolean(AppConstants.LOCK_STATE, false);
-                    Intent intent = new Intent(LockActivity.this, LockService.class);
-                    stopService(intent);
-                    NotifyUtil.stopServiceNotify(LockActivity.this);
                 }
             });
 
             dialog.show();
+            return false;
         }else {
-            ToastUtil.showToast("已获得权限");
+            return true;
+           // ToastUtil.showToast("已获得权限");
         }
     }
 

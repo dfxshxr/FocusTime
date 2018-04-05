@@ -15,8 +15,10 @@ import com.xidian.focustime.R;
 import com.xidian.focustime.base.AppConstants;
 import com.xidian.focustime.base2.BaseActivity;
 import com.xidian.focustime.base2.BasePresenter;
+import com.xidian.focustime.utils.DataUtil;
 import com.xidian.focustime.utils.SpUtil;
 import com.xidian.focustime.utils.ToastUtil;
+
 
 import butterknife.BindView;
 import cn.qqtheme.framework.picker.TimePicker;
@@ -35,7 +37,7 @@ public class SettingActivity extends BaseActivity {
     OptionItemView oivPlay;
     @BindView(R.id.oivAppWhiteList)
     OptionItemView oivAppWhiteList;
-    @BindView(R.id.oivWllpaper)
+    @BindView(R.id.oivWallpaper)
     OptionItemView oivWllpaper;
     @BindView(R.id.oivAbout)
     OptionItemView oivAbout;
@@ -43,9 +45,12 @@ public class SettingActivity extends BaseActivity {
     OptionItemView oivTomatoHelp;
 
 
+
     @Override
     public void initData() {
         setToolbarTitle("设置");
+        oivStudy.setRightText(DataUtil.timeParseInSetting(SpUtil.getInstance().getLong(AppConstants.LOCK_SETTING_MILLISENCONS,1000*60*60*2)));
+        oivPlay.setRightText(DataUtil.timeParseInSetting(SpUtil.getInstance().getLong(AppConstants.LOCK_PLAY_SETTING_MILLISENCONS,1000*60*10)));
     }
 
 
@@ -57,6 +62,7 @@ public class SettingActivity extends BaseActivity {
                 onStudyTimePicker(view);
             }
         });
+
         oivPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,9 +107,10 @@ public class SettingActivity extends BaseActivity {
         picker.setDividerColor(ContextCompat.getColor(this,R.color.black0));
         picker.setCancelTextColor(ContextCompat.getColor(this,R.color.black0));
         picker.setSubmitTextColor(ContextCompat.getColor(this,R.color.black0));
-        int currentHour =(int)SpUtil.getInstance().getLong(AppConstants.LOCK_SETTING_MILLISENCONS,1000*60*10)/(1000*60*60);
-        int currentMinute = (int)SpUtil.getInstance().getLong(AppConstants.LOCK_SETTING_MILLISENCONS,1000*60*10)/(1000*60);
-        picker.setSelectedItem(currentHour, currentMinute);
+        Long continueTime =SpUtil.getInstance().getLong(AppConstants.LOCK_SETTING_MILLISENCONS,1000*60*60*2);
+        int currentStudyHour =(int)(continueTime/(1000*60*60));
+        int currentStudyMinute = (int)(continueTime/(1000*60)-currentStudyHour*60);
+        picker.setSelectedItem(currentStudyHour,currentStudyMinute);
         picker.setTopLineVisible(false);
         picker.setOnTimePickListener(new TimePicker.OnTimePickListener() {
             @Override
@@ -113,8 +120,10 @@ public class SettingActivity extends BaseActivity {
                 Long remainPlaytime=SpUtil.getInstance().getLong(AppConstants.LOCK_PLAY_SETTING_MILLISENCONS,1000*60*10);
                 if(continueTime<remainPlaytime){
                     SpUtil.getInstance().putLong(AppConstants.LOCK_PLAY_SETTING_MILLISENCONS,continueTime);
+                    oivPlay.setRightText(DataUtil.timeParseInSetting(continueTime));
                 }
                 SpUtil.getInstance().putLong(AppConstants.LOCK_SETTING_MILLISENCONS,continueTime);
+                oivStudy.setRightText(DataUtil.timeParseInSetting(continueTime));
             }
         });
         picker.show();
@@ -146,7 +155,9 @@ public class SettingActivity extends BaseActivity {
         picker.setOnTimePickListener(new TimePicker.OnTimePickListener() {
             @Override
             public void onTimePicked(String hour, String minute) {
-                SpUtil.getInstance().putLong(AppConstants.LOCK_PLAY_SETTING_MILLISENCONS,1000*60*Integer.parseInt(minute)+1000*60*60*Integer.parseInt(hour));
+                long playTime=1000*60*Integer.parseInt(minute)+1000*60*60*Integer.parseInt(hour);
+                SpUtil.getInstance().putLong(AppConstants.LOCK_PLAY_SETTING_MILLISENCONS,playTime);
+                oivPlay.setRightText(DataUtil.timeParseInSetting(playTime));
             }
         });
         picker.show();
@@ -205,3 +216,5 @@ public class SettingActivity extends BaseActivity {
         return R.layout.activity_setting;
     }
 }
+
+
