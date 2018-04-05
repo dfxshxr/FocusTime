@@ -10,6 +10,7 @@ import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Chronometer;
 import android.widget.ImageView;
@@ -44,7 +45,7 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
     private final int PAUSE=3;
     private final int READY=4;
     private Chronometer chronometer;
-    ImageView mUserButton, mStartButton,mPlayButton, mStopButton, mSettingButton,mReStartButton,mPhoneButton,mAppButton;
+    ImageView mUserButton, mStartButton,mPlayButton, mStopButton, mSettingButton,mReStartButton,mPhoneButton,mAppButton,mLogoView;
     @Override
     public int getLayoutId() {
         return R.layout.activity_main;
@@ -52,7 +53,11 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
 
     @Override
     protected void initViews(Bundle savedInstanceState) {
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+
         chronometer = (Chronometer) findViewById(R.id.chronometer);
+        mLogoView = (ImageView) findViewById(R.id.logo);
         mUserButton = (ImageView) findViewById(R.id.user_button);
         mAppButton =(ImageView) findViewById(R.id.app_button);
         mAppButton.setOnClickListener(new OnClickListener() {
@@ -79,15 +84,7 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
                 if (SpUtil.getInstance().getBoolean(AppConstants.LOCK_STATE,false)) {
                     ToastUtil.showToast("当前任务尚未结束");
                 }else {
-                    UpdateUI(READY);
-                    MyCountTimer myCountTimer = new MyCountTimer(3000, 1000,chronometer, ""){
-                        @Override
-                        public void onFinish() {
-                            startLockService();
-                        }
-                    };
-                    myCountTimer.start();
-
+                   startLockService();
                 }
             }
         });
@@ -375,17 +372,9 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
 
     private void UpdateUI(int i){
         switch (i){
-            case READY:
-                mStartButton.setVisibility(View.GONE);
-                mUserButton.setVisibility(View.GONE);
-                mSettingButton.setVisibility(View.GONE);
-                mStopButton.setVisibility(View.GONE);
-                mPlayButton.setVisibility(View.GONE);
-                mReStartButton.setVisibility(View.GONE);
-                mPhoneButton.setVisibility(View.GONE);
-                mAppButton.setVisibility(View.GONE);
-                break;
             case START:
+                chronometer.setVisibility(View.VISIBLE);
+                mLogoView.setVisibility(View.GONE);
                 mStartButton.setVisibility(View.GONE);
                 mUserButton.setVisibility(View.GONE);
                 mSettingButton.setVisibility(View.GONE);
@@ -400,6 +389,8 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
                 mReStartButton.setVisibility(View.VISIBLE);
                 break;
             case STOP:
+                chronometer.setVisibility(View.GONE);
+                mLogoView.setVisibility(View.VISIBLE);
                 mStartButton.setVisibility(View.VISIBLE);
                 mUserButton.setVisibility(View.VISIBLE);
                 mSettingButton.setVisibility(View.VISIBLE);

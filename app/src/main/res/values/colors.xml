@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="white_100">#00000000</color><!--80透明度-->
     <color name="white_80">#ccffffff</color><!--80透明度-->
     <color name="white_90">#e6ffffff</color><!--90透明度-->
     <color name="white_70">#b3ffffff</color><!--70透明度-->
