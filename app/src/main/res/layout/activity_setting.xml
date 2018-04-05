@@ -4,134 +4,138 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray5"
+    android:background="@drawable/background"
     android:orientation="vertical">
 
    <include layout="@layout/include_toolbar"/>
 
     <com.zhy.autolayout.AutoLinearLayout
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/option_item_margin_top"
-        android:background="@color/white"
+        android:background="@color/white_70"
         android:orientation="vertical">
 
-        <com.lqr.optionitemview.OptionItemView
-            android:id="@+id/oivWallpaper"
-            style="@style/OptionItem"
-            android:background="@drawable/selector_option_item"
-            app:left_text="壁纸设置"
-            app:left_text_color="@color/black0"
-            app:left_image_margin_left="@dimen/option_item_margin_left"
-            app:left_image_margin_right="@dimen/option_item_margin_right"
-            app:left_src="@mipmap/setting_wallpaper"
-            app:right_src="@mipmap/setting_right"
-            app:left_text_size="16sp"/>
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="34px"
+                android:background="@color/white"
+                android:orientation="vertical">
 
-    </com.zhy.autolayout.AutoLinearLayout>
+                <com.lqr.optionitemview.OptionItemView
+                    android:id="@+id/oivWallpaper"
+                    style="@style/OptionItem"
+                    android:background="@drawable/selector_option_item"
+                    app:left_image_margin_left="@dimen/option_item_margin_left"
+                    app:left_image_margin_right="@dimen/option_item_text_image_margin"
+                    app:left_src="@mipmap/setting_wallpaper"
+                    app:left_text="壁纸设置"
+                    app:left_text_color="@color/gray_setting"
+                    app:left_text_size="14sp"
+                    app:right_image_margin_left="@dimen/option_item_text_image_margin"
+                    app:right_text="默认"
+                    app:right_text_size="14sp"
+                    app:right_text_color="@color/gray7"
+                    app:right_src="@mipmap/setting_right" />
+                <View
+                    style="@style/Line"
+                    android:layout_marginLeft="40px"
+                    android:layout_marginRight="40px" />
+                <com.lqr.optionitemview.OptionItemView
+                    android:id="@+id/oivStudy"
+                    style="@style/OptionItem"
+                    android:background="@drawable/selector_option_item"
+                    app:left_image_margin_left="@dimen/option_item_margin_left"
+                    app:left_image_margin_right="@dimen/option_item_text_image_margin"
+                    app:left_src="@mipmap/setting_time"
+                    app:left_text="预计专注时长"
+                    app:left_text_color="@color/gray_setting"
+                    app:left_text_size="14sp"
+                    app:right_image_margin_left="@dimen/option_item_text_image_margin"
+                    app:right_text="00:00"
+                    app:right_text_size="14sp"
+                    app:right_text_color="@color/gray7"
+                    app:right_src="@mipmap/setting_right"/>
 
-    <com.zhy.autolayout.AutoLinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/option_item_margin_top"
-        android:background="@color/white"
-        android:orientation="vertical">
+                <View
+                    style="@style/Line"
+                    android:layout_marginLeft="40px"
+                    android:layout_marginRight="40px" />
 
-        <com.lqr.optionitemview.OptionItemView
-            android:id="@+id/oivStudy"
-            style="@style/OptionItem"
-            android:background="@drawable/selector_option_item"
-            app:left_text="预计专注时长"
-            app:left_text_color="@color/black0"
-            app:left_image_margin_left="@dimen/option_item_margin_left"
-            app:left_image_margin_right="@dimen/option_item_margin_right"
-            app:left_src="@mipmap/setting_time"
-            app:right_text="00:00"
-            app:right_text_color="@color/gray2"
-            app:right_image_margin_right="@dimen/option_item_margin_right"
-            app:left_text_size="16sp"/>
-
-        <View
-            style="@style/Line"
-            android:layout_marginLeft="30px"
-            android:layout_marginRight="30px"
-            />
-
-        <com.lqr.optionitemview.OptionItemView
-            android:id="@+id/oivPlay"
-            style="@style/OptionItem"
-            android:background="@drawable/selector_option_item"
-            app:left_text="首次休息时长"
-            app:left_text_color="@color/black0"
-            app:left_image_margin_left="@dimen/option_item_margin_left"
-            app:left_image_margin_right="@dimen/option_item_margin_right"
-            app:left_src="@mipmap/setting_rest"
-            app:left_text_size="16sp"
-            app:right_text="00:00"
-            app:right_text_color="@color/gray2"
-            app:right_image_margin_right="@dimen/option_item_margin_right"
-            />
-    </com.zhy.autolayout.AutoLinearLayout>
-
-
-    <com.zhy.autolayout.AutoLinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/option_item_margin_top"
-        android:background="@color/white"
-        android:orientation="vertical">
-
-        <com.lqr.optionitemview.OptionItemView
-            android:id="@+id/oivAppWhiteList"
-            style="@style/OptionItem"
-            android:background="@drawable/selector_option_item"
-            app:left_text="应用白名单"
-            app:left_text_color="@color/black0"
-            app:left_image_margin_left="@dimen/option_item_margin_left"
-            app:left_image_margin_right="@dimen/option_item_margin_right"
-            app:left_src="@mipmap/setting_app"
-            app:right_src="@mipmap/setting_right"
-            app:left_text_size="16sp"/>
-
-    </com.zhy.autolayout.AutoLinearLayout>
-
-    <com.zhy.autolayout.AutoLinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/option_item_margin_top"
-        android:background="@color/white"
-        android:orientation="vertical">
-
-        <com.lqr.optionitemview.OptionItemView
-            android:id="@+id/oivTomatoHelp"
-            style="@style/OptionItem"
-            android:background="@drawable/selector_option_item"
-            app:left_image_margin_left="@dimen/option_item_margin_left"
-            app:left_image_margin_right="@dimen/option_item_margin_right"
-            app:left_src="@mipmap/setting_tomato"
-            app:left_text="番茄法则"
-            app:left_text_color="@color/black0"
-            app:right_src="@mipmap/setting_right"
-            app:left_text_size="16sp"/>
-
-        <View
-            style="@style/Line"
-            android:layout_marginLeft="30px"
-            android:layout_marginRight="30px"
-            />
-        <com.lqr.optionitemview.OptionItemView
-            android:id="@+id/oivAbout"
-            style="@style/OptionItem"
-            android:background="@drawable/selector_option_item"
-            app:left_image_margin_left="@dimen/option_item_margin_left"
-            app:left_image_margin_right="@dimen/option_item_margin_right"
-            app:left_src="@mipmap/setting_about"
-            app:left_text="@string/about"
-            app:left_text_color="@color/black0"
-            app:right_src="@mipmap/setting_right"
-            app:left_text_size="16sp"/>
+                <com.lqr.optionitemview.OptionItemView
+                    android:id="@+id/oivPlay"
+                    style="@style/OptionItem"
+                    android:background="@drawable/selector_option_item"
+                    app:left_image_margin_left="@dimen/option_item_margin_left"
+                    app:left_image_margin_right="@dimen/option_item_text_image_margin"
+                    app:left_src="@mipmap/setting_rest"
+                    app:left_text="首次休息时长"
+                    app:left_text_color="@color/gray_setting"
+                    app:left_text_size="14sp"
+                    app:right_image_margin_left="@dimen/option_item_text_image_margin"
+                    app:right_text="00:00"
+                    app:right_text_size="14sp"
+                    app:right_text_color="@color/gray7"
+                    app:right_src="@mipmap/setting_right"/>
+                <View
+                    style="@style/Line"
+                    android:layout_marginLeft="40px"
+                    android:layout_marginRight="40px" />
+                <com.lqr.optionitemview.OptionItemView
+                    android:id="@+id/oivAppWhiteList"
+                    style="@style/OptionItem"
+                    android:background="@drawable/selector_option_item"
+                    app:left_image_margin_left="@dimen/option_item_margin_left"
+                    app:left_image_margin_right="@dimen/option_item_text_image_margin"
+                    app:left_src="@mipmap/setting_app"
+                    app:left_text="应用白名单"
+                    app:left_text_color="@color/gray_setting"
+                    app:left_text_size="14sp"
+                    app:right_src="@mipmap/setting_right" />
+            </com.zhy.autolayout.AutoLinearLayout>
 
 
+
+
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/option_item_margin_top"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <com.lqr.optionitemview.OptionItemView
+                    android:id="@+id/oivTomatoHelp"
+                    style="@style/OptionItem"
+                    android:background="@drawable/selector_option_item"
+                    app:left_image_margin_left="@dimen/option_item_margin_left"
+                    app:left_image_margin_right="@dimen/option_item_text_image_margin"
+                    app:left_src="@mipmap/blank"
+                    app:left_text="番茄法则"
+                    app:left_text_color="@color/gray_setting"
+                    app:left_text_size="14sp"
+                    app:right_src="@mipmap/setting_right" />
+
+                <View
+                    style="@style/Line"
+                    android:layout_marginLeft="40px"
+                    android:layout_marginRight="40px" />
+
+                <com.lqr.optionitemview.OptionItemView
+                    android:id="@+id/oivAbout"
+                    style="@style/OptionItem"
+                    android:background="@drawable/selector_option_item"
+                    app:left_image_margin_left="@dimen/option_item_margin_left"
+                    app:left_image_margin_right="@dimen/option_item_text_image_margin"
+                    app:left_src="@mipmap/blank"
+                    app:left_text="@string/about"
+                    app:left_text_color="@color/gray_setting"
+                    app:left_text_size="14sp"
+                    app:right_src="@mipmap/setting_right" />
+
+
+            </com.zhy.autolayout.AutoLinearLayout>
 
     </com.zhy.autolayout.AutoLinearLayout>
 </com.zhy.autolayout.AutoLinearLayout>

@@ -23,7 +23,7 @@
         android:name=".LockApplication"
         android:allowBackup="true"
         android:clearTaskOnLaunch="true"
-        android:icon="@mipmap/setting_rest"
+        android:icon="@mipmap/setting_tomato"
         android:label="@string/app_name"
         android:manageSpaceActivity=".module.SplashActivity"
         android:theme="@style/AppTheme">
@@ -128,8 +128,6 @@
             android:launchMode="singleInstance"
             android:taskAffinity=""
             android:theme="@android:style/Theme.Wallpaper.NoTitleBar"/>
-        <activity android:name=".module.MainActivity">
-        </activity>
 
         <meta-data
             android:name="design_width"

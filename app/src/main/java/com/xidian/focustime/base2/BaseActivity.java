@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -65,7 +66,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         setupAppBarAndToolbar();
 
         //沉浸式状态栏
-        StatusBarUtil.setColor(this, UIUtils.getColor(R.color.colorPrimaryDark), 10);
+      //  StatusBarUtil.setColor(this, UIUtils.getColor(R.color.colorPrimaryDark), 10);
 
         initView();
         initData();
@@ -128,6 +129,8 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     }
 
     public void initView() {
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
     }
 
     public void initData() {
