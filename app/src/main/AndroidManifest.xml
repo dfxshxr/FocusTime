@@ -71,8 +71,7 @@
         <activity
             android:name=".module.LockActivity"
             android:excludeFromRecents="true"
-            android:launchMode="singleTask"
-            android:theme="@style/TranslucentTheme"/>
+            android:launchMode="singleTask" />
       <!--   android:noHistory="true"-->
         <service
             android:name=".service.AdvancedLockService"
@@ -102,8 +101,11 @@
 
         <activity android:name=".module.ResultActivity">
         </activity>
+        <activity android:name=".module.StatisticsActivity">
+        </activity>
         <activity
             android:name=".module.SettingActivity"
+
             android:label="设置">
         </activity>
         <activity

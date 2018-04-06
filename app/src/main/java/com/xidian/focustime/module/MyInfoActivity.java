@@ -3,9 +3,15 @@ package com.xidian.focustime.module;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.apkfuns.logutils.LogUtils;
 import com.lqr.imagepicker.ImagePicker;
 import com.lqr.imagepicker.bean.ImageItem;
 import com.lqr.imagepicker.ui.ImageGridActivity;
@@ -15,6 +21,7 @@ import com.xidian.focustime.base2.BaseActivity;
 import com.xidian.focustime.module.presenter.MyInfoAtPresenter;
 import com.xidian.focustime.module.view.IMyInfoAtView;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -43,6 +50,7 @@ public class MyInfoActivity extends BaseActivity<IMyInfoAtView, MyInfoAtPresente
     public void init() {
         super.init();
     }
+
 
     @Override
     public void initData() {
@@ -110,5 +118,35 @@ public class MyInfoActivity extends BaseActivity<IMyInfoAtView, MyInfoAtPresente
     @Override
     public OptionItemView getOivAccount() {
         return mOivAccount;
+    }
+
+
+    protected void setImmerseLayout(View view) {// view为标题栏
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window window = getWindow();
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+            int statusBarHeight = getStatusBarHeight();
+            LogUtils.d(statusBarHeight);
+            System.out.print("height:"+statusBarHeight);
+            view.setPadding(0, statusBarHeight, 0, 0);
+        }
+    }
+
+    protected int getStatusBarHeight(){
+        Class<?> c = null;
+        Object obj = null;
+        Field field = null;
+        int x = 0, sbar = 38;//默认为38，貌似大部分是这样的
+        try {
+            c = Class.forName("com.android.internal.R$dimen");
+            obj = c.newInstance();
+            field = c.getField("status_bar_height");
+            x = Integer.parseInt(field.get(obj).toString());
+            sbar = getResources().getDimensionPixelSize(x);
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+        return sbar;
     }
 }

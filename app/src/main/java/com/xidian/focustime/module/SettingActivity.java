@@ -4,9 +4,13 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBar;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.apkfuns.logutils.LogUtils;
@@ -45,6 +49,11 @@ public class SettingActivity extends BaseActivity {
     OptionItemView oivTomatoHelp;
 
 
+    @Override
+    public void initView(){
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+    }
 
     @Override
     public void initData() {
