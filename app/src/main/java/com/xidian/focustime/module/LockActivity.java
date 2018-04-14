@@ -45,7 +45,7 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
     private final int PAUSE=3;
     private final int READY=4;
     private Chronometer chronometer;
-    ImageView mUserButton, mStartButton,mPlayButton, mStopButton, mSettingButton,mReStartButton,mPhoneButton,mAppButton,mLogoView;
+    ImageView mUserButton, mStartButton,mPlayButton, mStopButton, mSettingButton,mReStartButton,mPhoneButton,mAppButton,mLogoView,mCycleView;
     @Override
     public int getLayoutId() {
         return R.layout.activity_main;
@@ -58,6 +58,7 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
 
         chronometer = (Chronometer) findViewById(R.id.chronometer);
         mLogoView = (ImageView) findViewById(R.id.logo);
+        mCycleView = (ImageView) findViewById(R.id.cycle);
         mUserButton = (ImageView) findViewById(R.id.user_button);
         mAppButton =(ImageView) findViewById(R.id.app_button);
         mAppButton.setOnClickListener(new OnClickListener() {
@@ -154,18 +155,7 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
 
             }
         });
-       /* Button mAdvancedButton = (Button) findViewById(R.id.advanced_menu_button);
-        mAdvancedButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (SpUtil.getInstance().getBoolean(AppConstants.LOCK_STATE,false)) {
-                    ToastUtil.showToast("学习中不能修改设置");
-                }else {
-                    Intent intent = new Intent(LockActivity.this, MainActivity.class);
-                    startActivity(intent);
-                }
-            }
-        });*/
+
     }
 
     @Override
@@ -375,6 +365,7 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
             case START:
                 chronometer.setVisibility(View.VISIBLE);
                 mLogoView.setVisibility(View.GONE);
+                mCycleView.setVisibility(View.VISIBLE);
                 mStartButton.setVisibility(View.GONE);
                 mUserButton.setVisibility(View.GONE);
                 mSettingButton.setVisibility(View.GONE);
@@ -391,6 +382,7 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
             case STOP:
                 chronometer.setVisibility(View.GONE);
                 mLogoView.setVisibility(View.VISIBLE);
+                mCycleView.setVisibility(View.GONE);
                 mStartButton.setVisibility(View.VISIBLE);
                 mUserButton.setVisibility(View.VISIBLE);
                 mSettingButton.setVisibility(View.VISIBLE);

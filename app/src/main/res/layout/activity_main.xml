@@ -2,6 +2,7 @@
 <com.zhy.autolayout.AutoRelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background">
@@ -28,17 +29,6 @@
             android:layout_alignParentRight="true"
             android:src="@drawable/user"/>
 
-
-        <ImageView
-            android:id="@+id/logo"
-            android:layout_width="192px"
-            android:layout_height="192px"
-            android:layout_marginTop="362px"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/logo"/>
-
-
         <ImageView
             android:id="@+id/start_button"
             android:layout_width="256px"
@@ -47,52 +37,79 @@
             android:layout_marginTop="964px"
             android:src="@drawable/start"/>
 
-        <Chronometer
-            android:id="@+id/chronometer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
+
+        <com.zhy.autolayout.AutoRelativeLayout
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="62px"
-            android:textColor="@color/white"
-            android:textSize="80sp">
-        </Chronometer>
+            android:layout_marginTop="240px"
+            android:layout_height="420px"
+            android:layout_width="420px"
+            >
+
+                <ImageView
+                    android:id="@+id/logo"
+                    android:layout_width="192px"
+                    android:layout_height="192px"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/logo"/>
+
+                <ImageView
+                    android:id="@+id/cycle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/cycle"/>
+
+                <Chronometer
+                    android:id="@+id/chronometer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/white"
+                    android:format="%s"
+                    android:textSize="64sp"
+                  />
+
+                </com.zhy.autolayout.AutoRelativeLayout>
+
 
         <ImageView
             android:id="@+id/play_button"
-            android:layout_width="60px"
-            android:layout_height="60px"
-            android:padding="10px"
-            android:layout_below="@+id/chronometer"
+            android:layout_width="256px"
+            android:layout_height="64px"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="78px"
+            android:layout_marginTop="964px"
             android:src="@drawable/play"/>
 
         <ImageView
             android:id="@+id/app_button"
-            android:layout_width="60px"
-            android:layout_height="60px"
-            android:padding="10px"
+            android:layout_width="48px"
+            android:layout_height="48px"
+            android:layout_marginBottom="80px"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:src="@drawable/app"/>
 
         <ImageView
             android:id="@+id/phone_button"
-            android:layout_width="60px"
-            android:layout_height="60px"
-            android:padding="10px"
+            android:layout_width="48px"
+            android:layout_height="48px"
+            android:layout_marginLeft="32px"
+            android:layout_marginBottom="80px"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:adjustViewBounds="false"
             android:src="@drawable/phone"/>
 
         <ImageView
             android:id="@+id/stop_button"
-            android:layout_width="60px"
-            android:layout_height="60px"
-            android:padding="10px"
+            android:layout_width="48px"
+            android:layout_height="48px"
+            android:layout_marginRight="32px"
+            android:layout_marginBottom="80px"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
@@ -102,11 +119,10 @@
 
         <ImageView
             android:id="@+id/restart_button"
-            android:layout_width="100px"
-            android:layout_height="40px"
-            android:layout_below="@+id/chronometer"
+            android:layout_width="256px"
+            android:layout_height="64px"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="78px"
+            android:layout_marginTop="964px"
             android:src="@drawable/restart"/>
 </com.zhy.autolayout.AutoRelativeLayout>
 
