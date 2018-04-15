@@ -14,8 +14,8 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Chronometer;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.apkfuns.logutils.LogUtils;
 import com.xidian.focustime.LockApplication;
 import com.xidian.focustime.R;
 import com.xidian.focustime.base.AppConstants;
@@ -24,7 +24,6 @@ import com.xidian.focustime.db.AppManager;
 import com.xidian.focustime.service.LockService;
 import com.xidian.focustime.utils.DataUtil;
 import com.xidian.focustime.utils.LockUtil;
-import com.xidian.focustime.utils.MyCountTimer;
 import com.xidian.focustime.utils.NotifyUtil;
 import com.xidian.focustime.utils.SpUtil;
 import com.xidian.focustime.utils.ToastUtil;
@@ -43,9 +42,12 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
     private final int START=1;
     private final int STOP =2;
     private final int PAUSE=3;
-    private final int READY=4;
+    private final int STOP_ENSURE=4;
+    private final int CANCEL=5;
     private Chronometer chronometer;
-    ImageView mUserButton, mStartButton,mPlayButton, mStopButton, mSettingButton,mReStartButton,mPhoneButton,mAppButton,mLogoView,mCycleView;
+    ImageView mUserButton, mStartButton,mPlayButton, mStopButton, mSettingButton,mReStartButton,mAppButton,mLogoView,mCycleView,mCancelButton, mOkButton;
+    TextView mTipTextView;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_main;
@@ -60,6 +62,7 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
         mLogoView = (ImageView) findViewById(R.id.logo);
         mCycleView = (ImageView) findViewById(R.id.cycle);
         mUserButton = (ImageView) findViewById(R.id.user_button);
+        mTipTextView=(TextView) findViewById(R.id.tip_text_view);
         mAppButton =(ImageView) findViewById(R.id.app_button);
         mAppButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -107,7 +110,7 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
             @Override
             public void onClick(View view) {
                 if (SpUtil.getInstance().getBoolean(AppConstants.LOCK_STATE,false)) {
-                    cancleLockService();
+                    UpdateUI(STOP_ENSURE);
                 }else {
                     ToastUtil.showToast("不在学习中");
                 }
@@ -142,8 +145,25 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
             }
         });
 
-        mPhoneButton = (ImageView) findViewById(R.id.phone_button);
-        mPhoneButton.setOnClickListener(new OnClickListener() {
+
+        mOkButton = (ImageView) findViewById(R.id.ok_button);
+        mOkButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cancleLockService();
+            }
+        });
+
+        mCancelButton = (ImageView) findViewById(R.id.cancel_button);
+        mCancelButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UpdateUI(START);
+            }
+        });
+
+        /*mAppButton = (ImageView) findViewById(R.id.phone_button);
+        mAppButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(checkAccessPermission()){
@@ -154,7 +174,7 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
                 }
 
             }
-        });
+        });*/
 
     }
 
@@ -366,14 +386,16 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
                 chronometer.setVisibility(View.VISIBLE);
                 mLogoView.setVisibility(View.GONE);
                 mCycleView.setVisibility(View.VISIBLE);
-                mStartButton.setVisibility(View.GONE);
                 mUserButton.setVisibility(View.GONE);
                 mSettingButton.setVisibility(View.GONE);
                 mReStartButton.setVisibility(View.GONE);
+                mStartButton.setVisibility(View.GONE);
                 mStopButton.setVisibility(View.VISIBLE);
                 mPlayButton.setVisibility(View.VISIBLE);
-                mPhoneButton.setVisibility(View.VISIBLE);
                 mAppButton.setVisibility(View.VISIBLE);
+                mOkButton.setVisibility(View.GONE);
+                mCancelButton.setVisibility(View.GONE);
+                mTipTextView.setVisibility(View.GONE);
                 break;
             case PAUSE:
                 mPlayButton.setVisibility(View.GONE);
@@ -389,8 +411,19 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
                 mPlayButton.setVisibility(View.GONE);
                 mStopButton.setVisibility(View.GONE);
                 mReStartButton.setVisibility(View.GONE);
-                mPhoneButton.setVisibility(View.GONE);
                 mAppButton.setVisibility(View.GONE);
+                mOkButton.setVisibility(View.GONE);
+                mCancelButton.setVisibility(View.GONE);
+                mTipTextView.setVisibility(View.GONE);
+                break;
+            case STOP_ENSURE:
+                mReStartButton.setVisibility(View.GONE);
+                mOkButton.setVisibility(View.VISIBLE);
+                mCancelButton.setVisibility(View.VISIBLE);
+                mStartButton.setVisibility(View.GONE);
+                mStopButton.setVisibility(View.GONE);
+                mPlayButton.setVisibility(View.GONE);
+                mTipTextView.setVisibility(View.VISIBLE);
                 break;
             default:
                 break;

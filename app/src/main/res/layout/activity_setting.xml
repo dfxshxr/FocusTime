@@ -29,7 +29,7 @@
                 android:background="@drawable/selector_option_item"
                 app:left_image_margin_left="@dimen/option_item_margin_left"
                 app:left_image_margin_right="@dimen/option_item_text_image_margin"
-                app:left_src="@mipmap/setting_wallpaper"
+                app:left_src="@drawable/setting_wallpaper"
                 app:left_text="壁纸设置"
                 app:left_text_color="@color/gray_setting"
                 app:left_text_size="14sp"
@@ -37,7 +37,7 @@
                 app:right_text="默认"
                 app:right_text_size="14sp"
                 app:right_text_color="@color/gray7"
-                app:right_src="@mipmap/setting_right" />
+                app:right_src="@drawable/setting_right" />
             <View
                 style="@style/Line"
                 android:layout_marginLeft="40px"
@@ -48,7 +48,7 @@
                 android:background="@drawable/selector_option_item"
                 app:left_image_margin_left="@dimen/option_item_margin_left"
                 app:left_image_margin_right="@dimen/option_item_text_image_margin"
-                app:left_src="@mipmap/setting_time"
+                app:left_src="@drawable/setting_time"
                 app:left_text="预计专注时长"
                 app:left_text_color="@color/gray_setting"
                 app:left_text_size="14sp"
@@ -56,7 +56,7 @@
                 app:right_text="00:00"
                 app:right_text_size="14sp"
                 app:right_text_color="@color/gray7"
-                app:right_src="@mipmap/setting_right"/>
+                app:right_src="@drawable/setting_right"/>
 
             <View
                 style="@style/Line"
@@ -69,7 +69,7 @@
                 android:background="@drawable/selector_option_item"
                 app:left_image_margin_left="@dimen/option_item_margin_left"
                 app:left_image_margin_right="@dimen/option_item_text_image_margin"
-                app:left_src="@mipmap/setting_rest"
+                app:left_src="@drawable/setting_time"
                 app:left_text="首次休息时长"
                 app:left_text_color="@color/gray_setting"
                 app:left_text_size="14sp"
@@ -77,7 +77,7 @@
                 app:right_text="00:00"
                 app:right_text_size="14sp"
                 app:right_text_color="@color/gray7"
-                app:right_src="@mipmap/setting_right"/>
+                app:right_src="@drawable/setting_right"/>
             <View
                 style="@style/Line"
                 android:layout_marginLeft="40px"
@@ -88,11 +88,11 @@
                 android:background="@drawable/selector_option_item"
                 app:left_image_margin_left="@dimen/option_item_margin_left"
                 app:left_image_margin_right="@dimen/option_item_text_image_margin"
-                app:left_src="@mipmap/setting_app"
+                app:left_src="@drawable/setting_app"
                 app:left_text="应用白名单"
                 app:left_text_color="@color/gray_setting"
                 app:left_text_size="14sp"
-                app:right_src="@mipmap/setting_right" />
+                app:right_src="@drawable/setting_right" />
         </com.zhy.autolayout.AutoLinearLayout>
 
 
@@ -115,7 +115,7 @@
                 app:left_text="番茄法则"
                 app:left_text_color="@color/gray_setting"
                 app:left_text_size="14sp"
-                app:right_src="@mipmap/setting_right" />
+                app:right_src="@drawable/setting_right" />
 
             <View
                 style="@style/Line"
@@ -132,7 +132,7 @@
                 app:left_text="@string/about"
                 app:left_text_color="@color/gray_setting"
                 app:left_text_size="14sp"
-                app:right_src="@mipmap/setting_right" />
+                app:right_src="@drawable/setting_right" />
 
 
         </com.zhy.autolayout.AutoLinearLayout>

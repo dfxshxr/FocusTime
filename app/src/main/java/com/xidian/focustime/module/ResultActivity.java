@@ -1,9 +1,11 @@
 package com.xidian.focustime.module;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.TextView;
 
 import com.xidian.focustime.LockApplication;
@@ -17,31 +19,27 @@ import com.xidian.focustime.utils.SpUtil;
 
 public class ResultActivity extends BaseActivity {
 
+    private Chronometer chronometer;
+    TextView mResultText;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_result;
     }
 
-    TextView mResultText;
 
     @Override
     protected void initViews(Bundle savedInstanceState) {
 
         mResultText = (TextView) findViewById(R.id.textView);
-        Button mCancleButton = (Button) findViewById(R.id.button);
-        mCancleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        chronometer = (Chronometer) findViewById(R.id.chronometer);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
     }
 
     @Override
     protected void initData() {
-        setToolbarTitle("结果统计");
+        setToolbarTitle("本次专注");
         long currentTime =System.currentTimeMillis();
         long startTime = SpUtil.getInstance().getLong(AppConstants.LOCK_START_MILLISENCONS,0);
         long settingTime =SpUtil.getInstance().getLong(AppConstants.LOCK_SETTING_MILLISENCONS,1000*60*60*2);
@@ -53,12 +51,17 @@ public class ResultActivity extends BaseActivity {
             totalPlayTime =totalPlayTime + (currentTime - startPlayTime);
         }
 
+
         long thisTime =currentTime-startTime-totalPlayTime-totalErrorTime;
 
+        chronometer.setBase(SystemClock.elapsedRealtime()-thisTime);
+
+
+        chronometer.stop();
         if(thisTime>settingTime){
-            mResultText.setText("任务成功\n本次学习时长："+ DataUtil.timeParse(thisTime)+"\n休息时长："+DataUtil.timeParse(totalPlayTime)+"\n应用状态异常时间："+DataUtil.timeParse(totalErrorTime));
+            mResultText.setText("专注成功");
         }else{
-            mResultText.setText("任务失败\n本次学习时长："+ DataUtil.timeParse(thisTime)+"\n设定学习时长："+ DataUtil.timeParse(settingTime)+"\n休息时长："+DataUtil.timeParse(totalPlayTime)+"\n应用状态异常时间："+DataUtil.timeParse(totalErrorTime));
+            mResultText.setText("专注失败");
         }
 
     }

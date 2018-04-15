@@ -153,8 +153,10 @@ public class LockUtil {
                 }
             }
         }else{
+            LogUtils.i("这是当前应用："+getApplicationValue((LockApplication) ((Service) context).getApplication()));
             if(getApplicationValue((LockApplication) ((Service) context).getApplication())){
                 result=AppConstants.APP_PACKAGE_NAME;
+
             }
         }
 
