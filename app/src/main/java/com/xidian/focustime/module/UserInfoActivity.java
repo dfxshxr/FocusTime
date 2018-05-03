@@ -34,12 +34,8 @@ public class UserInfoActivity extends BaseActivity{
 
     @BindView(R.id.appBar)
     protected AppBarLayout mAppBar;
-    @BindView(R.id.ivHeader)
-    ImageView mIvHeader;
-    @BindView(R.id.tvName)
-    TextView tvName;
-    @BindView(R.id.oivHistory)
-    OptionItemView oivHistory;
+    @BindView(R.id.ivToolbarHistory)
+    ImageView mIvHistory;
 
     @Override
     public int getLayoutId() {
@@ -50,22 +46,18 @@ public class UserInfoActivity extends BaseActivity{
     protected void initViews(Bundle savedInstanceState) {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+      //  mIvHistory.setVisibility(View.VISIBLE);
     }
 
     @Override
     protected void initData() {
-        setToolbarTitle("个人中心");
+        setToolbarTitle("今日统计");
     }
 
 
     @Override
     protected void initAction() {
-        oivHistory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(UserInfoActivity.this, ResultActivity.class));
-            }
-        });
+
     }
 
     @Override

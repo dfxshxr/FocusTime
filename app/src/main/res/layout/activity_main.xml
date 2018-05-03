@@ -71,6 +71,7 @@
                     android:textColor="@color/white"
                     android:format="%s"
                     android:textSize="64sp"
+                    android:lines="1"
                   />
 
                 </com.zhy.autolayout.AutoRelativeLayout>

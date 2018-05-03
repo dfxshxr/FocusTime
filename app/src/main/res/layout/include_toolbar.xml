@@ -28,6 +28,28 @@
                 android:layout_marginLeft="32px"
                 android:src="@drawable/back"/>
 
+            <ImageView
+                android:id="@+id/ivToolbarShare"
+                android:layout_width="48px"
+                android:layout_height="48px"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="32px"
+                android:src="@drawable/share"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/ivToolbarHistory"
+                android:layout_width="48px"
+                android:layout_height="48px"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="32px"
+                android:src="@drawable/history"
+                android:visibility="gone"/>
+
             <View
                 android:id="@+id/vToolbarDivision"
                 android:layout_width="40px"

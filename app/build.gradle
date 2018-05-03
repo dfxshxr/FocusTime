@@ -70,9 +70,9 @@ android {
     android.applicationVariants.all { variant ->
         variant.outputs.all {
             if (variant.buildType.name == "release") {
-                outputFileName = "FocusTime_v${gitVersionTag()}_${gitVersionCode()}_${releaseTime()}.apk"
+                outputFileName = "MKTIME_v${gitVersionTag()}_${gitVersionCode()}_${releaseTime()}.apk"
             } else {
-                outputFileName = "FocusTime_${gitBranchName()}_v${gitVersionTagDebug()}_${gitVersionCode()}_${releaseTime()}_debug.apk"
+                outputFileName = "MKTIME_${gitBranchName()}_v${gitVersionTagDebug()}_${gitVersionCode()}_${releaseTime()}_debug.apk"
             }
         }
     }
