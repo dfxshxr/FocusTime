@@ -61,18 +61,22 @@
                     android:layout_centerVertical="true"
                     android:src="@drawable/cycle"/>
 
+
                 <Chronometer
                     android:id="@+id/chronometer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true"
                     android:layout_centerInParent="true"
                     android:textColor="@color/white"
                     android:format="%s"
-                    android:textSize="64sp"
                     android:lines="1"
+                    android:layout_width="320px"
+                    android:layout_height="320px"
+                    android:textSize="40sp"
+                    android:autoSizeTextType="uniform"
+                    android:gravity="center"
                   />
+
 
                 </com.zhy.autolayout.AutoRelativeLayout>
 
