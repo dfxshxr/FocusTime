@@ -19,6 +19,7 @@ import com.xidian.focustime.bean.Monitor;
 import com.xidian.focustime.module.SplashActivity;
 import com.xidian.focustime.utils.DataUtil;
 
+import java.util.Date;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MonitorService extends Service {
@@ -56,7 +57,7 @@ public class MonitorService extends Service {
                     monitor.save();
                     getNotificationManager().notify(1, getNotification("Monitoring...", ""));
                     LogUtils.i(DataUtil.timeParse(System.currentTimeMillis()));
-                    Thread.sleep(5000);
+                    Thread.sleep(30000);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -86,7 +87,7 @@ public class MonitorService extends Service {
         builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
         builder.setContentIntent(pi);
         builder.setContentTitle(title);
-        builder.setContentText(DataUtil.timeParse(System.currentTimeMillis()));
+        builder.setContentText(new Date(System.currentTimeMillis()).toString());
 
         return builder.build();
     }
