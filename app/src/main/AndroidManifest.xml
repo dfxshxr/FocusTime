@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="com.xidian.focustime">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.xidian.focustime">
 
     <!-- 应用锁需要的权限 -->
-    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
-        tools:ignore="ProtectedPermissions"/>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <!-- 友盟统计 -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:name=".LockApplication"
@@ -29,41 +29,46 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".module.FirstActivity"
-            android:excludeFromRecents="true">
+            android:excludeFromRecents="true"
+            android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".module.SplashActivity"
-            android:excludeFromRecents="true">
-        </activity>
-        <activity android:name=".module.AppManageActivity"/>
+            android:excludeFromRecents="true"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".module.AppManageActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".module.AdvancedSettingActivity"
-            android:label="设置"/>
+            android:label="设置"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".module.AddWhiteListActivity"
             android:autoRemoveFromRecents="true"
             android:label="请将本应用加入白名单"
-            android:launchMode="singleInstance"/>
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" />
 
-        <service android:name=".service.LoadAppListService"/>
-        <service android:name=".service.LockService"/>
+        <service android:name=".service.LoadAppListService" />
+        <service android:name=".service.LockService" />
 
         <receiver android:name=".receiver.BootBroadcastReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_ADDED"/>
-                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
 
-                <data android:scheme="package"/>
+                <data android:scheme="package" />
                 <!-- 注意！！ 这句必须要加，否则接收不到BroadCast -->
             </intent-filter>
         </receiver>
@@ -71,74 +76,66 @@
         <activity
             android:name=".module.LockActivity"
             android:excludeFromRecents="true"
-            android:launchMode="singleTask" />
-      <!--   android:noHistory="true"-->
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <!-- android:noHistory="true" -->
         <service
             android:name=".service.AdvancedLockService"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>
-                <action android:name="android.accessibilityservice.AccessibilityService"/>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
             </intent-filter>
 
             <meta-data
                 android:name="android.accessibilityservice"
-                android:resource="@xml/accessibility_service_config"/>
+                android:resource="@xml/accessibility_service_config" />
         </service>
 
-        <receiver
-            android:name=".receiver.DeviceAdminBroadcastReceiver"
-            android:description="@string/device_admin_description"
-            android:label="@string/app_name"
-            android:permission="android.permission.BIND_DEVICE_ADMIN">
-            <meta-data
-                android:name="android.app.device_admin"
-                android:resource="@xml/device_admin"/>
-
-            <intent-filter>
-                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED"/>
-            </intent-filter>
-        </receiver>
-
-        <activity android:name=".module.ResultActivity">
-        </activity>
-        <activity android:name=".module.StatisticsActivity">
-        </activity>
+        <activity
+            android:name=".module.ResultActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".module.StatisticsActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".module.SettingActivity"
-
-            android:label="设置">
-        </activity>
+            android:label="设置"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".module.MyInfoActivity"
-            android:label="修改信息">
-        </activity>
+            android:label="修改信息"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".module.UserInfoActivity"
-            android:label="用户中心">
-        </activity>
+            android:label="用户中心"
+            android:screenOrientation="portrait"></activity>
         <!-- 友盟统计 -->
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="5a0417a8a40fa369e30000d0"/>
+            android:value="5a0417a8a40fa369e30000d0" />
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="Main Channel"/>
+            android:value="Main Channel" />
 
         <activity
             android:name=".module.TomatoWakeUpActivity"
             android:excludeFromRecents="true"
             android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
             android:taskAffinity=""
-            android:theme="@android:style/Theme.Wallpaper.NoTitleBar"/>
+            android:theme="@android:style/Theme.Wallpaper.NoTitleBar" />
 
         <meta-data
             android:name="design_width"
-            android:value="720">
-        </meta-data>
+            android:value="720"></meta-data>
         <meta-data
             android:name="design_height"
-            android:value="1280">
-        </meta-data>
+            android:value="1280"></meta-data>
+
+        <service
+            android:name=".service.MonitorService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

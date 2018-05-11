@@ -68,7 +68,7 @@ public class AdvancedLockService extends AccessibilityService {
 
         Notification notification;
         if(lockState){
-            notification = new NotificationCompat.Builder(this)
+            notification = new NotificationCompat.Builder(this,"status")
                     .setContentTitle(getString(R.string.lock_start))
                     .setTicker(getString(R.string.lock_start_advanced_model))
                     .setContentText(getString(R.string.advanced_model))
@@ -79,7 +79,7 @@ public class AdvancedLockService extends AccessibilityService {
                     .setContentIntent(pi)
                     .build();
         }else{
-            notification = new NotificationCompat.Builder(this)
+            notification = new NotificationCompat.Builder(this,"status")
                     .setContentTitle(getString(R.string.lock_stop))
                     .setTicker(getString(R.string.lock_stop))
                     .setContentText(getString(R.string.lock_stop))

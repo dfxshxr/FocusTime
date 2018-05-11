@@ -1,12 +1,15 @@
 package com.xidian.focustime;
 
 import android.app.Activity;
+import android.app.NotificationManager;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.umeng.analytics.MobclickAgent;
 import com.xidian.focustime.base.AppConstants;
 import com.xidian.focustime.base.BaseActivity;
 import com.xidian.focustime.module.LockActivity;
+import com.xidian.focustime.utils.NotifyUtil;
 import com.xidian.focustime.utils.SpUtil;
 
 import org.litepal.LitePalApplication;
@@ -33,6 +36,20 @@ public class LockApplication extends LitePalApplication {
         activityList = new ArrayList<>();
         MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType. E_UM_NORMAL);
         SpUtil.getInstance().putBoolean(AppConstants.RUN_LOCK_STATE,true);
+
+
+        //注册通知渠道
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            String channelId = "status";
+            String channelName = "学习状态";
+            int importance = NotificationManager.IMPORTANCE_MIN;
+            NotifyUtil.createNotificationChannel(channelId, channelName, importance);
+            channelId = "subscribe";
+            channelName = "订阅消息";
+            importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotifyUtil.createNotificationChannel(channelId, channelName, importance);
+        }
 
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             @Override

@@ -106,7 +106,7 @@ public class LockService extends IntentService {
         Bitmap icon = BitmapFactory.decodeResource(getResources(),
                 R.mipmap.ic_launcher);
 
-        Notification notification = new NotificationCompat.Builder(this)
+        Notification notification = new NotificationCompat.Builder(this,"status")
                 .setContentTitle(getString(R.string.lock_start))
                 .setTicker(getString(R.string.lock_start_cycle_model))
                 .setContentText(getString(R.string.cycle_model))

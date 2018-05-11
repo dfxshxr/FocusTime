@@ -1,6 +1,8 @@
 package com.xidian.focustime.utils;
 
+import android.annotation.TargetApi;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -27,7 +29,7 @@ public class NotifyUtil {
         NotificationManager manager=(NotificationManager)context.getSystemService(NOTIFICATION_SERVICE);
         Bitmap icon = BitmapFactory.decodeResource(context.getResources(),
                 R.mipmap.ic_launcher);
-        Notification notification = new NotificationCompat.Builder(context)
+        Notification notification = new NotificationCompat.Builder(context,"status")
                 .setContentTitle(context.getString(R.string.lock_stop))
                 .setTicker(context.getString(R.string.lock_stop))
                 .setContentText(context.getString(R.string.lock_stop))
@@ -48,7 +50,7 @@ public class NotifyUtil {
         NotificationManager manager=(NotificationManager)context.getSystemService(NOTIFICATION_SERVICE);
         Bitmap icon = BitmapFactory.decodeResource(context.getResources(),
                 R.mipmap.ic_launcher);
-        Notification notification = new NotificationCompat.Builder(context)
+        Notification notification = new NotificationCompat.Builder(context,"status")
                 .setContentTitle(context.getString(R.string.lock_start))
                 .setTicker(context.getString(R.string.lock_start_advanced_model))
                 .setContentText(context.getString(R.string.advanced_model))
@@ -70,7 +72,7 @@ public class NotifyUtil {
         NotificationManager manager=(NotificationManager)context.getSystemService(NOTIFICATION_SERVICE);
         Bitmap icon = BitmapFactory.decodeResource(context.getResources(),
                 R.mipmap.ic_launcher);
-        Notification notification = new NotificationCompat.Builder(context)
+        Notification notification = new NotificationCompat.Builder(context,"status")
                 .setContentTitle(Title)
            /*     .setTicker(message)*/
                 .setContentText(message)
@@ -90,7 +92,7 @@ public class NotifyUtil {
         PendingIntent pi= PendingIntent.getActivity(context,0,intent,0);
         Bitmap icon = BitmapFactory.decodeResource(context.getResources(),
                 R.mipmap.ic_launcher);
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context);
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context,"status");
         mBuilder.setSmallIcon(R.mipmap.ic_launcher)
                 .setContentText( "是否需要休息一下" )
                 // 点击消失
@@ -111,5 +113,13 @@ public class NotifyUtil {
         NotificationManager manager=(NotificationManager)context.getSystemService(NOTIFICATION_SERVICE);
         manager.notify(AppConstants.TOMATO_NOTIFICATION_ID.SERVICE,
                 notification);
+    }
+
+    @TargetApi(Build.VERSION_CODES.O)
+    public static void createNotificationChannel(String channelId, String channelName, int importance) {
+        NotificationChannel channel = new NotificationChannel(channelId, channelName, importance);
+        NotificationManager notificationManager = (NotificationManager) LockApplication.getContext().getSystemService(
+                NOTIFICATION_SERVICE);
+        notificationManager.createNotificationChannel(channel);
     }
 }

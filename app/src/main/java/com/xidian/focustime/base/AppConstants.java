@@ -85,4 +85,8 @@ public class AppConstants {
         public static int SERVICE = 102;
         public static int FOREGROUND_SERVICE = 102;
     }
+    public interface MONITOR_NOTIFICATION_ID {
+        public static int SERVICE = 101;
+        public static int FOREGROUND_SERVICE = 101;
+    }
 }

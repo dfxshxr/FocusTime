@@ -20,8 +20,10 @@ import com.xidian.focustime.LockApplication;
 import com.xidian.focustime.R;
 import com.xidian.focustime.base.AppConstants;
 import com.xidian.focustime.base.BaseActivity;
+import com.xidian.focustime.bean.Monitor;
 import com.xidian.focustime.db.AppManager;
 import com.xidian.focustime.service.LockService;
+import com.xidian.focustime.service.MonitorService;
 import com.xidian.focustime.utils.DataUtil;
 import com.xidian.focustime.utils.LockUtil;
 import com.xidian.focustime.utils.NotifyUtil;
@@ -229,6 +231,12 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
 
     @Override
     protected void initAction() {
+
+        //初始化变量
+        Intent intent = new Intent(this, MonitorService.class);
+        // 启动监控服务
+        startService(intent);
+
     }
 
 
@@ -246,6 +254,10 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
      */
     public void startLockService() {
         //初始化变量
+        Intent intent = new Intent(this, MonitorService.class);
+        // 启动监控服务
+        startService(intent);
+
         SpUtil.getInstance().putLong(AppConstants.LOCK_START_MILLISENCONS, System.currentTimeMillis());
         SpUtil.getInstance().putLong(AppConstants.LOCK_PLAY_REMAIN_MILLISENCONS,SpUtil.getInstance().getLong(AppConstants.LOCK_PLAY_SETTING_MILLISENCONS,1000*60*10));
         SpUtil.getInstance().putBoolean(AppConstants.RUN_LOCK_STATE, true);
@@ -263,7 +275,7 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
         chronometer.setBase(lastSuccess - elapsedRealtimeOffset);
         chronometer.start();
 
-        Intent intent = new Intent(LockActivity.this, LockService.class);
+        intent = new Intent(this, LockService.class);
         startService(intent);
         UpdateUI(START);
     }

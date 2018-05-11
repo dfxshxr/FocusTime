@@ -1,23 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <litepal>
 
-    <dbname value="qualitytime" />
-
-    <!--
-        Define the version of your database. Each time you want
-        to upgrade your database, the version tag would helps.
-        Modify the models you defined in the mapping tag, and just
-        make the version value plus one, the upgrade of database
-        will be processed automatically without concern.
-            For example:
-        <version value="1" />
-    -->
-    <version value="1" />
+    <dbname value="mktime" />
+    <version value="2" />
 
 
     <list>
         <mapping class="com.xidian.focustime.bean.App" />
         <mapping class="com.xidian.focustime.bean.RecommendApp" />
+        <mapping class="com.xidian.focustime.bean.Monitor" />
     </list>
 
     <!--
