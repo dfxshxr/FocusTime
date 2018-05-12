@@ -37,6 +37,7 @@ public class NotifyUtil {
                 .setLargeIcon(
                         Bitmap.createScaledBitmap(icon, 128, 128, false))
                 .setOngoing(true)
+                .setDefaults(Notification.FLAG_NO_CLEAR)
                 .setContentIntent(pi)
                 .build();
 
@@ -59,6 +60,7 @@ public class NotifyUtil {
                         Bitmap.createScaledBitmap(icon, 128, 128, false))
                 .setOngoing(true)
                 .setContentIntent(pi)
+                .setDefaults(Notification.FLAG_NO_CLEAR)
                 .build();
 
         manager.notify(AppConstants.NOTIFICATION_ID.SERVICE,
@@ -81,6 +83,7 @@ public class NotifyUtil {
                         Bitmap.createScaledBitmap(icon, 128, 128, false))
                 .setOngoing(true)
                 .setContentIntent(pi)
+                .setDefaults(Notification.FLAG_NO_CLEAR)
                 .build();
 
         manager.notify(AppConstants.NOTIFICATION_ID.SERVICE,
@@ -101,9 +104,7 @@ public class NotifyUtil {
                 .setTicker("您已完成一个番茄时间周期")
                 .setContentIntent(pi)
                 // 通知首次出现在通知栏，带上升动画效果的
-                .setWhen( System.currentTimeMillis() )
-                .setDefaults(Notification.DEFAULT_SOUND
-                        | Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS);
+                .setWhen( System.currentTimeMillis() );
         //在5.0版本之后，可以支持在锁屏界面显示notification
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             mBuilder.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);

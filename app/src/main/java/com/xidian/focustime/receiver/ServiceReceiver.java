@@ -65,7 +65,7 @@ public class ServiceReceiver extends BroadcastReceiver {
             case Intent.ACTION_SCREEN_ON:
                     SpUtil.getInstance().putBoolean(AppConstants.FIRST_PLAY_CYCLE, true);
                 if (isLockOffScreen) {
-                    NotifyUtil.updateNotify("专心学习中","专心学习中");
+                  //  NotifyUtil.updateNotify("专心学习中","专心学习中");
                     //解锁之后的第一个学习周期
                     /*if(LockUtil.getLauncherTopApp(context,activityManager).equals(AppConstants.APP_PACKAGE_NAME)&&
                             !LockUtil.getLauncherTopActivity(context,activityManager).equals(AppConstants.APP_PACKAGE_NAME+".module.LockActivity"))
