@@ -9,6 +9,7 @@ import com.xidian.focustime.base.AppConstants;
 import com.xidian.focustime.base.BaseActivity;
 import com.xidian.focustime.service.LoadAppListService;
 import com.xidian.focustime.service.LockService;
+import com.xidian.focustime.utils.ServiceUtil;
 import com.xidian.focustime.utils.SpUtil;
 
 

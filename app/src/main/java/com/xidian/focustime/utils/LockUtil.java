@@ -157,6 +157,8 @@ public class LockUtil {
             if(getApplicationValue((LockApplication) ((Service) context).getApplication())){
                 result=AppConstants.APP_PACKAGE_NAME;
 
+            }else {
+                result="black";
             }
         }
 
@@ -211,12 +213,15 @@ public class LockUtil {
      * 白名单
      */
     public static boolean inWhiteList(String packageName) {
-        return packageName.equals(AppConstants.APP_PACKAGE_NAME+".debug")||packageName.equals(AppConstants.APP_PACKAGE_NAME);
+        return packageName.equals(AppConstants.APP_PACKAGE_NAME+".debug")||packageName.equals(AppConstants.APP_PACKAGE_NAME)||packageName.contains("launcher");
     }
     /**
     黑名单
      */
     public static boolean inBlackList(String packageName) {
+        if(packageName.equals("black")){
+            return true;
+        }
         if(packageName.equals("com.android.packageinstaller")&&SpUtil.getInstance().getBoolean(AppConstants.LOCK_INSTALL, false))
         {return true;}
         return false;

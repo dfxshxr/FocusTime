@@ -109,7 +109,5 @@ dependencies {
     implementation 'com.lqr.imagepicker:library:1.0.0'
     implementation 'com.lqr.ninegridimageview:library:1.0.0'
     implementation 'com.lqr.optionitemview:library:1.0.7'
-    implementation 'com.lqr.emoji:library:1.0.2'
-    implementation 'com.lqr.audio:library:1.0.0'
-    implementation 'com.lqr.imagepicker:library:1.0.0'
+
 }

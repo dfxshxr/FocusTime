@@ -22,6 +22,7 @@ import com.xidian.focustime.module.SplashActivity;
 import com.xidian.focustime.receiver.ServiceReceiver;
 import com.xidian.focustime.utils.LockUtil;
 import com.apkfuns.logutils.LogUtils;
+import com.xidian.focustime.utils.ServiceUtil;
 import com.xidian.focustime.utils.SpUtil;
 
 public class AdvancedLockService extends AccessibilityService {
@@ -179,7 +180,7 @@ public class AdvancedLockService extends AccessibilityService {
     {
         LogUtils.i("onUnbind");
         Intent startIntent = new Intent(this, LockService.class);
-        startService(startIntent);
+        ServiceUtil.startForegroundService(this,startIntent);
         return super.onUnbind(intent);
     }
 
@@ -190,7 +191,7 @@ public class AdvancedLockService extends AccessibilityService {
     public static void disableAdvancedLockService(){
 
         Intent intent = new Intent(this, LockService.class);
-        startService(intent);
+        ServiceUtil.startForegroundService(this,intent);
 
         if (Build.VERSION.SDK_INT >= 24)
         {
