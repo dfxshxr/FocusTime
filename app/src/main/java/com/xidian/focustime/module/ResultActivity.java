@@ -2,19 +2,14 @@ package com.xidian.focustime.module;
 
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.TextView;
 
-import com.xidian.focustime.LockApplication;
 import com.xidian.focustime.R;
 import com.xidian.focustime.base.AppConstants;
 import com.xidian.focustime.base.BaseActivity;
-import com.xidian.focustime.utils.DataUtil;
-import com.xidian.focustime.utils.LockUtil;
-import com.xidian.focustime.utils.NotifyUtil;
+import com.xidian.focustime.bean.Statistics;
 import com.xidian.focustime.utils.SpUtil;
 
 public class ResultActivity extends BaseActivity {
@@ -63,6 +58,15 @@ public class ResultActivity extends BaseActivity {
         }else{
             mResultText.setText("专注失败");
         }
+
+        Statistics statistics = new Statistics();
+        statistics.setThisMilliseconds(thisTime);
+        statistics.setEndMilliseconds(currentTime);
+        statistics.setStartMilliseconds(startTime);
+        statistics.setSettingMilliseconds(settingTime);
+        statistics.setErrorMilliseconds(totalErrorTime);
+        statistics.setPlayMilliseconds(totalPlayTime);
+        statistics.save();
 
     }
 
