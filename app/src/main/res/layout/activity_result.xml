@@ -29,6 +29,7 @@
             android:textSize="40sp"
             android:autoSizeTextType="uniform"
             android:gravity="center"
+            android:lines="1"
             />
 
     </com.zhy.autolayout.AutoRelativeLayout>

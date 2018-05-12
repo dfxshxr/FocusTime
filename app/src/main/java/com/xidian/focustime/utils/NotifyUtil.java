@@ -34,8 +34,7 @@ public class NotifyUtil {
                 .setTicker(context.getString(R.string.lock_stop))
                 .setContentText(context.getString(R.string.lock_stop))
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setLargeIcon(
-                        Bitmap.createScaledBitmap(icon, 128, 128, false))
+                //.setLargeIcon(Bitmap.createScaledBitmap(icon, 128, 128, false))
                 .setOngoing(true)
                 .setDefaults(Notification.FLAG_NO_CLEAR)
                 .setContentIntent(pi)
@@ -56,8 +55,7 @@ public class NotifyUtil {
                 .setTicker(context.getString(R.string.lock_start_advanced_model))
                 .setContentText(context.getString(R.string.advanced_model))
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setLargeIcon(
-                        Bitmap.createScaledBitmap(icon, 128, 128, false))
+                //.setLargeIcon(Bitmap.createScaledBitmap(icon, 128, 128, false))
                 .setOngoing(true)
                 .setContentIntent(pi)
                 .setDefaults(Notification.FLAG_NO_CLEAR)
@@ -76,11 +74,10 @@ public class NotifyUtil {
                 R.mipmap.ic_launcher);
         Notification notification = new NotificationCompat.Builder(context,"status")
                 .setContentTitle(Title)
-           /*     .setTicker(message)*/
+           //     .setTicker(message)
                 .setContentText(message)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setLargeIcon(
-                        Bitmap.createScaledBitmap(icon, 128, 128, false))
+               // .setLargeIcon(Bitmap.createScaledBitmap(icon, 128, 128, false))
                 .setOngoing(true)
                 .setContentIntent(pi)
                 .setDefaults(Notification.FLAG_NO_CLEAR)
@@ -100,7 +97,7 @@ public class NotifyUtil {
                 .setContentText( "是否需要休息一下" )
                 // 点击消失
                 .setAutoCancel( true )
-                .setLargeIcon( Bitmap.createScaledBitmap(icon, 128, 128, false) )
+               // .setLargeIcon( Bitmap.createScaledBitmap(icon, 128, 128, false) )
                 .setTicker("您已完成一个番茄时间周期")
                 .setContentIntent(pi)
                 // 通知首次出现在通知栏，带上升动画效果的

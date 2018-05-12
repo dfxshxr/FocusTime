@@ -32,7 +32,7 @@
     <string name="setting">设置</string>
     <string name="lock_status">开启专注时间</string>
     <string name="lock_start">开始学习</string>
-    <string name="lock_stop">学习结束</string>
+    <string name="lock_stop">点我开始学习</string>
     <string name="lock_start_cycle_model">专心学习中</string>
     <string name="lock_start_advanced_model">专心学习中</string>
     <string name="cycle_model">轮询模式</string>

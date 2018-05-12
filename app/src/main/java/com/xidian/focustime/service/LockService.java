@@ -111,8 +111,7 @@ public class LockService extends IntentService {
                 .setTicker(getString(R.string.lock_start_cycle_model))
                 .setContentText(getString(R.string.cycle_model))
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setLargeIcon(
-                        Bitmap.createScaledBitmap(icon, 128, 128, false))
+            //    .setLargeIcon( Bitmap.createScaledBitmap(icon, 128, 128, false))
                 .setOngoing(true)
                 .setContentIntent(pi)
                 .build();

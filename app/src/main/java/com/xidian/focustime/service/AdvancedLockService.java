@@ -74,8 +74,7 @@ public class AdvancedLockService extends AccessibilityService {
                     .setTicker(getString(R.string.lock_start_advanced_model))
                     .setContentText(getString(R.string.advanced_model))
                     .setSmallIcon(R.mipmap.ic_launcher)
-                    .setLargeIcon(
-                            Bitmap.createScaledBitmap(icon, 128, 128, false))
+                 //   .setLargeIcon(Bitmap.createScaledBitmap(icon, 128, 128, false))
                     .setOngoing(true)
                     .setContentIntent(pi)
                     .build();
@@ -85,8 +84,7 @@ public class AdvancedLockService extends AccessibilityService {
                     .setTicker(getString(R.string.lock_stop))
                     .setContentText(getString(R.string.lock_stop))
                     .setSmallIcon(R.mipmap.ic_launcher)
-                    .setLargeIcon(
-                            Bitmap.createScaledBitmap(icon, 128, 128, false))
+                //    .setLargeIcon(Bitmap.createScaledBitmap(icon, 128, 128, false))
                     .setOngoing(true)
                     .setContentIntent(pi)
                     .build();

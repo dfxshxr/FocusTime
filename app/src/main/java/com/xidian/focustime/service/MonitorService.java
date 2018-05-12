@@ -43,7 +43,7 @@ public class MonitorService extends Service {
         super.onCreate();
 
         monitor.setStartMilliseconds(System.currentTimeMillis());
-        startForeground(1, getNotification("Monitoring...", ""));
+        startForeground(101, getNotification("点我开始学习", ""));
         AsyncTask.SERIAL_EXECUTOR.execute(new ServiceWorker());
     }
 
@@ -55,7 +55,7 @@ public class MonitorService extends Service {
                 try{
                     monitor.setEndMilliseconds(System.currentTimeMillis());
                     monitor.save();
-                    getNotificationManager().notify(1, getNotification("Monitoring...", ""));
+                   // getNotificationManager().notify(1, getNotification("Monitoring...", ""));
                     LogUtils.i(DataUtil.timeParse(System.currentTimeMillis()));
                     Thread.sleep(30000);
                 } catch (Exception e) {
@@ -84,10 +84,11 @@ public class MonitorService extends Service {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this,"status");
         builder.setOngoing(true);
         builder.setSmallIcon(R.mipmap.ic_launcher);
-        builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
+        //builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
         builder.setContentIntent(pi);
         builder.setContentTitle(title);
-        builder.setContentText(new Date(System.currentTimeMillis()).toString());
+        builder.setContentText(message);
+        //builder.setContentText(new Date(System.currentTimeMillis()).toString());
 
         return builder.build();
     }
