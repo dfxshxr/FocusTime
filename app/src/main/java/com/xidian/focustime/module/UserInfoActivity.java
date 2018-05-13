@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 
 import com.xidian.focustime.R;
@@ -34,6 +35,10 @@ public class UserInfoActivity extends BaseActivity{
     protected AppBarLayout mAppBar;
     @BindView(R.id.ivToolbarHistory)
     ImageView mIvHistory;
+    @BindView(R.id.tvSumNum)
+    TextView mTvSumNum;
+    @BindView(R.id.tvSumTime)
+    TextView mTvSumTime;
 
     @Override
     public int getLayoutId() {
@@ -58,6 +63,22 @@ public class UserInfoActivity extends BaseActivity{
         statisticsList= DataSupport.where("endMilliseconds>?",Long.toString(todayStart)).order("endMilliseconds desc").find(Statistics.class);
         StatisticsAdapter adapter = new StatisticsAdapter(statisticsList);
         recyclerView.setAdapter(adapter);
+
+        long sumTime=0;
+        int sumSum=0;
+        for(int    i=0;    i<statisticsList.size();    i++)    {
+            Statistics statistics =    statisticsList.get(i);
+
+            if(statistics.getThisMilliseconds()>=0){
+                sumTime=sumTime+statistics.getThisMilliseconds();
+            }
+            if(statistics.getThisMilliseconds()-statistics.getSettingMilliseconds()>=0){
+                sumSum=sumSum+1;
+            }
+        }
+        mTvSumNum.setText(Integer.toString(sumSum));
+        mTvSumTime.setText(DataUtil.timeParseInStatistics(sumTime));
+
     }
 
 

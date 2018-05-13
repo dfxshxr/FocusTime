@@ -70,7 +70,7 @@ public class StatisticsAdapter extends RecyclerView.Adapter<StatisticsAdapter.Vi
         String dateTime = dateFm.format(new Date(statistics.getEndMilliseconds()));
         holder.tvEnd.setText(dateTime);
         holder.tvSetting.setText(DataUtil.timeParse2Minutes(statistics.getSettingMilliseconds()));
-        if(statistics.getThisMilliseconds()-statistics.getSettingMilliseconds()>0)
+        if(statistics.getThisMilliseconds()-statistics.getSettingMilliseconds()>=0)
         {
             holder.tvStatus.setText("成功");
             holder.tvStatus.setTextColor(LockApplication.getContext().getResources().getColor(R.color.red6));
