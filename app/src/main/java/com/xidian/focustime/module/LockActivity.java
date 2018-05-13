@@ -270,6 +270,8 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
         SpUtil.getInstance().putLong(AppConstants.TOMATO_START_TIME, System.currentTimeMillis());
         SpUtil.getInstance().putLong(AppConstants.TOTAL_PLAY_MILLISENCONS,0);
         SpUtil.getInstance().putLong(AppConstants.TOTAL_ERROR_STATE_MILLISENCONS,0);
+        SpUtil.getInstance().putLong(AppConstants.LAST_NORMAL_STATE_MILLISENCONS,System.currentTimeMillis());
+
         //时钟显示计数
         long lastSuccess = SpUtil.getInstance().getLong(AppConstants.LOCK_START_MILLISENCONS);
         long elapsedRealtimeOffset = System.currentTimeMillis() - SystemClock.elapsedRealtime();
