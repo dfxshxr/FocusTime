@@ -16,6 +16,7 @@ import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.apkfuns.logutils.LogUtils;
 import com.xidian.focustime.LockApplication;
 import com.xidian.focustime.R;
 import com.xidian.focustime.base.AppConstants;
@@ -189,16 +190,28 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
         actionFrom = getIntent().getStringExtra(AppConstants.LOCK_FROM);
         mAppManager = new AppManager(this);
 
+        long currentTime=System.currentTimeMillis();
+        long lastSuccess = SpUtil.getInstance().getLong(AppConstants.LOCK_START_MILLISENCONS);
+        long elapsedRealtimeOffset = currentTime - SystemClock.elapsedRealtime();
+        long totalPlayTime=SpUtil.getInstance().getLong(AppConstants.TOTAL_PLAY_MILLISENCONS,0);
+        long totalErrorTime=SpUtil.getInstance().getLong(AppConstants.TOTAL_ERROR_STATE_MILLISENCONS,0);
+        long startPlayTime=SpUtil.getInstance().getLong(AppConstants.LOCK_PLAY_START_MILLISENCONS,currentTime);
+
         if (SpUtil.getInstance().getBoolean(AppConstants.LOCK_STATE,false)) {
-            long lastSuccess = SpUtil.getInstance().getLong(AppConstants.LOCK_START_MILLISENCONS);
-            long elapsedRealtimeOffset = System.currentTimeMillis() - SystemClock.elapsedRealtime();
-            long totalPlayTime=SpUtil.getInstance().getLong(AppConstants.TOTAL_PLAY_MILLISENCONS,0);
-            long totalErrorTime=SpUtil.getInstance().getLong(AppConstants.TOTAL_ERROR_STATE_MILLISENCONS,0);
-            chronometer.setBase(lastSuccess - elapsedRealtimeOffset+totalPlayTime+totalErrorTime);
-            chronometer.start();
-            UpdateUI(START);
-        }else {
+            if(SpUtil.getInstance().getBoolean(AppConstants.RUN_LOCK_STATE,false))
+            {
+                chronometer.setBase(lastSuccess - elapsedRealtimeOffset+totalPlayTime+totalErrorTime);
+                UpdateUI(START);
+                chronometer.start();
+            }else{
+                chronometer.setBase(lastSuccess - elapsedRealtimeOffset+totalPlayTime+totalErrorTime+(currentTime-startPlayTime));
+                UpdateUI(PAUSE);
+                chronometer.stop();
+            }
+        }else{
             UpdateUI(STOP);
+            chronometer.setBase(SystemClock.elapsedRealtime());
+            chronometer.stop();
         }
 
     }
@@ -206,28 +219,6 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
     @Override
     protected void onResume(){
         super.onResume();
-        long lastSuccess = SpUtil.getInstance().getLong(AppConstants.LOCK_START_MILLISENCONS);
-        long elapsedRealtimeOffset = System.currentTimeMillis() - SystemClock.elapsedRealtime();
-        long totalPlayTime=SpUtil.getInstance().getLong(AppConstants.TOTAL_PLAY_MILLISENCONS,0);
-        long totalErrorTime=SpUtil.getInstance().getLong(AppConstants.TOTAL_ERROR_STATE_MILLISENCONS,0);
-       // LogUtils.i(lastSuccess - elapsedRealtimeOffset);
-        //LogUtils.i(totalPlayTime);
-        if (SpUtil.getInstance().getBoolean(AppConstants.LOCK_STATE,false)) {
-
-
-            if(SpUtil.getInstance().getBoolean(AppConstants.RUN_LOCK_STATE,false))
-            {
-                chronometer.setBase(lastSuccess - elapsedRealtimeOffset+totalPlayTime+totalErrorTime);
-                UpdateUI(START);
-                chronometer.start();
-            }else{
-                UpdateUI(PAUSE);
-                chronometer.stop();
-            }
-        }else{
-            chronometer.setBase(SystemClock.elapsedRealtime());
-            chronometer.stop();
-        }
     }
 
     @Override
@@ -403,16 +394,27 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
                 mCycleView.setVisibility(View.VISIBLE);
                 mUserButton.setVisibility(View.GONE);
                 mSettingButton.setVisibility(View.GONE);
-                mReStartButton.setVisibility(View.GONE);
                 mStartButton.setVisibility(View.GONE);
                 mStopButton.setVisibility(View.VISIBLE);
-                mPlayButton.setVisibility(View.VISIBLE);
                 mAppButton.setVisibility(View.VISIBLE);
                 mOkButton.setVisibility(View.GONE);
                 mCancelButton.setVisibility(View.GONE);
                 mTipTextView.setVisibility(View.GONE);
+                mPlayButton.setVisibility(View.VISIBLE);
+                mReStartButton.setVisibility(View.GONE);
                 break;
             case PAUSE:
+                chronometer.setVisibility(View.VISIBLE);
+                mLogoView.setVisibility(View.GONE);
+                mCycleView.setVisibility(View.VISIBLE);
+                mUserButton.setVisibility(View.GONE);
+                mSettingButton.setVisibility(View.GONE);
+                mStartButton.setVisibility(View.GONE);
+                mStopButton.setVisibility(View.VISIBLE);
+                mAppButton.setVisibility(View.VISIBLE);
+                mOkButton.setVisibility(View.GONE);
+                mCancelButton.setVisibility(View.GONE);
+                mTipTextView.setVisibility(View.GONE);
                 mPlayButton.setVisibility(View.GONE);
                 mReStartButton.setVisibility(View.VISIBLE);
                 break;
