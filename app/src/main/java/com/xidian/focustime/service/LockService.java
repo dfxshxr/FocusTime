@@ -215,12 +215,15 @@ public class LockService extends IntentService {
                     }*/
                     LogUtils.i("当前包名:"+packageName);
                     // 如果是锁定状态，转向解锁页面
-                    if ((!TextUtils.isEmpty(packageName)||mAppManager.isLockedPackageName(packageName)||LockUtil.inBlackList(packageName))&&SpUtil.getInstance().getBoolean(AppConstants.RUN_LOCK_STATE,true)&&!LockUtil.inWhiteList(packageName)) {
+                    if(!TextUtils.isEmpty(packageName)){
+                        if ((mAppManager.isLockedPackageName(packageName)||LockUtil.inBlackList(packageName))&&SpUtil.getInstance().getBoolean(AppConstants.RUN_LOCK_STATE,true)&&!LockUtil.inWhiteList(packageName)) {
 
-                        LogUtils.i("后台跳转:"+packageName);
-                        LockUtil.gotoUnlock(this,packageName);
-                        continue;
+                            LogUtils.i("后台跳转:"+packageName);
+                            LockUtil.gotoUnlock(this,packageName);
+                            continue;
+                        }
                     }
+
                 }
                 Thread.sleep(500);
             } catch (Exception e) {

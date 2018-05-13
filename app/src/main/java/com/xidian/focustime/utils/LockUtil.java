@@ -213,7 +213,9 @@ public class LockUtil {
      * 白名单
      */
     public static boolean inWhiteList(String packageName) {
-        return packageName.equals(AppConstants.APP_PACKAGE_NAME+".debug")||packageName.equals(AppConstants.APP_PACKAGE_NAME)||packageName.contains("launcher");
+        return packageName.contains(AppConstants.APP_PACKAGE_NAME)||
+                packageName.contains("launcher")||
+                packageName.contains("com.android.incallui");
     }
     /**
     黑名单
