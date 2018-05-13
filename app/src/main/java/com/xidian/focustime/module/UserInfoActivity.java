@@ -1,26 +1,23 @@
 package com.xidian.focustime.module;
 
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.design.widget.AppBarLayout;
-import android.view.View;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 
-import com.lqr.optionitemview.OptionItemView;
 import com.xidian.focustime.R;
-import com.xidian.focustime.base.AppConstants;
 import com.xidian.focustime.base.BaseActivity;
+import com.xidian.focustime.bean.Statistics;
 import com.xidian.focustime.utils.DataUtil;
-import com.xidian.focustime.utils.SpUtil;
-import com.xidian.focustime.utils.ToastUtil;
+
+import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -30,7 +27,8 @@ import butterknife.BindView;
  */
 public class UserInfoActivity extends BaseActivity{
 
-    public static final int REQUEST_IMAGE_PICKER = 1000;
+    RecyclerView recyclerView;
+    private List<Statistics> statisticsList = new ArrayList<Statistics>();
 
     @BindView(R.id.appBar)
     protected AppBarLayout mAppBar;
@@ -39,7 +37,7 @@ public class UserInfoActivity extends BaseActivity{
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_user_info;
+        return R.layout.activity_today_statistics;
     }
 
     @Override
@@ -47,11 +45,19 @@ public class UserInfoActivity extends BaseActivity{
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
       //  mIvHistory.setVisibility(View.VISIBLE);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        StaggeredGridLayoutManager layoutManager = new
+                StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
     }
 
     @Override
     protected void initData() {
         setToolbarTitle("今日统计");
+        long todayStart=DataUtil.getStartTimeOfDay(System.currentTimeMillis());
+        statisticsList= DataSupport.where("endMilliseconds>?",Long.toString(todayStart)).order("endMilliseconds desc").find(Statistics.class);
+        StatisticsAdapter adapter = new StatisticsAdapter(statisticsList);
+        recyclerView.setAdapter(adapter);
     }
 
 

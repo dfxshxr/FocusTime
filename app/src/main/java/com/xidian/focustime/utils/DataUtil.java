@@ -1,11 +1,16 @@
 package com.xidian.focustime.utils;
 
+import android.content.Context;
+import android.text.TextUtils;
+
 import com.xidian.focustime.bean.App;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
-
+import java.util.Locale;
+import java.util.TimeZone;
 
 
 public class DataUtil {
@@ -65,10 +70,73 @@ public class DataUtil {
             stringBuilder.append(hours);
             stringBuilder.append("小时");
         }
-        if(minutes>0){
+        if(minutes>0||hours==0){
             stringBuilder.append(minutes);
             stringBuilder.append("分钟");
         }
     return new String(stringBuilder);
     }
+
+    /**
+     *
+     * @return 将时间毫秒数转为小时分钟数
+     */
+    public static String timeParse2Minutes(long mss) {
+
+        long minutes = (mss) / (1000 * 60);
+        StringBuilder stringBuilder = new StringBuilder("");
+        stringBuilder.append(minutes);
+        stringBuilder.append("分钟");
+        return new String(stringBuilder);
+    }
+
+    /**
+     *
+     * @return 将时间毫秒数转为小时分钟秒数
+     */
+    public static String timeParseInStatistics(long ms) {
+
+        Integer ss = 1000;
+        Integer mi = ss * 60;
+        Integer hh = mi * 60;
+        Integer dd = hh * 24;
+
+        Long day = ms / dd;
+        Long hour = (ms - day * dd) / hh;
+        Long minute = (ms - day * dd - hour * hh) / mi;
+        Long second = (ms - day * dd - hour * hh - minute * mi) / ss;
+
+        StringBuilder stringBuilder = new StringBuilder("");
+
+        if(day>0){
+            stringBuilder.append(day);
+            stringBuilder.append("d");
+        }
+
+        if(hour>0){
+            stringBuilder.append(hour);
+            stringBuilder.append("h");
+        }
+        if(minute>0){
+            stringBuilder.append(minute);
+            stringBuilder.append("m");
+        }
+        if(second>=0){
+            stringBuilder.append(second);
+            stringBuilder.append("s");
+        }
+        return new String(stringBuilder);
+    }
+
+    public static long getStartTimeOfDay(long now) {
+        TimeZone curTimeZone = TimeZone.getDefault();
+        Calendar calendar = Calendar.getInstance(curTimeZone);
+        calendar.setTimeInMillis(now);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        return calendar.getTimeInMillis();
+    }
+
 }

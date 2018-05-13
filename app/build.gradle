@@ -39,7 +39,7 @@ android {
     buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "com.xidian.focustime"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 26
         versionCode gitVersionCode()
         versionName gitVersionTag()
