@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar"/>
+
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="240px"
+        android:layout_height="420px"
+        android:layout_width="420px"
+        >
+
+        <TextView
+            android:id="@+id/token"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:textColor="@color/white"
+            android:format="%s"
+            android:layout_width="200px"
+            android:layout_height="200px"
+            android:textSize="20sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:lines="1"
+            android:text="读取中"
+            />
+
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="528px"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:text="当前积分" />
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="964px"
+        android:layout_height="64px"
+        android:layout_width="408px"
+        >
+
+        <ImageView
+            android:id="@+id/add"
+            android:layout_width="172px"
+            android:layout_height="64px"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/add"/>
+
+
+        <ImageView
+            android:id="@+id/read"
+            android:layout_width="172px"
+            android:layout_height="64px"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/read"/>
+    </com.zhy.autolayout.AutoRelativeLayout>
+</com.zhy.autolayout.AutoRelativeLayout>

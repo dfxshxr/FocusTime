@@ -44,6 +44,7 @@ android {
         versionCode gitVersionCode()
         versionName gitVersionTag()
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
 
@@ -110,4 +111,7 @@ dependencies {
     implementation 'com.lqr.ninegridimageview:library:1.0.0'
     implementation 'com.lqr.optionitemview:library:1.0.7'
 
+    implementation 'org.web3j:core:3.3.1-android'
+    implementation 'org.web3j:infura:3.3.1-android'
+    implementation 'com.android.support:multidex:1.0.3'
 }

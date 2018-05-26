@@ -96,7 +96,44 @@
         </com.zhy.autolayout.AutoLinearLayout>
 
 
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/option_item_margin_top"
+            android:background="@color/white"
+            android:orientation="vertical">
 
+            <com.lqr.optionitemview.OptionItemView
+                android:id="@+id/oivTask"
+                style="@style/OptionItem"
+                android:background="@drawable/selector_option_item"
+                app:left_image_margin_left="@dimen/option_item_margin_left"
+                app:left_image_margin_right="@dimen/option_item_text_image_margin"
+                app:left_src="@mipmap/blank"
+                app:left_text="任务系统"
+                app:left_text_color="@color/gray_setting"
+                app:left_text_size="14sp"
+                app:right_src="@drawable/setting_right" />
+
+            <View
+                style="@style/Line"
+                android:layout_marginLeft="40px"
+                android:layout_marginRight="40px" />
+
+            <com.lqr.optionitemview.OptionItemView
+                android:id="@+id/oivToken"
+                style="@style/OptionItem"
+                android:background="@drawable/selector_option_item"
+                app:left_image_margin_left="@dimen/option_item_margin_left"
+                app:left_image_margin_right="@dimen/option_item_text_image_margin"
+                app:left_src="@mipmap/blank"
+                app:left_text="积分兑换"
+                app:left_text_color="@color/gray_setting"
+                app:left_text_size="14sp"
+                app:right_src="@drawable/setting_right" />
+
+
+        </com.zhy.autolayout.AutoLinearLayout>
 
         <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="match_parent"

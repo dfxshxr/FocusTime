@@ -47,7 +47,10 @@ public class SettingActivity extends BaseActivity {
     OptionItemView oivAbout;
     @BindView(R.id.oivTomatoHelp)
     OptionItemView oivTomatoHelp;
-
+    @BindView(R.id.oivTask)
+    OptionItemView oivTask;
+    @BindView(R.id.oivToken)
+    OptionItemView oivToken;
 
     @Override
     public void initView(){
@@ -98,6 +101,20 @@ public class SettingActivity extends BaseActivity {
             }
         });
         oivTomatoHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ToastUtil.showToast("暂不可用");
+            }
+        });
+
+        oivTask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SettingActivity.this, TaskActivity.class);
+                startActivity(intent);
+            }
+        });
+        oivToken.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ToastUtil.showToast("暂不可用");

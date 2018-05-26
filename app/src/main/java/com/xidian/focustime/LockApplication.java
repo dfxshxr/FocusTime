@@ -2,8 +2,10 @@ package com.xidian.focustime;
 
 import android.app.Activity;
 import android.app.NotificationManager;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.multidex.MultiDex;
 
 import com.umeng.analytics.MobclickAgent;
 import com.xidian.focustime.base.AppConstants;
@@ -84,6 +86,12 @@ public class LockApplication extends LitePalApplication {
 
             }
         });
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
     public static LockApplication getInstance() {
