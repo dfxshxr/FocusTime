@@ -26,6 +26,7 @@ import com.xidian.focustime.utils.ToastUtil;
 
 import butterknife.BindView;
 import cn.qqtheme.framework.picker.TimePicker;
+import skin.support.SkinCompatManager;
 
 public class SettingActivity extends BaseActivity {
 
@@ -88,7 +89,9 @@ public class SettingActivity extends BaseActivity {
         oivWllpaper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ToastUtil.showToast("暂不可用");
+
+                SkinCompatManager.getInstance().loadSkin("skin1", SkinCompatManager.SKIN_LOADER_STRATEGY_BUILD_IN); // 后缀加载
+                // ToastUtil.showToast("暂不可用");
             }
         });
         oivAbout.setOnClickListener(new View.OnClickListener() {

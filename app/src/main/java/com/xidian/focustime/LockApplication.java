@@ -17,6 +17,11 @@ import org.litepal.LitePalApplication;
 import java.util.ArrayList;
 import java.util.List;
 
+import skin.support.SkinCompatManager;
+import skin.support.app.SkinCardViewInflater;
+import skin.support.constraint.app.SkinConstraintViewInflater;
+import skin.support.design.app.SkinMaterialViewInflater;
+
 /**
  * 引入LitePal数据库
  *
@@ -33,6 +38,16 @@ public class LockApplication extends LitePalApplication {
         super.onCreate();
         application = this;
         SpUtil.getInstance().init(application);
+
+        // 基础控件换肤初始化
+        SkinCompatManager.withoutActivity(this)
+                .addInflater(new SkinMaterialViewInflater())            // material design 控件换肤初始化[可选]
+                .addInflater(new SkinConstraintViewInflater())          // ConstraintLayout 控件换肤初始化[可选]
+                .addInflater(new SkinCardViewInflater())                // CardView v7 控件换肤初始化[可选]
+          //      .setSkinStatusBarColorEnable(false)                     // 关闭状态栏换肤，默认打开[可选]
+          //      .setSkinWindowBackgroundEnable(false)                   // 关闭windowBackground换肤，默认打开[可选]
+                .loadSkin();
+
         activityList = new ArrayList<>();
         MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType. E_UM_NORMAL);
         SpUtil.getInstance().putBoolean(AppConstants.RUN_LOCK_STATE,true);
