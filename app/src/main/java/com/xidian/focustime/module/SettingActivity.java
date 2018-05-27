@@ -19,6 +19,7 @@ import com.xidian.focustime.R;
 import com.xidian.focustime.base.AppConstants;
 import com.xidian.focustime.base2.BaseActivity;
 import com.xidian.focustime.base2.BasePresenter;
+import com.xidian.focustime.bean.Wallpaper;
 import com.xidian.focustime.utils.DataUtil;
 import com.xidian.focustime.utils.SpUtil;
 import com.xidian.focustime.utils.ToastUtil;
@@ -89,9 +90,9 @@ public class SettingActivity extends BaseActivity {
         oivWllpaper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(SettingActivity.this, WallpaperActivity.class);
+                startActivity(intent);
 
-                SkinCompatManager.getInstance().loadSkin("skin1", SkinCompatManager.SKIN_LOADER_STRATEGY_BUILD_IN); // 后缀加载
-                // ToastUtil.showToast("暂不可用");
             }
         });
         oivAbout.setOnClickListener(new View.OnClickListener() {

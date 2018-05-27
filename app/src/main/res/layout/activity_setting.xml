@@ -34,7 +34,7 @@
                     app:left_text_color="@color/gray_setting"
                     app:left_text_size="14sp"
                     app:right_image_margin_left="@dimen/option_item_text_image_margin"
-                    app:right_text="默认"
+                    app:right_text=""
                     app:right_text_size="14sp"
                     app:right_text_color="@color/gray7"
                     app:right_src="@drawable/setting_right" />
