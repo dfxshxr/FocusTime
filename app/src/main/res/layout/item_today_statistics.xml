@@ -1,120 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="284px"
+    android:layout_height="wrap_content"
     android:layout_marginBottom="16px"
     android:layout_marginLeft="16px"
     android:layout_marginRight="16px"
-    android:background="@drawable/statistics_detail_background"
-    >
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/tvEnd"
+        android:id="@+id/tvDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16px"
-        android:layout_marginLeft="16px"
-        android:textSize="16sp"
-        android:text="完成时间" />
+        android:layout_marginBottom="12px"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/white"
+        android:text="日期"
+        android:textSize="12sp" />
 
-    <TextView
-        android:id="@+id/tvThisDetail"
+    <com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72px"
-        android:layout_marginLeft="16px"
-        android:text="详细时间"
-        android:textSize="32sp" />
+        android:background="@drawable/shape_white_background">
 
-    <TextView
-        android:id="@+id/tvStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/tvEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="22px"
+            android:layout_marginTop="20px"
+            android:textColor="#333333"
+            android:text="完成时间"
+            android:textSize="12sp" />
 
-        android:layout_alignBottom="@+id/tvThisDetail"
-        android:layout_toRightOf="@+id/tvThisDetail"
-        android:layout_toEndOf="@+id/tvThisDetail"
-        android:layout_marginLeft="32px"
-        android:text="状态" />
-
-    <com.zhy.autolayout.AutoLinearLayout
-        android:layout_width="250px"
-        android:layout_marginTop="16px"
-        android:layout_marginBottom="16px"
-        android:layout_marginRight="16px"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:orientation="vertical">
-
-        <com.zhy.autolayout.AutoRelativeLayout
+        <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="36px"
+            android:layout_marginTop="20px"
+            android:layout_toEndOf="@+id/tvEnd"
+            android:layout_toRightOf="@+id/tvEnd">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="本次专注：" />
-
-            <TextView
-                android:id="@+id/tvThis"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="1分钟" />
-        </com.zhy.autolayout.AutoRelativeLayout>
-
-        <com.zhy.autolayout.AutoRelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="设定时长：" />
+                android:text="设定时长："
+                android:textColor="#333333"
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tvSetting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="2小时" />
-        </com.zhy.autolayout.AutoRelativeLayout>
+                android:textColor="#333333"
+                android:text="2小时"
+                android:textSize="12sp" />
+        </com.zhy.autolayout.AutoLinearLayout>
 
-        <com.zhy.autolayout.AutoRelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvThisDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="22px"
+            android:layout_marginTop="56px"
+            android:layout_marginBottom="16px"
+            android:textColor="#333333"
+            android:text="详细时间"
+            android:textSize="24sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvSetting"
-                android:text="本次休息:" />
 
-            <TextView
-                android:id="@+id/tvPlay"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="1分钟" />
-        </com.zhy.autolayout.AutoRelativeLayout>
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="22px"
+            android:layout_marginTop="20px"
+            android:textColor="#333333"
+            android:text="状态"
+            android:textSize="12sp" />
 
-        <com.zhy.autolayout.AutoRelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvSetting"
-                android:text="程序异常：" />
+        <TextView
+            android:id="@+id/tvPlay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="22px"
+            android:layout_marginTop="80px"
+            android:textColor="#333333"
+            android:text="休息时间"
+            android:textSize="12sp" />
 
-            <TextView
-                android:id="@+id/tvError"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="0分钟" />
-        </com.zhy.autolayout.AutoRelativeLayout>
-    </com.zhy.autolayout.AutoLinearLayout>
 
-</com.zhy.autolayout.AutoRelativeLayout>
+    </com.zhy.autolayout.AutoRelativeLayout>
+</com.zhy.autolayout.AutoLinearLayout>

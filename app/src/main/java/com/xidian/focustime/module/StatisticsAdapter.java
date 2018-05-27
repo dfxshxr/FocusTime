@@ -26,7 +26,7 @@ public class StatisticsAdapter extends RecyclerView.Adapter<StatisticsAdapter.Vi
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         View statisticsView;
-        TextView tvEnd,tvStatus,tvSetting,tvThis,tvPlay,tvError,tvThisDetail;
+        TextView tvEnd,tvStatus,tvSetting,tvPlay,tvThisDetail,tvDate;
 
         public ViewHolder(View view) {
             super(view);
@@ -34,11 +34,9 @@ public class StatisticsAdapter extends RecyclerView.Adapter<StatisticsAdapter.Vi
             tvEnd = (TextView) view.findViewById(R.id.tvEnd);
             tvStatus = (TextView) view.findViewById(R.id.tvStatus);
             tvSetting = (TextView) view.findViewById(R.id.tvSetting);
-            tvThis = (TextView) view.findViewById(R.id.tvThis);
             tvPlay = (TextView) view.findViewById(R.id.tvPlay);
-            tvError = (TextView) view.findViewById(R.id.tvError);
             tvThisDetail=(TextView) view.findViewById(R.id.tvThisDetail);
-
+            tvDate=(TextView) view.findViewById(R.id.tvDate);
         }
     }
 
@@ -55,7 +53,6 @@ public class StatisticsAdapter extends RecyclerView.Adapter<StatisticsAdapter.Vi
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
                 Statistics statistics = mStatisticsList.get(position);
-              //  Toast.makeText(v.getContext(), "you clicked view " , Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -66,23 +63,40 @@ public class StatisticsAdapter extends RecyclerView.Adapter<StatisticsAdapter.Vi
     public void onBindViewHolder(ViewHolder holder, int position) {
         Statistics statistics = mStatisticsList.get(position);
 
-        SimpleDateFormat dateFm = new SimpleDateFormat("MM月dd日　　　HH:mm");
-        String dateTime = dateFm.format(new Date(statistics.getEndMilliseconds()));
-        holder.tvEnd.setText(dateTime);
-        holder.tvSetting.setText(DataUtil.timeParse2Minutes(statistics.getSettingMilliseconds()));
+        SimpleDateFormat dateFm = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat dateFm2 = new SimpleDateFormat("YYYY年MM月dd日E");
+
+        String time = dateFm.format(new Date(statistics.getEndMilliseconds()));
+        holder.tvEnd.setText(time);
+        String date = dateFm2.format(new Date(statistics.getEndMilliseconds()));
+        holder.tvDate.setText(date);
+
+        if (position != 0) {
+            Statistics dataBefore = mStatisticsList.get(position - 1);
+            if (date.equals(dateFm2.format(new Date(dataBefore.getEndMilliseconds())))){
+                holder.tvDate.setVisibility(View.GONE);
+
+            }
+        }
+
+        holder.tvSetting.setText(DataUtil.formatTime(statistics.getSettingMilliseconds()));
         if(statistics.getThisMilliseconds()-statistics.getSettingMilliseconds()>=0)
         {
             holder.tvStatus.setText("成功");
             holder.tvStatus.setTextColor(LockApplication.getContext().getResources().getColor(R.color.red6));
         } else {
-            holder.tvStatus.setText("失败");
+            holder.tvStatus.setText("");
             holder.tvStatus.setTextColor(LockApplication.getContext().getResources().getColor(R.color.gray0));
         }
 
-        holder.tvThisDetail.setText(DataUtil.timeParseInStatistics(statistics.getThisMilliseconds()));
-        holder.tvError.setText(DataUtil.timeParse2Minutes(statistics.getErrorMilliseconds()));
-        holder.tvPlay.setText(DataUtil.timeParse2Minutes(statistics.getPlayMilliseconds()));
-        holder.tvThis.setText(DataUtil.timeParse2Minutes(statistics.getThisMilliseconds()));
+        holder.tvThisDetail.setText(DataUtil.formatTime(statistics.getThisMilliseconds()));
+
+        if(statistics.getPlayMilliseconds()>0){
+            holder.tvPlay.setText("休息"+DataUtil.timeParse2Minutes(statistics.getPlayMilliseconds()));
+        }else {
+            holder.tvPlay.setText("");
+        }
+
     }
 
     @Override

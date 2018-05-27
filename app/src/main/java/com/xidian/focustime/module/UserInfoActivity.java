@@ -60,7 +60,7 @@ public class UserInfoActivity extends BaseActivity{
     protected void initData() {
         setToolbarTitle("今日统计");
         long todayStart=DataUtil.getStartTimeOfDay(System.currentTimeMillis());
-        statisticsList= DataSupport.where("endMilliseconds>?",Long.toString(todayStart)).order("endMilliseconds desc").find(Statistics.class);
+        statisticsList= DataSupport.order("endMilliseconds desc").find(Statistics.class);
         StatisticsAdapter adapter = new StatisticsAdapter(statisticsList);
         recyclerView.setAdapter(adapter);
 
@@ -77,7 +77,7 @@ public class UserInfoActivity extends BaseActivity{
             }
         }
         mTvSumNum.setText(Integer.toString(sumSum));
-        mTvSumTime.setText(DataUtil.timeParseInStatistics(sumTime));
+        mTvSumTime.setText(DataUtil.formatTime(sumTime));
 
     }
 

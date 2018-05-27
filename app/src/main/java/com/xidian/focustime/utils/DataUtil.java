@@ -85,7 +85,7 @@ public class DataUtil {
 
         long minutes = (mss) / (1000 * 60);
         StringBuilder stringBuilder = new StringBuilder("");
-        stringBuilder.append(minutes);
+        stringBuilder.append(minutes+1);
         stringBuilder.append("分钟");
         return new String(stringBuilder);
     }
@@ -139,4 +139,29 @@ public class DataUtil {
         return calendar.getTimeInMillis();
     }
 
+    /**
+     * 将毫秒时间转换成时分秒
+     * @param totalTime
+     * @return
+     */
+    public static String formatTime(long totalTime){
+        long hour = 0;
+        long minute = 0;
+        long second = 0;
+        second = totalTime / 1000;
+        if (totalTime <= 1000 && totalTime > 0) {
+            second = 1;
+        }
+        if (second > 60) {
+            minute = second / 60;
+            second = second % 60;
+        }
+        if (minute > 60) {
+            hour = minute / 60;
+            minute = minute % 60;
+        }
+        // 转换时分秒 00:00:00
+        String duration = (hour >= 10 ? hour : "0" + hour)+ ":" +(minute >= 10 ? minute : "0" + minute)+ ":" +(second >= 10 ? second : "0" + second);
+        return duration;
+    }
 }
