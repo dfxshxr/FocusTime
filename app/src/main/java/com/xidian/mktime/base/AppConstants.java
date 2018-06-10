@@ -77,6 +77,16 @@ public class AppConstants {
      * 应用状态异常时间 初始化为0
      */
     public static final String TOTAL_ERROR_STATE_MILLISENCONS = "total_error_state_milliseconds";
+
+    /**
+     * Token总量
+     */
+    public static final String TOTAL_TOKEN = "total_token";
+    /**
+     * 连续打卡日数
+     */
+    public static final String TOTAL_SIGN_IN= "total_sign_in";
+
     public interface NOTIFICATION_ID {
         public static int SERVICE = 101;
         public static int FOREGROUND_SERVICE = 101;

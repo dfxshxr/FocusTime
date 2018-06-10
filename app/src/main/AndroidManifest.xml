@@ -102,6 +102,12 @@
             android:name=".module.StatisticsActivity"
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".module.TaskActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".module.TokenActivity"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".module.SettingActivity"
             android:label="设置"
             android:screenOrientation="portrait"/>

@@ -164,4 +164,12 @@ public class DataUtil {
         String duration = (hour >= 10 ? hour : "0" + hour)+ ":" +(minute >= 10 ? minute : "0" + minute)+ ":" +(second >= 10 ? second : "0" + second);
         return duration;
     }
+
+    public static int safeLongToInt(long l) {
+        int i = (int)l;
+        if ((long)i != l) {
+            throw new IllegalArgumentException(l + " cannot be cast to int without changing its value.");
+        }
+        return i;
+    }
 }

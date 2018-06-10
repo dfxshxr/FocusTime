@@ -278,6 +278,18 @@ public class LockUtil {
 
         LogUtils.i("当前时间：" + currentTime + "开始时间：" + startPlayTime + "时间差：" + (currentTime - startPlayTime));
 
+        int amount = DataUtil.safeLongToInt( (currentTime - startPlayTime)/(1000*60*1)) ;
+        amount=amount*amount;
+        if(amount>=25){
+            amount=25;
+        }
+        if(amount<=0){
+            amount=1;
+        }
+        if(!SpUtil.getInstance().getBoolean(AppConstants.TOMATO_LEARNING_BREAK_TIME_STATE,false)){
+            TokenUtil.Billing(0-amount,"小玩一下");
+        }
+
         SpUtil.getInstance().putLong(AppConstants.TOMATO_START_TIME,currentTime);
         SpUtil.getInstance().putBoolean(AppConstants.RUN_LOCK_STATE, true);
         SpUtil.getInstance().putBoolean(AppConstants.TOMATO_LEARNING_BREAK_TIME_STATE, false);

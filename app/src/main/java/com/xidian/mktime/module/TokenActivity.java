@@ -8,11 +8,11 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import com.xidian.mktime.R;
 import com.xidian.mktime.base.BaseActivity;
+import com.xidian.mktime.bean.Billing;
 import com.xidian.mktime.bean.StudyStatistics;
-import com.xidian.mktime.utils.DataUtil;
+import com.xidian.mktime.utils.TokenUtil;
 
 import org.litepal.crud.DataSupport;
 
@@ -23,12 +23,12 @@ import butterknife.BindView;
 
 
 /**
- * @描述 统计
+ * @描述 我的积分
  */
-public class StatisticsActivity extends BaseActivity{
+public class TokenActivity extends BaseActivity{
 
     RecyclerView recyclerView;
-    private List<StudyStatistics> studyStatisticsList = new ArrayList<StudyStatistics>();
+    private List<Billing> billingList = new ArrayList<Billing>();
 
     @BindView(R.id.appBar)
     protected AppBarLayout mAppBar;
@@ -41,7 +41,7 @@ public class StatisticsActivity extends BaseActivity{
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_today_statistics;
+        return R.layout.activity_token;
     }
 
     @Override
@@ -57,26 +57,13 @@ public class StatisticsActivity extends BaseActivity{
 
     @Override
     protected void initData() {
-        setToolbarTitle("今日统计");
-        long todayStart=DataUtil.getStartTimeOfDay(System.currentTimeMillis());
-        studyStatisticsList = DataSupport.order("endMilliseconds desc").find(StudyStatistics.class);
-        StatisticsAdapter adapter = new StatisticsAdapter(studyStatisticsList);
+        setToolbarTitle("我的积分");
+        billingList = DataSupport.order("milliseconds desc").find(Billing.class);
+        TokenAdapter adapter = new TokenAdapter(billingList);
         recyclerView.setAdapter(adapter);
 
-        long sumTime=0;
-        int sumSum=0;
-        for(int i = 0; i< studyStatisticsList.size(); i++)    {
-            StudyStatistics studyStatistics =    studyStatisticsList.get(i);
-
-            if(studyStatistics.getThisMilliseconds()>=0){
-                sumTime=sumTime+ studyStatistics.getThisMilliseconds();
-            }
-            if(studyStatistics.getThisMilliseconds()- studyStatistics.getSettingMilliseconds()>=0){
-                sumSum=sumSum+1;
-            }
-        }
-        mTvSumNum.setText(Integer.toString(sumSum));
-        mTvSumTime.setText(DataUtil.formatTime(sumTime));
+        mTvSumNum.setText(Integer.toString(TokenUtil.getTodayTokenSum()));
+        mTvSumTime.setText(Integer.toString(TokenUtil.getTokenSum()));
 
     }
 

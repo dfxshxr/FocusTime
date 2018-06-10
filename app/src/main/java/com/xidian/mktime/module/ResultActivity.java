@@ -10,7 +10,9 @@ import com.xidian.mktime.R;
 import com.xidian.mktime.base.AppConstants;
 import com.xidian.mktime.base.BaseActivity;
 import com.xidian.mktime.bean.StudyStatistics;
+import com.xidian.mktime.utils.DataUtil;
 import com.xidian.mktime.utils.SpUtil;
+import com.xidian.mktime.utils.TokenUtil;
 
 public class ResultActivity extends BaseActivity {
 
@@ -53,11 +55,27 @@ public class ResultActivity extends BaseActivity {
 
 
         chronometer.stop();
+
+        int amount =0;
         if(thisTime>settingTime){
             mResultText.setText("专注成功");
+            amount = DataUtil.safeLongToInt(thisTime/(1000*60*5)) ;
+
         }else{
             mResultText.setText("专注失败");
+            amount = DataUtil.safeLongToInt(thisTime/(1000*60*10)) ;
         }
+
+        if (amount<=0){
+            amount=0;
+        }
+        if(amount>=100){
+            amount=100;
+        }
+        if (amount>0){
+            TokenUtil.Billing(amount,"专注奖励");
+        }
+
 
         StudyStatistics studyStatistics = new StudyStatistics();
         studyStatistics.setThisMilliseconds(thisTime);

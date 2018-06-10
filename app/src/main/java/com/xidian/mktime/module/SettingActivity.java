@@ -44,6 +44,10 @@ public class SettingActivity extends BaseActivity {
     OptionItemView oivAbout;
     @BindView(R.id.oivTomatoHelp)
     OptionItemView oivTomatoHelp;
+    @BindView(R.id.oivTask)
+    OptionItemView oivTask;
+    @BindView(R.id.oivToken)
+    OptionItemView oivToken;
 
 
     @Override
@@ -91,6 +95,22 @@ public class SettingActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SettingActivity.this, WallpaperActivity.class);
+                startActivity(intent);
+
+            }
+        });
+        oivTask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SettingActivity.this, TaskActivity.class);
+                startActivity(intent);
+
+            }
+        });
+        oivToken.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SettingActivity.this, TokenActivity.class);
                 startActivity(intent);
 
             }

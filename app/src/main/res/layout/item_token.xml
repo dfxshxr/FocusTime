@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16px"
+    android:layout_marginLeft="16px"
+    android:layout_marginRight="16px"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12px"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/white"
+        android:text="日期"
+        android:textSize="12sp" />
+
+    <com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_white_background">
+
+        <TextView
+            android:id="@+id/tvEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="22px"
+            android:layout_marginTop="20px"
+            android:textColor="#333333"
+            android:text="完成时间"
+            android:textSize="12sp" />
+
+
+
+        <TextView
+            android:id="@+id/tvNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="22px"
+            android:layout_marginTop="56px"
+            android:layout_marginBottom="16px"
+            android:textColor="#333333"
+            android:text="说明"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tvToken"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="22px"
+            android:layout_marginTop="56px"
+            android:layout_marginBottom="16px"
+            android:textColor="#333333"
+            android:text="0"
+            android:textSize="24sp" />
+
+
+    </com.zhy.autolayout.AutoRelativeLayout>
+</com.zhy.autolayout.AutoLinearLayout>
