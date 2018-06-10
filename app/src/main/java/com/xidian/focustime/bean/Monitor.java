@@ -1,9 +1,5 @@
 package com.xidian.focustime.bean;
 
-import android.content.pm.ApplicationInfo;
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import org.litepal.crud.DataSupport;
 
 

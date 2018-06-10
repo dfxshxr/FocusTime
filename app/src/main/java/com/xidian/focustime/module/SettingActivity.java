@@ -4,11 +4,9 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
-import android.graphics.Color;
-import android.os.Build;
+import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBar;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -17,9 +15,7 @@ import com.apkfuns.logutils.LogUtils;
 import com.lqr.optionitemview.OptionItemView;
 import com.xidian.focustime.R;
 import com.xidian.focustime.base.AppConstants;
-import com.xidian.focustime.base2.BaseActivity;
-import com.xidian.focustime.base2.BasePresenter;
-import com.xidian.focustime.bean.Wallpaper;
+import com.xidian.focustime.base.BaseActivity;
 import com.xidian.focustime.utils.DataUtil;
 import com.xidian.focustime.utils.SpUtil;
 import com.xidian.focustime.utils.ToastUtil;
@@ -27,7 +23,6 @@ import com.xidian.focustime.utils.ToastUtil;
 
 import butterknife.BindView;
 import cn.qqtheme.framework.picker.TimePicker;
-import skin.support.SkinCompatManager;
 
 public class SettingActivity extends BaseActivity {
 
@@ -44,7 +39,7 @@ public class SettingActivity extends BaseActivity {
     @BindView(R.id.oivAppWhiteList)
     OptionItemView oivAppWhiteList;
     @BindView(R.id.oivWallpaper)
-    OptionItemView oivWllpaper;
+    OptionItemView oivWallpaper;
     @BindView(R.id.oivAbout)
     OptionItemView oivAbout;
     @BindView(R.id.oivTomatoHelp)
@@ -52,13 +47,18 @@ public class SettingActivity extends BaseActivity {
 
 
     @Override
-    public void initView(){
+    public int getLayoutId() {
+        return R.layout.activity_setting;
+    }
+
+    @Override
+    protected void initViews(Bundle savedInstanceState) {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
     }
 
     @Override
-    public void initData() {
+    protected void initData() {
         setToolbarTitle("设置");
         oivStudy.setRightText(DataUtil.timeParseInSetting(SpUtil.getInstance().getLong(AppConstants.LOCK_SETTING_MILLISENCONS,1000*60*60*2)));
         oivPlay.setRightText(DataUtil.timeParseInSetting(SpUtil.getInstance().getLong(AppConstants.LOCK_PLAY_SETTING_MILLISENCONS,1000*60*10)));
@@ -66,7 +66,7 @@ public class SettingActivity extends BaseActivity {
 
 
     @Override
-    public void initListener() {
+    protected void initAction() {
         oivStudy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,7 +87,7 @@ public class SettingActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
-        oivWllpaper.setOnClickListener(new View.OnClickListener() {
+        oivWallpaper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SettingActivity.this, WallpaperActivity.class);
@@ -218,15 +218,10 @@ public class SettingActivity extends BaseActivity {
         return -1;
     }
 
-
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
-    }
+    protected void onDestroy() {
+        super.onDestroy();
 
-    @Override
-    protected int provideContentViewId() {
-        return R.layout.activity_setting;
     }
 }
 

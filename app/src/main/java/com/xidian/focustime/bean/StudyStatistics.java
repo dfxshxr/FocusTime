@@ -3,7 +3,7 @@ package com.xidian.focustime.bean;
 import org.litepal.crud.DataSupport;
 
 
-public class Statistics extends DataSupport{
+public class StudyStatistics extends DataSupport{
 
     private long id;
     private long startMilliseconds;
@@ -13,7 +13,7 @@ public class Statistics extends DataSupport{
     private long playMilliseconds;
     private long errorMilliseconds;
 
-    public Statistics() {
+    public StudyStatistics() {
     }
 
     public long getId() {

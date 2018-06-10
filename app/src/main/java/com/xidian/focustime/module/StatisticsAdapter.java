@@ -4,25 +4,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.apkfuns.logutils.LogUtils;
 import com.xidian.focustime.LockApplication;
 import com.xidian.focustime.R;
-import com.xidian.focustime.bean.Statistics;
+import com.xidian.focustime.bean.StudyStatistics;
 import com.xidian.focustime.utils.DataUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import butterknife.BindView;
-
 public class StatisticsAdapter extends RecyclerView.Adapter<StatisticsAdapter.ViewHolder>{
 
-    private List<Statistics> mStatisticsList;
+    private List<StudyStatistics> mStudyStatisticsList;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         View statisticsView;
@@ -40,8 +35,8 @@ public class StatisticsAdapter extends RecyclerView.Adapter<StatisticsAdapter.Vi
         }
     }
 
-    public StatisticsAdapter(List<Statistics> statisticsList) {
-        mStatisticsList = statisticsList;
+    public StatisticsAdapter(List<StudyStatistics> studyStatisticsList) {
+        mStudyStatisticsList = studyStatisticsList;
     }
 
     @Override
@@ -52,7 +47,7 @@ public class StatisticsAdapter extends RecyclerView.Adapter<StatisticsAdapter.Vi
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
-                Statistics statistics = mStatisticsList.get(position);
+                StudyStatistics studyStatistics = mStudyStatisticsList.get(position);
             }
         });
 
@@ -61,26 +56,26 @@ public class StatisticsAdapter extends RecyclerView.Adapter<StatisticsAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Statistics statistics = mStatisticsList.get(position);
+        StudyStatistics studyStatistics = mStudyStatisticsList.get(position);
 
         SimpleDateFormat dateFm = new SimpleDateFormat("HH:mm");
         SimpleDateFormat dateFm2 = new SimpleDateFormat("YYYY年MM月dd日E");
 
-        String time = dateFm.format(new Date(statistics.getEndMilliseconds()));
+        String time = dateFm.format(new Date(studyStatistics.getEndMilliseconds()));
         holder.tvEnd.setText(time);
-        String date = dateFm2.format(new Date(statistics.getEndMilliseconds()));
+        String date = dateFm2.format(new Date(studyStatistics.getEndMilliseconds()));
         holder.tvDate.setText(date);
 
         if (position != 0) {
-            Statistics dataBefore = mStatisticsList.get(position - 1);
+            StudyStatistics dataBefore = mStudyStatisticsList.get(position - 1);
             if (date.equals(dateFm2.format(new Date(dataBefore.getEndMilliseconds())))){
                 holder.tvDate.setVisibility(View.GONE);
 
             }
         }
 
-        holder.tvSetting.setText(DataUtil.formatTime(statistics.getSettingMilliseconds()));
-        if(statistics.getThisMilliseconds()-statistics.getSettingMilliseconds()>=0)
+        holder.tvSetting.setText(DataUtil.formatTime(studyStatistics.getSettingMilliseconds()));
+        if(studyStatistics.getThisMilliseconds()- studyStatistics.getSettingMilliseconds()>=0)
         {
             holder.tvStatus.setText("成功");
             holder.tvStatus.setTextColor(LockApplication.getContext().getResources().getColor(R.color.red6));
@@ -89,10 +84,10 @@ public class StatisticsAdapter extends RecyclerView.Adapter<StatisticsAdapter.Vi
             holder.tvStatus.setTextColor(LockApplication.getContext().getResources().getColor(R.color.gray0));
         }
 
-        holder.tvThisDetail.setText(DataUtil.formatTime(statistics.getThisMilliseconds()));
+        holder.tvThisDetail.setText(DataUtil.formatTime(studyStatistics.getThisMilliseconds()));
 
-        if(statistics.getPlayMilliseconds()>0){
-            holder.tvPlay.setText("休息"+DataUtil.timeParse2Minutes(statistics.getPlayMilliseconds()));
+        if(studyStatistics.getPlayMilliseconds()>0){
+            holder.tvPlay.setText("休息"+DataUtil.timeParse2Minutes(studyStatistics.getPlayMilliseconds()));
         }else {
             holder.tvPlay.setText("");
         }
@@ -101,7 +96,7 @@ public class StatisticsAdapter extends RecyclerView.Adapter<StatisticsAdapter.Vi
 
     @Override
     public int getItemCount() {
-        return mStatisticsList.size();
+        return mStudyStatisticsList.size();
     }
 
 }

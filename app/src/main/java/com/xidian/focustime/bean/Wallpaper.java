@@ -1,6 +1,6 @@
 package com.xidian.focustime.bean;
 
-import org.litepal.crud.DataSupport;
+
 
 
 public class Wallpaper{

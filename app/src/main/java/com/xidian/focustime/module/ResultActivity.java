@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.xidian.focustime.R;
 import com.xidian.focustime.base.AppConstants;
 import com.xidian.focustime.base.BaseActivity;
-import com.xidian.focustime.bean.Statistics;
+import com.xidian.focustime.bean.StudyStatistics;
 import com.xidian.focustime.utils.SpUtil;
 
 public class ResultActivity extends BaseActivity {
@@ -59,14 +59,14 @@ public class ResultActivity extends BaseActivity {
             mResultText.setText("专注失败");
         }
 
-        Statistics statistics = new Statistics();
-        statistics.setThisMilliseconds(thisTime);
-        statistics.setEndMilliseconds(currentTime);
-        statistics.setStartMilliseconds(startTime);
-        statistics.setSettingMilliseconds(settingTime);
-        statistics.setErrorMilliseconds(totalErrorTime);
-        statistics.setPlayMilliseconds(totalPlayTime);
-        statistics.save();
+        StudyStatistics studyStatistics = new StudyStatistics();
+        studyStatistics.setThisMilliseconds(thisTime);
+        studyStatistics.setEndMilliseconds(currentTime);
+        studyStatistics.setStartMilliseconds(startTime);
+        studyStatistics.setSettingMilliseconds(settingTime);
+        studyStatistics.setErrorMilliseconds(totalErrorTime);
+        studyStatistics.setPlayMilliseconds(totalPlayTime);
+        studyStatistics.save();
 
     }
 

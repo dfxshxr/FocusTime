@@ -1,92 +1,96 @@
 package com.xidian.focustime.module;
 
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.SystemClock;
-import android.provider.Settings;
-import android.support.v7.app.AlertDialog;
+import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Chronometer;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-import com.apkfuns.logutils.LogUtils;
-import com.xidian.focustime.LockApplication;
+
 import com.xidian.focustime.R;
-import com.xidian.focustime.base.AppConstants;
 import com.xidian.focustime.base.BaseActivity;
-import com.xidian.focustime.bean.Statistics;
-import com.xidian.focustime.db.AppManager;
-import com.xidian.focustime.service.LockService;
+import com.xidian.focustime.bean.StudyStatistics;
 import com.xidian.focustime.utils.DataUtil;
-import com.xidian.focustime.utils.LockUtil;
-import com.xidian.focustime.utils.NotifyUtil;
-import com.xidian.focustime.utils.SpUtil;
-import com.xidian.focustime.utils.ToastUtil;
 
 import org.litepal.crud.DataSupport;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+
 
 /**
- * A login screen that offers login via email/password.
+ * @描述 我的个人信息
  */
 public class StatisticsActivity extends BaseActivity{
 
     RecyclerView recyclerView;
-    private List<Statistics> statisticsList = new ArrayList<Statistics>();
+    private List<StudyStatistics> studyStatisticsList = new ArrayList<StudyStatistics>();
 
+    @BindView(R.id.appBar)
+    protected AppBarLayout mAppBar;
+    @BindView(R.id.ivToolbarHistory)
+    ImageView mIvHistory;
+    @BindView(R.id.tvSumNum)
+    TextView mTvSumNum;
+    @BindView(R.id.tvSumTime)
+    TextView mTvSumTime;
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_statistics;
+        return R.layout.activity_today_statistics;
     }
 
     @Override
     protected void initViews(Bundle savedInstanceState) {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-
+      //  mIvHistory.setVisibility(View.VISIBLE);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         StaggeredGridLayoutManager layoutManager = new
                 StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-
-
     }
 
     @Override
     protected void initData() {
-        statisticsList=DataSupport.findAll(Statistics.class);
-        StatisticsAdapter adapter = new StatisticsAdapter(statisticsList);
+        setToolbarTitle("今日统计");
+        long todayStart=DataUtil.getStartTimeOfDay(System.currentTimeMillis());
+        studyStatisticsList = DataSupport.order("endMilliseconds desc").find(StudyStatistics.class);
+        StatisticsAdapter adapter = new StatisticsAdapter(studyStatisticsList);
         recyclerView.setAdapter(adapter);
 
+        long sumTime=0;
+        int sumSum=0;
+        for(int i = 0; i< studyStatisticsList.size(); i++)    {
+            StudyStatistics studyStatistics =    studyStatisticsList.get(i);
+
+            if(studyStatistics.getThisMilliseconds()>=0){
+                sumTime=sumTime+ studyStatistics.getThisMilliseconds();
+            }
+            if(studyStatistics.getThisMilliseconds()- studyStatistics.getSettingMilliseconds()>=0){
+                sumSum=sumSum+1;
+            }
+        }
+        mTvSumNum.setText(Integer.toString(sumSum));
+        mTvSumTime.setText(DataUtil.formatTime(sumTime));
+
     }
 
-    @Override
-    protected void onResume(){
-        super.onResume();
-
-    }
 
     @Override
     protected void initAction() {
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
     }
 
 
-
 }
-

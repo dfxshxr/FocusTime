@@ -16,19 +16,16 @@ import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.apkfuns.logutils.LogUtils;
 import com.xidian.focustime.LockApplication;
 import com.xidian.focustime.R;
 import com.xidian.focustime.base.AppConstants;
 import com.xidian.focustime.base.BaseActivity;
-import com.xidian.focustime.bean.Monitor;
 import com.xidian.focustime.db.AppManager;
 import com.xidian.focustime.service.LockService;
 import com.xidian.focustime.service.MonitorService;
 import com.xidian.focustime.utils.DataUtil;
 import com.xidian.focustime.utils.LockUtil;
 import com.xidian.focustime.utils.NotifyUtil;
-import com.xidian.focustime.utils.ServiceUtil;
 import com.xidian.focustime.utils.SpUtil;
 import com.xidian.focustime.utils.ToastUtil;
 
@@ -80,7 +77,7 @@ public class LockActivity extends BaseActivity implements DialogInterface.OnDism
                 if (SpUtil.getInstance().getBoolean(AppConstants.LOCK_STATE,false)) {
                     ToastUtil.showToast("学习中不能修改设置");
                 }else {
-                    Intent intent = new Intent(LockActivity.this, UserInfoActivity.class);
+                    Intent intent = new Intent(LockActivity.this, StatisticsActivity.class);
                     startActivity(intent);
                 }
             }

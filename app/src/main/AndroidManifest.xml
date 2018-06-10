@@ -105,14 +105,7 @@
             android:name=".module.SettingActivity"
             android:label="设置"
             android:screenOrientation="portrait"/>
-        <activity
-            android:name=".module.MyInfoActivity"
-            android:label="修改信息"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".module.UserInfoActivity"
-            android:label="用户中心"
-            android:screenOrientation="portrait"/>
+
         <!-- 友盟统计 -->
         <meta-data
             android:name="UMENG_APPKEY"

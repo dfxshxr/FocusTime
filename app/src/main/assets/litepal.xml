@@ -2,14 +2,15 @@
 <litepal>
 
     <dbname value="mktime" />
-    <version value="3" />
+    <version value="4" />
 
 
     <list>
         <mapping class="com.xidian.focustime.bean.App" />
         <mapping class="com.xidian.focustime.bean.RecommendApp" />
         <mapping class="com.xidian.focustime.bean.Monitor" />
-        <mapping class="com.xidian.focustime.bean.Statistics" />
+        <mapping class="com.xidian.focustime.bean.StudyStatistics" />
+        <mapping class="com.xidian.focustime.bean.Billing" />
     </list>
 
     <!--
