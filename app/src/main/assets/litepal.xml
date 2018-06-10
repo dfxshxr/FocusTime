@@ -6,11 +6,11 @@
 
 
     <list>
-        <mapping class="com.xidian.focustime.bean.App" />
-        <mapping class="com.xidian.focustime.bean.RecommendApp" />
-        <mapping class="com.xidian.focustime.bean.Monitor" />
-        <mapping class="com.xidian.focustime.bean.StudyStatistics" />
-        <mapping class="com.xidian.focustime.bean.Billing" />
+        <mapping class="com.xidian.mktime.bean.App" />
+        <mapping class="com.xidian.mktime.bean.RecommendApp" />
+        <mapping class="com.xidian.mktime.bean.Monitor" />
+        <mapping class="com.xidian.mktime.bean.StudyStatistics" />
+        <mapping class="com.xidian.mktime.bean.Billing" />
     </list>
 
     <!--
