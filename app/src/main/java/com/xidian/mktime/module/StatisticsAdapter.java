@@ -59,7 +59,7 @@ public class StatisticsAdapter extends RecyclerView.Adapter<StatisticsAdapter.Vi
         StudyStatistics studyStatistics = mStudyStatisticsList.get(position);
 
         SimpleDateFormat dateFm = new SimpleDateFormat("HH:mm");
-        SimpleDateFormat dateFm2 = new SimpleDateFormat("YYYY年MM月dd日E");
+        SimpleDateFormat dateFm2 = new SimpleDateFormat("yyyy年MM月dd日E");
 
         String time = dateFm.format(new Date(studyStatistics.getEndMilliseconds()));
         holder.tvEnd.setText(time);

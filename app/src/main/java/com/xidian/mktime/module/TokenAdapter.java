@@ -57,7 +57,7 @@ public class TokenAdapter extends RecyclerView.Adapter<TokenAdapter.ViewHolder>{
         Billing billing = mBillingList.get(position);
 
         SimpleDateFormat dateFm = new SimpleDateFormat("HH:mm");
-        SimpleDateFormat dateFm2 = new SimpleDateFormat("YYYY年MM月dd日E");
+        SimpleDateFormat dateFm2 = new SimpleDateFormat("yyyy年MM月dd日E");
 
         String time = dateFm.format(new Date(billing.getMilliseconds()));
         holder.tvEnd.setText(time);
